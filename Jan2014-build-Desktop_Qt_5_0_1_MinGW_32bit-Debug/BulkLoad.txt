@@ -1,0 +1,36 @@
+#This file should be read by cycling through and adding new objects every pass.
+#The order of passes should be:
+#				1) <Person>
+#				2) <Item>
+#				3) <Action>
+#				4) <Relationship>
+# The formatting of each type should be as follows:
+# <Action>
+# <Item> NameOfPersonHolding(NULL for World)    NameOfObject
+# <Person> Name    Gender(0 male, 1 female)
+# <Relationship> NameOfMain    NameOfPartner    Type    Strength
+#
+# To give attributes to a person, list all items, relationships, and actions after them
+# Example:	Nick holding a banana in a relationship with Nikki
+#			<Person>Nick 0
+#			<Item>Banana
+#			<Relationship>Nikki 3 1
+
+<Action>eat
+<Action>break
+<Action>die
+<Action>stab
+
+<Item>knife
+<Item>apple
+<Item>carrot
+
+<Person>Nick 0
+<Item>knife
+<Item>donut
+<Item>GlassWater
+<Relationship>Nick Nikki 6 2
+
+<Person>Nikki 2
+<Item>Stethoscope
+<Relationship>Nikki Nick 3 1
