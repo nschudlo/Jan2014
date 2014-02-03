@@ -2,5 +2,4 @@
 
 Action::Action()
 {
-    //This is a new test
 }
