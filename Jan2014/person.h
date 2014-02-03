@@ -4,6 +4,7 @@
 #include <vector>
 #include <worldobject.h>
 #include <relationship.h>
+#include <action.h>
 
 class Relationship;
 
@@ -27,6 +28,11 @@ public:
     int getGender();
     void printDetails();
 
+
+    void listActions();
+    void addActionDo(Action *act);
+    void addActionGet(Action *act);
+
     void addRelationship(Relationship *rel);
     void listRelationships();
     Relationship* getRelationship(std::string name);
@@ -38,6 +44,8 @@ private:
 
     std::vector<WorldObject*> itemsHeld;
     std::vector<Relationship*> relationships;
+    std::vector<Action*> actionsDo;
+    std::vector<Action*> actionsGet;
 };
 
 #endif // PERSON_H

@@ -29,47 +29,12 @@ Controller* Controller::Instance()
 void Controller::doThings()
 {
     //void updateCursors(vector<cursor*>& cursors)
-    BulkLoader bulk = BulkLoader(&worldObjects,&relationships,&people);
+    //BulkLoader bulk =
+    BulkLoader(&worldObjects,&relationships,&people,&actions);
 
-    /*
-    Person* nick = createPerson("Nick",MALE);
-    Person* nikki = createPerson("Nikki",FEMALE);
 
-    //Nick believes this is the type of relationship he has with nikki
-    addRelationship(nick, nikki, SO, 2);
-    addRelationship(nikki,nick,SO,1);
-
-   // nick->listRelationships();
-   // nikki->listRelationships();
-
-    createPerson("Larissa",FEMALE);
-    createPerson("John",MALE);
-
-    addRelationship(getPerson("Larissa"),getPerson("John"),Parent,2);
-    addRelationship(getPerson("John"),getPerson("Larissa"),Child,0);
-
-    getPerson("Larissa")->listRelationships();
-    getPerson("John")->listRelationships();
-
-    /*for(int index=0;index<=12;index++)
-    {
-        for(int index2=0; index2<=2; index2++)
-        {
-            nikki->getRelationship("Nick")->setState(index,index2);
-            nikki->listRelationships();
-        }
-    }*/
-
-    //createObject("Apple");
-    //createObject("Flowers");
-
-    //getPerson("Nick")->listRelationships();
-   // getPerson("Nikki")->listRelationships();
     getPerson("Nick")->printDetails();
     getPerson("Nikki")->printDetails();
-
-
-
 
 }
 

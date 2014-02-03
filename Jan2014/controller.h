@@ -4,6 +4,7 @@
 #include "person.h"
 #include "relationship.h"
 #include "worldobject.h"
+#include "action.h"
 
 class Controller
 {
@@ -27,6 +28,7 @@ private:
     std::vector<WorldObject*> worldObjects;
     std::vector<Relationship*> relationships;
     std::vector<Person*> people;
+    std::vector<Action*> actions;
 
 };
 

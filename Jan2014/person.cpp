@@ -33,6 +33,16 @@ void Person::addRelationship(Relationship *rel)
     relationships.push_back(rel);
 }
 
+void Person::addActionDo(Action *act)
+{
+    actionsDo.push_back(act);
+}
+
+void Person::addActionGet(Action *act)
+{
+    actionsGet.push_back(act);
+}
+
 void Person::listRelationships()
 {
     for(unsigned int index=0; index<this->relationships.size(); index++)
@@ -41,6 +51,27 @@ void Person::listRelationships()
             relationships.at(index)->printRelationship();
         }catch(exception e){cout<<"No more relationships \n";}
     }
+}
+
+void Person::listActions()
+{
+    cout<<"Actions Possible To Do:";
+
+    for(unsigned int f=0; f < actionsDo.size(); f++)
+    {
+       try{ cout<<" "<<actionsDo.at(f)->getName();}
+        catch(exception e){cout<<" none";}
+    }
+    cout<<endl;
+
+    cout<<"Actions Possible To Receive:";
+
+    for(unsigned int f=0; f < actionsGet.size(); f++)
+    {
+       try{ cout<<" "<<actionsGet.at(f)->getName();}
+        catch(exception e){cout<<" none";}
+    }
+    cout<<endl;
 }
 
 void Person::setMood(int mood)
@@ -166,13 +197,15 @@ void Person::printDetails()
     cout<<"\tGender: "<<gender<<endl;
     cout<<"\t";
     printAllItems();
-    cout<<endl;
     cout<<"\t";
+    listActions();
+    cout<<"\n\t";
     listRelationships();
     cout<<endl;
     cout<<"-----------------------"<<endl;
 
 
 }
+
 
 

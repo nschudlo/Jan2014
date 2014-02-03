@@ -1,5 +1,15 @@
 #include "action.h"
+#include <string>
 
-Action::Action()
+
+using namespace std;
+
+Action::Action(string _name)
 {
+    name = _name;
+}
+
+string Action::getName()
+{
+    return name;
 }

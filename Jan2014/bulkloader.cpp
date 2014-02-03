@@ -16,6 +16,7 @@
 #define NUM_ITEM_PARAM 1
 #define NUM_RELATIONSHIP_PARAM 4
 #define NUM_ACTION_PARAM 1
+#define NUM_ACTION_PARAM_PLUS 2
 
 #define S_TO_I(string) boost::lexical_cast<int>(string)
 
@@ -25,19 +26,16 @@ using namespace std;
 
 //enum BulkFileType{=0,=1,=2};
 
-BulkLoader::BulkLoader(vector<WorldObject*> *_worldObjects,vector<Relationship*> *_relationships,vector<Person*> *_people)
+BulkLoader::BulkLoader(vector<WorldObject*> *_worldObjects,
+                       vector<Relationship*> *_relationships,
+                       vector<Person*> *_people,
+                       vector<Action*> *_actions)
 {
 
     worldObjects = _worldObjects;
     relationships = _relationships;
     people = _people;
-    // Person* nick = createPerson("Nick",0);
-    // people->push_back(nick);
-    // Person* nikki = createPerson("Nikki",1);
-    // people->push_back(nikki);
-
-    // relationships->push_back(addRelationship(nick, nikki, 0, 2));
-    // relationships->push_back(addRelationship(nikki,nick,5,1));
+    actions = _actions;
 
     loadfile("BulkLoad.txt");
 
@@ -56,9 +54,10 @@ void BulkLoader::loadfile(string filename)
 
         //Cycle through the file, looking for different
         //types everytime
-        for(int cycle=0; cycle<CYCLE_MAX; cycle++)
+        for(int cycle=0; cycle<=CYCLE_MAX; cycle++)
         {
             cout<<"NEW CYCLE"<<endl;
+            currentPerson = "";
             while(getline(file, line))
             {
                 testString(line,cycle, currentPerson);
@@ -174,9 +173,49 @@ void BulkLoader::testString(string line, int cycle, string &currentPerson)
                     break;
                 }
 
-
-
                 addRelationship(personOne, personTwo, S_TO_I(info[2]),S_TO_I(info[3]));
+            }
+            break;
+        case 3: //Actions
+            if(type.compare("Action")==0)
+            {
+                if(!(numParams == NUM_ACTION_PARAM || numParams == NUM_ACTION_PARAM_PLUS))
+                {
+                    cout<<"ERROR: wrong number of (Action) params"<<endl;
+                    break;
+                }
+
+                Person* currPerson = getPerson(currentPerson);
+
+                //Create the action and stores it globally
+                Action* action = getAction(info[0]);
+                if(action == 0)
+                    action = createAction(info[0]);
+
+                //If action is to be given to a person or object
+                //this statement should be true
+                if(numParams==NUM_ACTION_PARAM_PLUS)
+                {
+                    string actionType = info[1];
+                    if(actionType.compare("do")==0)
+                    {
+                        if(currPerson != 0)
+                            currPerson->addActionDo(action);
+                    }
+                    else
+                    {
+                        if(currPerson != 0)
+                            currPerson->addActionGet(action);
+                    }
+
+                }
+
+
+
+
+
+
+
             }
 
             break;
@@ -196,6 +235,12 @@ WorldObject *BulkLoader::createObject(std::string name)
 {
     worldObjects->push_back(new WorldObject(name));
     return worldObjects->back();
+}
+
+Action *BulkLoader::createAction(std::string name)
+{
+    actions->push_back(new Action(name));
+    return actions->back();
 }
 
 Relationship *BulkLoader::addRelationship(Person *one, Person *two, int type, int status)
@@ -221,10 +266,21 @@ Person* BulkLoader::getPerson(std::string name)
 
 WorldObject* BulkLoader::getItem(std::string name)
 {
-    for(int index=0; index<(int)people->size(); index++)
+    for(int index=0; index<(int)worldObjects->size(); index++)
     {
         if(worldObjects->at(index)->getName()==name)
             return worldObjects->at(index);
+    }
+
+    return 0;
+}
+
+Action* BulkLoader::getAction(std::string name)
+{
+    for(int index=0; index<(int)actions->size(); index++)
+    {
+        if(actions->at(index)->getName()==name)
+            return actions->at(index);
     }
 
     return 0;
