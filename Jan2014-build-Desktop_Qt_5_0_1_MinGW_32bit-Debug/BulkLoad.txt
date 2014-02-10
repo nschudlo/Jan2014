@@ -10,29 +10,41 @@
 # <Person> Name    Gender(0 male, 1 female)
 # <Relationship> NameOfMain    NameOfPartner    Type    Strength
 #
+#	Parent=0, Child=1, Sibling=2, Married=3, Family=4, SO=5, Strangers=6,
+#	Friends=7, Enemies=8, Teacher=9, Student=10, Working=11, Community=12
+#
+#	0=bad, 1=average, 2=good
+#
 # To give attributes to a person, list all items, relationships, and actions after them
 # Example:	Nick holding a banana in a relationship with Nikki
 #			<Person>Nick 0
 #			<Item>Banana
 #			<Relationship>Nikki 3 1
 
-<Action>eat
-<Action>break
-<Action>die
-<Action>stab
+#Define all actions here. This section may not be needed...
+#<Action>eat
+#<Action>break
+#<Action>die
+#<Action>stab
 
+#Define all items here. Included all actions that it can do and can happen to it here
 <Item>knife
+<Action>cut do
+<Action>break get
 <Item>apple
+<Action>cut get
 <Item>carrot
+<Action>cut get
 
+#Define People here. Included all items, actions, and relationships after the person
 <Person>Nick 0
 <Action>eat do
 <Action>stab get
 <Item>knife 
 <Item>donut
 <Item>GlassWater
-<Relationship>Nick Nikki 6 2
+<Relationship>Nikki 6 2
 
-<Person>Nikki 2
+<Person>Nikki 1
 <Item>Stethoscope
-<Relationship>Nikki Nick 3 1
+<Relationship>Nick 3 1

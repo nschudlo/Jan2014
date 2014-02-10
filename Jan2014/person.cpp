@@ -74,6 +74,42 @@ void Person::listActions()
     cout<<endl;
 }
 
+vector<Action*> Person::getActionsDo()
+{
+    return actionsDo;
+}
+
+vector<Action*> Person::getActionsGet()
+{
+    return actionsGet;
+}
+
+bool Person::canActionDo(std::string name)
+{
+    for(unsigned int f=0; f < actionsDo.size(); f++)
+    {
+       try{
+            if(actionsDo.at(f)->getName()==name)
+                return true;
+        }
+        catch(exception e){cout<<" none";}
+    }
+    return false;
+}
+
+bool Person::canActionGet(std::string name)
+{
+    for(unsigned int f=0; f < actionsGet.size(); f++)
+    {
+       try{
+            if(actionsGet.at(f)->getName()==name)
+                return true;
+        }
+        catch(exception e){cout<<" none";}
+    }
+    return false;
+}
+
 void Person::setMood(int mood)
 {
     this->mood = mood;

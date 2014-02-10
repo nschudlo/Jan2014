@@ -14,7 +14,7 @@
 #define CYCLE_MAX 3
 #define NUM_PERSON_PARAM 2
 #define NUM_ITEM_PARAM 1
-#define NUM_RELATIONSHIP_PARAM 4
+#define NUM_RELATIONSHIP_PARAM 3
 #define NUM_ACTION_PARAM 1
 #define NUM_ACTION_PARAM_PLUS 2
 
@@ -47,6 +47,7 @@ void BulkLoader::loadfile(string filename)
     ifstream file(filename.c_str());
 
     string currentPerson;
+    string currentItem;
 
     //Open the file
     if(file.is_open())
@@ -60,7 +61,7 @@ void BulkLoader::loadfile(string filename)
             currentPerson = "";
             while(getline(file, line))
             {
-                testString(line,cycle, currentPerson);
+                testString(line,cycle, currentPerson, currentItem);
             }
             file.clear();
             file.seekg(0,ios::beg);
@@ -70,7 +71,7 @@ void BulkLoader::loadfile(string filename)
     else cout<<"Unable to open file "<<filename<<endl;
 }
 
-void BulkLoader::testString(string line, int cycle, string &currentPerson)
+void BulkLoader::testString(string line, int cycle, string &currentPerson, string &currentItem)
 {
     //Skip comment lines and blank lines
     if(line[0] == '#' || line.empty())
@@ -92,24 +93,18 @@ void BulkLoader::testString(string line, int cycle, string &currentPerson)
         int numParams = std::distance(tok.begin(),tok.end())-1;
 
 
-        //vector<string> tokens;
-        //tokens.assign(tok.begin(),tok.end());
-        //cout<<"Number of tokens is " <<std::distance(tok.begin(),tok.end())<<endl;
-
-        //tokens[0];
-
-        //BOOST_FOREACH(string t, tokens)
-        //{
-        //    cout << t<<"."<<endl;
-        //}
-
-        //After the first cycle store which person was last seen
+        //For every cycle after the first, store which person was last seen
         //This is for use in the bulk load file. The bulk load can
-        //give a person items or relationships by listing these after
+        //give a person items, action, or relationships by listing these after
         //declaring the person
         if(cycle !=0 && type.compare("Person")==0)
         {
             currentPerson = info[0];
+        }
+
+        if(type.compare("Item")==0)
+        {
+            currentItem = info[0];
         }
 
         switch (cycle)
@@ -123,9 +118,6 @@ void BulkLoader::testString(string line, int cycle, string &currentPerson)
                     cout<<"ERROR: wrong number of (Person) params"<<endl;
                     break;
                 }
-
-                //cout<<info[0]<<endl;
-
 
                 createPerson(info[0], S_TO_I(info[1]));//boost::lexical_cast<int>(info[1]));
             }
@@ -160,20 +152,25 @@ void BulkLoader::testString(string line, int cycle, string &currentPerson)
                     cout<<"ERROR: wrong number of (Relationship) params"<<endl;
                     break;
                 }
-                Person* personOne=getPerson(info[0]);
-                Person* personTwo=getPerson(info[1]);
+
+               // Person* personOne=getPerson(info[0]);
+                //Person* personTwo=getPerson(info[1]);
+
+                Person* personOne = getPerson(currentPerson);
+                Person* personTwo = getPerson(info[0]);
+
                 if(!personOne)
                 {
-                    cout<< info[0] << " was not found"<<endl;
+                    cout<< "<Relationship> is not following under a person"<<endl;
                     break;
                 }
                 if(!personTwo)
                 {
-                    cout<< info[1] << " was not found"<<endl;
+                    cout<< info[0] << " was not found"<<endl;
                     break;
                 }
 
-                addRelationship(personOne, personTwo, S_TO_I(info[2]),S_TO_I(info[3]));
+                addRelationship(personOne, personTwo, S_TO_I(info[1]),S_TO_I(info[2]));
             }
             break;
         case 3: //Actions
@@ -186,6 +183,7 @@ void BulkLoader::testString(string line, int cycle, string &currentPerson)
                 }
 
                 Person* currPerson = getPerson(currentPerson);
+                WorldObject* currItem = getItem(currentItem);
 
                 //Create the action and stores it globally
                 Action* action = getAction(info[0]);
@@ -197,27 +195,26 @@ void BulkLoader::testString(string line, int cycle, string &currentPerson)
                 if(numParams==NUM_ACTION_PARAM_PLUS)
                 {
                     string actionType = info[1];
-                    if(actionType.compare("do")==0)
+
+                    if(currPerson==0)
                     {
-                        if(currPerson != 0)
-                            currPerson->addActionDo(action);
+                        if(currItem !=0)
+                        {
+                            if(actionType.compare("do")==0)
+                                currItem->addActionDo(action);
+                            else
+                                currItem->addActionGet(action);
+                        }
                     }
                     else
                     {
-                        if(currPerson != 0)
+                        if(actionType.compare("do")==0)
+                            currPerson->addActionDo(action);
+                        else
                             currPerson->addActionGet(action);
                     }
-
                 }
-
-
-
-
-
-
-
             }
-
             break;
         }
     }
@@ -233,8 +230,14 @@ Person* BulkLoader::createPerson(std::string name, int gender)
 
 WorldObject *BulkLoader::createObject(std::string name)
 {
-    worldObjects->push_back(new WorldObject(name));
-    return worldObjects->back();
+    WorldObject* object = getItem(name);
+    if(object != 0)
+        return object;
+    else
+    {
+        worldObjects->push_back(new WorldObject(name));
+        return worldObjects->back();
+    }
 }
 
 Action *BulkLoader::createAction(std::string name)

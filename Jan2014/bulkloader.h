@@ -19,7 +19,7 @@ public:
     Relationship *addRelationship(Person *one, Person *two, int type, int status);
 
     void loadfile(std::string filename);
-    void testString(std::string line, int cycle, std::string &currentPerson);
+    void testString(std::string line, int cycle, std::string &currentPerson, std::string &currentItem);
     Person* getPerson(std::string name);
     WorldObject* getItem(std::string name);
     Action* getAction(std::string name);

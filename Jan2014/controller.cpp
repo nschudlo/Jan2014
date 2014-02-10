@@ -28,19 +28,16 @@ Controller* Controller::Instance()
  */
 void Controller::doThings()
 {
-    //void updateCursors(vector<cursor*>& cursors)
-    //BulkLoader bulk =
     BulkLoader(&worldObjects,&relationships,&people,&actions);
-
 
     getPerson("Nick")->printDetails();
     getPerson("Nikki")->printDetails();
 
+   //nick->getItemsHeld().at(0)->listActions();
 }
 
 Person* Controller::createPerson(std::string name, int gender)
 {
-
     people.push_back(new Person(name,gender));
     return people.back();
 }
@@ -70,4 +67,10 @@ Person* Controller::getPerson(std::string name)
     }
 
     return 0;
+}
+
+Action *Controller::createAction(std::string name)
+{
+    actions.push_back(new Action(name));
+    return actions.back();
 }

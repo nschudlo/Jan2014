@@ -32,6 +32,11 @@ public:
     void listActions();
     void addActionDo(Action *act);
     void addActionGet(Action *act);
+    std::vector<Action*> getActionsDo();
+    std::vector<Action*> getActionsGet();
+    bool canActionDo(std::string name);
+    bool canActionGet(std::string name);
+
 
     void addRelationship(Relationship *rel);
     void listRelationships();

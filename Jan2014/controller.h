@@ -22,6 +22,7 @@ private:
     Person *createPerson(std::string name, int gender);
     WorldObject* createObject(std::string name);
     Relationship* addRelationship(Person *one, Person *two, int type, int status);
+    Action* createAction(std::string name);
 
     Person *getPerson(std::string name);
 
