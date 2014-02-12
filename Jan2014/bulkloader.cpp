@@ -22,22 +22,19 @@
 
 
 using namespace std;
-//using namespace boost;
 
-//enum BulkFileType{=0,=1,=2};
-
-BulkLoader::BulkLoader(vector<WorldObject*> *_worldObjects,
-                       vector<Relationship*> *_relationships,
-                       vector<Person*> *_people,
-                       vector<Action*> *_actions)
+BulkLoader::BulkLoader(vector<WorldObject*> *_o,
+                       vector<Relationship*> *_r,
+                       vector<Person*> *_p,
+                       vector<Action*> *_a, string filename)
 {
 
-    worldObjects = _worldObjects;
-    relationships = _relationships;
-    people = _people;
-    actions = _actions;
+    worldObjects = _o;
+    relationships = _r;
+    people = _p;
+    actions = _a;
 
-    loadfile("BulkLoad.txt");
+    loadfile(filename);
 
 }
 

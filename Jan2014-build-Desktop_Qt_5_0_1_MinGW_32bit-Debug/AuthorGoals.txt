@@ -1,0 +1,32 @@
+#	Parent=0, Child=1, Sibling=2, Married=3, Family=4, SO=5, Strangers=6,
+#	Friends=7, Enemies=8, Teacher=9, Student=10, Working=11, Community=12};
+
+<Name>GetMoney
+<Change>
+<Start><Person>A
+<End><Person>A <Get>Money
+
+<Name>GetJob
+<Change>
+<Start><Person>A <NotHave>Job
+<End><Person>A <Have>Job
+
+<Name>Flee
+<Change>
+<Start><Person>A <Location>L
+<End><Person>A <NotLocation>L
+
+<Name>Betrayal
+<Change>
+<Start><Person>A <Relationship><Person>B<Value>* 2 (Any Good)
+<End><Person>A <Relationship><Person>B<Value>* 0 (Any Bad)
+
+<Name>SeekPerson
+<Change>
+<Start><Location>LA != <Location>LB
+<End><Location>LA = <Location>LB
+
+<Name>FightPerson
+<Change>
+<Start><Person>A <Relationship> <Person>B <Value> * 0 (Any Bad)
+<End

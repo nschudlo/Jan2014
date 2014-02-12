@@ -14,8 +14,7 @@ public:
     Person(std::string name, int gender);
 
     std::string getName();
-    void setMood(int mood);
-    int getMood();
+
 
     std::vector<WorldObject *> getItemsHeld();
     void holdItem(WorldObject *object);
@@ -37,6 +36,13 @@ public:
     bool canActionDo(std::string name);
     bool canActionGet(std::string name);
 
+    int getMoney();
+    void setMoney(int _mon);
+    int getMood();
+    void setMood(int _mood);
+    int getHealth();
+    void setHealth(int _health);
+
 
     void addRelationship(Relationship *rel);
     void listRelationships();
@@ -46,6 +52,8 @@ private:
     std::string name;
     int gender; //0=male 1=female
     int mood; //0=sad 10=happy
+    int money; //Common value in games
+    int health; //0-100?
 
     std::vector<WorldObject*> itemsHeld;
     std::vector<Relationship*> relationships;

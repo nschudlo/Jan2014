@@ -13,35 +13,6 @@ Person::Person(string name, int gender)
     cout<<"Created a person named: "<<this->name<<endl;
 }
 
-void Person::setName(std::string newName)
-{
-    this->name = newName;
-}
-
-string Person::getName()
-{
-    return this->name;
-}
-
-int Person::getGender()
-{
-    return this->gender;
-}
-
-void Person::addRelationship(Relationship *rel)
-{
-    relationships.push_back(rel);
-}
-
-void Person::addActionDo(Action *act)
-{
-    actionsDo.push_back(act);
-}
-
-void Person::addActionGet(Action *act)
-{
-    actionsGet.push_back(act);
-}
 
 void Person::listRelationships()
 {
@@ -74,15 +45,6 @@ void Person::listActions()
     cout<<endl;
 }
 
-vector<Action*> Person::getActionsDo()
-{
-    return actionsDo;
-}
-
-vector<Action*> Person::getActionsGet()
-{
-    return actionsGet;
-}
 
 bool Person::canActionDo(std::string name)
 {
@@ -110,25 +72,7 @@ bool Person::canActionGet(std::string name)
     return false;
 }
 
-void Person::setMood(int mood)
-{
-    this->mood = mood;
-}
 
-int Person::getMood()
-{
-    return this->mood;
-}
-
-vector<WorldObject*> Person::getItemsHeld()
-{
-    return this->itemsHeld;
-}
-
-void Person::holdItem(WorldObject *object)
-{
-    this->itemsHeld.push_back(object);
-}
 
 Relationship* Person::getRelationship(string name)
 {
@@ -243,5 +187,50 @@ void Person::printDetails()
 
 }
 
+void Person::setName(std::string newName){
+    this->name = newName;}
 
+string Person::getName(){
+    return this->name;}
 
+int Person::getGender(){
+    return this->gender;}
+
+int Person::getMoney(){
+    return money;}
+
+void Person::setMoney(int _mon){
+    money = _mon;}
+
+int Person::getHealth(){
+    return health;}
+
+void Person::setHealth(int _health){
+    health = _health;}
+
+int Person::getMood(){
+    return mood;}
+
+void Person::setMood(int _mood){
+    mood = _mood;}
+
+void Person::addRelationship(Relationship *rel){
+    relationships.push_back(rel);}
+
+void Person::addActionDo(Action *act){
+    actionsDo.push_back(act);}
+
+void Person::addActionGet(Action *act){
+    actionsGet.push_back(act);}
+
+vector<WorldObject*> Person::getItemsHeld(){
+    return this->itemsHeld;}
+
+void Person::holdItem(WorldObject *object){
+    this->itemsHeld.push_back(object);}
+
+vector<Action*> Person::getActionsDo(){
+    return actionsDo;}
+
+vector<Action*> Person::getActionsGet(){
+    return actionsGet;}

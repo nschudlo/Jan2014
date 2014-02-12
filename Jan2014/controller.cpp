@@ -1,6 +1,7 @@
 #include "controller.h"
 #include <iostream>
-#include <bulkloader.h>
+#include "bulkloader.h"
+#include "locationloader.h"
 
 using namespace std;
 
@@ -28,7 +29,9 @@ Controller* Controller::Instance()
  */
 void Controller::doThings()
 {
-    BulkLoader(&worldObjects,&relationships,&people,&actions);
+
+    BulkLoader(&worldObjects,&relationships,&people,&actions, "BulkLoad.txt");
+    LocationLoader(&locations, "locations.txt");
 
     getPerson("Nick")->printDetails();
     getPerson("Nikki")->printDetails();

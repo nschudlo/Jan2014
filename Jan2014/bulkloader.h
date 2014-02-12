@@ -1,17 +1,18 @@
 #ifndef BULKLOADER_H
 #define BULKLOADER_H
-#include <person.h>
-#include <relationship.h>
-#include <worldobject.h>
-#include <action.h>
+#include "person.h"
+#include "relationship.h"
+#include "worldobject.h"
+#include "action.h"
 
 class BulkLoader
 {
 public:
-    BulkLoader(std::vector<WorldObject*> *_worldObjects,
-               std::vector<Relationship*> *_relationships,
-               std::vector<Person*> *_people,
-               std::vector<Action *> *_actions);
+    BulkLoader(std::vector<WorldObject*> *_o,
+               std::vector<Relationship*> *_r,
+               std::vector<Person*> *_p,
+               std::vector<Action *> *_a,
+               std::string filename);
 
     Person* createPerson(std::string name, int gender);
     WorldObject* createObject(std::string name);

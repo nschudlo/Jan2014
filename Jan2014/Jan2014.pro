@@ -21,7 +21,9 @@ SOURCES += main.cpp \
     relationship.cpp \
     controller.cpp \
     bulkloader.cpp \
-    action.cpp
+    action.cpp \
+    location.cpp \
+    locationloader.cpp
 
 HEADERS += \
     worldobject.h \
@@ -29,6 +31,8 @@ HEADERS += \
     relationship.h \
     controller.h \
     bulkloader.h \
-    action.h
+    action.h \
+    location.h \
+    locationloader.h
 
 INCLUDEPATH += C:\boost_1_55_0
