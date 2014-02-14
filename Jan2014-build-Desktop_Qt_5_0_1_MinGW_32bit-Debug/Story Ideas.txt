@@ -8,6 +8,7 @@ Need Money
 		Play High Stakes poker
 		Rob a bank
 		play in golf pro tour
+		Make/ask rich friends
 		
 Friend Betrayal		
 (Person goes from Good Friend to Bad Friend)
@@ -50,4 +51,17 @@ Fight your enemy
 		Too powerful
 	Ways to achieve
 		Find them
+		
+Need healthcare
+(Person goes from needing healthcare to receiving healthcare or
+Person goes from being sick to being healthy)
+	Reason?
+		Sick and can't afford
+		Sick and not powerful enough
+	Ways to achieve
+		Get in prison
+		Get money
+		Generous stranger
+		
+
 		

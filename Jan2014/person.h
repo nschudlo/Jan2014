@@ -5,6 +5,7 @@
 #include <worldobject.h>
 #include <relationship.h>
 #include <action.h>
+#include "location.h"
 
 class Relationship;
 
@@ -43,6 +44,9 @@ public:
     int getHealth();
     void setHealth(int _health);
 
+    Location* getCurrLocation();
+    void setCurrLocation(Location* loc);
+
 
     void addRelationship(Relationship *rel);
     void listRelationships();
@@ -54,6 +58,8 @@ private:
     int mood; //0=sad 10=happy
     int money; //Common value in games
     int health; //0-100?
+
+    Location* currentLocation;
 
     std::vector<WorldObject*> itemsHeld;
     std::vector<Relationship*> relationships;

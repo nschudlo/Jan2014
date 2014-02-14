@@ -234,3 +234,9 @@ vector<Action*> Person::getActionsDo(){
 
 vector<Action*> Person::getActionsGet(){
     return actionsGet;}
+
+Location* Person::getCurrLocation(){
+    return currentLocation;}
+
+void Person::setCurrLocation(Location *loc){
+    currentLocation=loc;}
