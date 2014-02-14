@@ -1,0 +1,13 @@
+INPUT(
+./release/main.o
+./release/worldobject.o
+./release/person.o
+./release/relationship.o
+./release/controller.o
+./release/bulkloader.o
+./release/action.o
+./release/location.o
+./release/locationloader.o
+./release/form.o
+./release/moc_form.o
+);

@@ -1,0 +1,13 @@
+INPUT(
+./debug/main.o
+./debug/worldobject.o
+./debug/person.o
+./debug/relationship.o
+./debug/controller.o
+./debug/bulkloader.o
+./debug/action.o
+./debug/location.o
+./debug/locationloader.o
+./debug/form.o
+./debug/moc_form.o
+);

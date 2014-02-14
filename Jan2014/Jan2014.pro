@@ -4,9 +4,10 @@
 #
 #-------------------------------------------------
 
-QT       += core
+QT       += core \
+            gui
 
-QT       -= gui
+greaterThan(QT_MAJOR_VERSION, 4): QT += widgets
 
 TARGET = Jan2014
 CONFIG   += console
@@ -23,7 +24,8 @@ SOURCES += main.cpp \
     bulkloader.cpp \
     action.cpp \
     location.cpp \
-    locationloader.cpp
+    locationloader.cpp \
+    form.cpp
 
 HEADERS += \
     worldobject.h \
@@ -33,6 +35,10 @@ HEADERS += \
     bulkloader.h \
     action.h \
     location.h \
-    locationloader.h
+    locationloader.h \
+    form.h
 
 INCLUDEPATH += C:\boost_1_55_0
+
+FORMS += \
+    form.ui
