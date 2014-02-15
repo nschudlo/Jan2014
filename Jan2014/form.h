@@ -2,6 +2,7 @@
 #define FORM_H
 
 #include <QtWidgets/QWidget>
+#include "controller.h"
 
 namespace Ui {
 class Form;
@@ -17,6 +18,7 @@ public:
     
 private:
     Ui::Form *ui;
+    Controller *controller;
 };
 
 #endif // FORM_H

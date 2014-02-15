@@ -15,7 +15,7 @@ using namespace std;
 
 int main(int argc, char *argv[])
 {
-    Controller::Instance()->doThings();
+    //Controller::Instance()->doThings();
 
     QApplication a(argc, argv);
     Form w;
