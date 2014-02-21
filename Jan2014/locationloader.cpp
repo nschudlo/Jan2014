@@ -120,7 +120,7 @@ Location* LocationLoader::getLocation(std::string name)
 {
     for(int index=0; index<(int)locations->size(); index++)
     {
-        if(locations->at(index)->getLocation()==name)
+        if(locations->at(index)->getName()==name)
             return locations->at(index);
     }
     return 0;

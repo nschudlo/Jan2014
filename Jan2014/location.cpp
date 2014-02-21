@@ -9,7 +9,7 @@ Location::Location(std::string _location)
     location = _location;
 }
 
-std::string Location::getLocation(){
+std::string Location::getName(){
     return location;}
 
 void Location::addGoTo(Location * loc){
@@ -25,13 +25,13 @@ std::vector<Location*> Location::getComeFrom(){
     return comeFromLocations;}
 
 bool Location::canGoTo(Location *loc){
-    return canGoTo(loc->getLocation());}
+    return canGoTo(loc->getName());}
 
 bool Location::canGoTo(std::string loc){
     for(unsigned int f=0; f < goToLocations.size(); f++)
     {
        try{
-            if(goToLocations.at(f)->getLocation()==loc)
+            if(goToLocations.at(f)->getName()==loc)
                 return true;
         }catch(std::exception e){std::cout<<" none";}
     }
@@ -39,13 +39,13 @@ bool Location::canGoTo(std::string loc){
 }
 
 bool Location::canComeFrom(Location *loc){
-    return canComeFrom(loc->getLocation());}
+    return canComeFrom(loc->getName());}
 
 bool Location::canComeFrom(std::string loc){
     for(unsigned int f=0; f < comeFromLocations.size(); f++)
     {
        try{
-            if(comeFromLocations.at(f)->getLocation()==loc)
+            if(comeFromLocations.at(f)->getName()==loc)
                 return true;
         }catch(std::exception e){std::cout<<" none";}
     }

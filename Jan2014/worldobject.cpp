@@ -7,23 +7,24 @@ using namespace std;
 WorldObject::WorldObject(std::string name)
 {
     this->name = name;
+    this->maxItemsPossible = 1;
     cout<< "Created an object: " << this->name << endl;
 }
 
-std::string WorldObject::getName()
-{
-   return this->name;
-}
+std::string WorldObject::getName(){
+   return this->name;}
 
-void WorldObject::addActionDo(Action *act)
-{
-    actionsDo.push_back(act);
-}
+void WorldObject::addActionDo(Action *act){
+    actionsDo.push_back(act);}
 
-void WorldObject::addActionGet(Action *act)
-{
-    actionsGet.push_back(act);
-}
+void WorldObject::addActionGet(Action *act){
+    actionsGet.push_back(act);}
+
+void WorldObject::setMaxItemsPossible(int max){
+    maxItemsPossible = max;}
+
+int WorldObject::getMaxItemsPossible(){
+    return maxItemsPossible;}
 
 void WorldObject::listActions()
 {
@@ -81,3 +82,5 @@ bool WorldObject::canActionGet(std::string name)
     }
     return false;
 }
+
+

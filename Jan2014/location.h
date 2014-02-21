@@ -12,7 +12,7 @@ public:
     void addGoTo(Location* loc);
     void addComeFrom(Location* loc);
 
-    std::string getLocation();
+    std::string getName();
 
     std::vector<Location*> getGoTo();
     std::vector<Location*> getComeFrom();

@@ -59,7 +59,16 @@ void Relationship::setPersonOne(Person *_new)
 
 void Relationship::printRelationship()
 {
-    cout << two->getName() <<" is a";
+    cout<<relationshipToString()<<endl;
+}
+
+string Relationship::relationshipToString()
+{
+
+    string relOutput = "";
+    relOutput.append(two->getName() +" is a");
+    //cout << two->getName() <<" is a";
+
     string currStrength = " ";
     switch(relationshipStrength)
     {
@@ -68,65 +77,100 @@ void Relationship::printRelationship()
     case 2:currStrength=" good";break;
     }
 
-
+    relOutput.append(currStrength);
 
     switch(relationshipState)
     {
     case 0:
         if(two->getGender()==0)
-            cout<<currStrength<<" father to ";
+            relOutput.append(" father to ");
+        //cout<<currStrength<<" father to ";
         else
-            cout<<currStrength<<" mother to ";
+            relOutput.append(" mother to ");
+        //cout<<currStrength<<" mother to ";
         break;
 
     case 1:
         if(two->getGender()==0)
-            cout<<currStrength<<" son to ";
+            relOutput.append(" son to ");
+        //cout<<currStrength<<" son to ";
         else
-            cout<<currStrength<<" daughter to ";
+            relOutput.append(" daughter to ");
+        //cout<<currStrength<<" daughter to ";
         break;
 
     case 2:
         if(two->getGender()==0)
-            cout<<currStrength<<" brother to ";
+            relOutput.append(" brother to ");
+        //cout<<currStrength<<" brother to ";
         else
-            cout<<currStrength<<" sister to ";
+            relOutput.append(" sister to ");
+        //cout<<currStrength<<" sister to ";
         break;
 
     case 3:
         if(two->getGender()==0)
-            cout<<currStrength<<" husband to ";
+            relOutput.append(" husband to ");
+        //cout<<currStrength<<" husband to ";
         else
-            cout<<currStrength<<" wife to ";
+            relOutput.append(" wife to ");
+        //cout<<currStrength<<" wife to ";
         break;
 
     case 4:
-        cout<<currStrength<<" family members to ";break;
+        relOutput.append(" family member to ");
+        //cout<<currStrength<<" family members to ";
+        break;
 
     case 5:
         if(two->getGender()==0)
-            cout<<currStrength<<" boyfriend to ";
+            relOutput.append(" boyfriend to ");
+        //cout<<currStrength<<" boyfriend to ";
         else
-            cout<<currStrength<<" girlfriend to ";
+            relOutput.append(" girlfriend to ");
+        //cout<<currStrength<<" girlfriend to ";
         break;
 
-    case 6:cout<<currStrength<<" strangers to ";break;
+    case 6:
+        relOutput.append(" stranger to ");
+        //cout<<currStrength<<" strangers to ";
+        break;
 
-    case 7:cout<<currStrength<<" friend with ";break;
+    case 7:
+        relOutput.append(" friend with ");
+        //cout<<currStrength<<" friend with ";
+        break;
 
-    case 8:cout<<currStrength<<" enemy with ";break;
+    case 8:
+        relOutput.append(" enemy with ");
+        //cout<<currStrength<<" enemy with ";
+        break;
 
-    case 9:cout<<currStrength<<" teacher to ";break;
+    case 9:
+        relOutput.append(" teacher to ");
+        //cout<<currStrength<<" teacher to ";
+        break;
 
-    case 10:cout<<currStrength<<" student to ";break;
+    case 10:
+        relOutput.append(" student to ");
+        //cout<<currStrength<<" student to ";
+        break;
 
-    case 11:cout<<currStrength<<" coworker to ";break;
+    case 11:
+        relOutput.append(" coworker to ");
+        //cout<<currStrength<<" coworker to ";
+        break;
 
-    case 12:cout<<currStrength<<" community member to ";break;
+    case 12:
+        relOutput.append(" community member to ");
+        //cout<<currStrength<<" community member to ";
+        break;
     }
 
-    cout<<one->getName()<<endl;
+    relOutput.append(one->getName());
+    //cout<<one->getName()<<endl;
 
+    return relOutput;
     /* switch(relationshipState)
     {
     case 0:cout<<currStrength<<" parent and child to each other"<<endl;break;

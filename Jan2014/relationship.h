@@ -12,6 +12,7 @@ public:
 
     void setPersonOne(Person *_new);
     void printRelationship();
+    std::string relationshipToString();
 
     void setState(int state, int strength);
     int getState();

@@ -21,10 +21,15 @@ public:
     bool canActionDo(std::string name);
     bool canActionGet(std::string name);
 
+    void setMaxItemsPossible(int max);
+    int getMaxItemsPossible();
+
 private:
     std::string name;
     std::vector<Action*> actionsDo;
     std::vector<Action*> actionsGet;
+
+    int maxItemsPossible;
 
 };
 

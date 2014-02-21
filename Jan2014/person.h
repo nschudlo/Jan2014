@@ -12,6 +12,7 @@ class Relationship;
 class Person
 {
 public:
+    Person();
     Person(std::string name, int gender);
 
     std::string getName();
@@ -37,6 +38,8 @@ public:
     bool canActionDo(std::string name);
     bool canActionGet(std::string name);
 
+
+
     int getMoney();
     void setMoney(int _mon);
     int getMood();
@@ -51,6 +54,7 @@ public:
     void addRelationship(Relationship *rel);
     void listRelationships();
     Relationship* getRelationship(std::string name);
+    std::vector<Relationship*> getRelationships();
 
 private:
     std::string name;

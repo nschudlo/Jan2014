@@ -13,7 +13,16 @@ class Controller
 public:
     static Controller* Instance();
 
-    void doThings();
+    void startLoad();
+
+    std::vector<Person*> getPeopleVector();
+    std::vector<Location*> getLocationVector();
+    std::vector<WorldObject*> getItemVector();
+    std::vector<Action*> getActionVector();
+
+    Person *getPerson(std::string name);
+    WorldObject* getItem(std::string name);
+    Location* getLocation(std::string name);
 
 private:
     Controller(){};// Private so that it can  not be called
@@ -25,8 +34,6 @@ private:
     WorldObject* createObject(std::string name);
     Relationship* addRelationship(Person *one, Person *two, int type, int status);
     Action* createAction(std::string name);
-
-    Person *getPerson(std::string name);
 
 
     std::vector<Location*> locations;

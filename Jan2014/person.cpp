@@ -4,11 +4,16 @@
 
 using namespace std;
 
+Person::Person(){}
+
 Person::Person(string name, int gender)
 {
     this->name = name;
     this->mood = 5;
     this->gender = gender;
+    this->health = 100;
+    this->money = 200;
+    this->currentLocation=0;
 
     cout<<"Created a person named: "<<this->name<<endl;
 }
@@ -240,3 +245,6 @@ Location* Person::getCurrLocation(){
 
 void Person::setCurrLocation(Location *loc){
     currentLocation=loc;}
+
+std::vector<Relationship*> Person::getRelationships(){
+    return relationships;}

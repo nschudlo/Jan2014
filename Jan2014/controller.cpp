@@ -27,7 +27,7 @@ Controller* Controller::Instance()
  *  Main function of the class.
  * @brief Controller::doThings
  */
-void Controller::doThings()
+void Controller::startLoad()
 {
 
     BulkLoader(&worldObjects,&relationships,&people,&actions, "BulkLoad.txt");
@@ -38,6 +38,16 @@ void Controller::doThings()
 
    //nick->getItemsHeld().at(0)->listActions();
 }
+
+
+std::vector<Person*> Controller::getPeopleVector(){
+    return people;}
+std::vector<WorldObject*> Controller::getItemVector(){
+    return worldObjects;}
+std::vector<Action*> Controller::getActionVector(){
+    return actions;}
+std::vector<Location*> Controller::getLocationVector(){
+    return locations;}
 
 Person* Controller::createPerson(std::string name, int gender)
 {
@@ -72,8 +82,29 @@ Person* Controller::getPerson(std::string name)
     return 0;
 }
 
+WorldObject* Controller::getItem(std::string name)
+{
+    for(int index=0; index<(int)worldObjects.size(); index++)
+    {
+        if(worldObjects.at(index)->getName()==name)
+            return worldObjects.at(index);
+    }
+
+    return 0;
+}
+
 Action *Controller::createAction(std::string name)
 {
     actions.push_back(new Action(name));
     return actions.back();
+}
+
+Location* Controller::getLocation(string name)
+{
+    for(int index=0; index<(int)locations.size();index++)
+    {
+        if(locations.at(index)->getName()==name)
+            return locations.at(index);
+    }
+    return 0;
 }
