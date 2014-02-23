@@ -1,6 +1,7 @@
 #include "location.h"
 #include <iostream>
 
+Location::Location(){}
 
 Location::Location(std::string _location)
 {
@@ -51,3 +52,25 @@ bool Location::canComeFrom(std::string loc){
     }
     return false;
 }
+
+void Location::addPerson(Person *person)
+{
+    peopleAtLocation.push_back(person);
+}
+
+int Location::removePerson(Person *person)
+{
+    for(int index=0; index<(int)peopleAtLocation.size();index++)
+    {
+        if(peopleAtLocation.at(index)->getName()==person->getName())
+        {
+            peopleAtLocation.erase(peopleAtLocation.begin()+index);
+            return 1;
+        }
+    }
+    return 0;
+}
+
+std::vector<Person*> Location::getCurrentPeople(){
+    return peopleAtLocation;}
+

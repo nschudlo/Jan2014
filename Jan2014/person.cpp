@@ -35,7 +35,7 @@ void Person::listActions()
 
     for(unsigned int f=0; f < actionsDo.size(); f++)
     {
-       try{ cout<<" "<<actionsDo.at(f)->getName();}
+        try{ cout<<" "<<actionsDo.at(f)->getName();}
         catch(exception e){cout<<" none";}
     }
     cout<<endl;
@@ -44,7 +44,7 @@ void Person::listActions()
 
     for(unsigned int f=0; f < actionsGet.size(); f++)
     {
-       try{ cout<<" "<<actionsGet.at(f)->getName();}
+        try{ cout<<" "<<actionsGet.at(f)->getName();}
         catch(exception e){cout<<" none";}
     }
     cout<<endl;
@@ -55,7 +55,7 @@ bool Person::canActionDo(std::string name)
 {
     for(unsigned int f=0; f < actionsDo.size(); f++)
     {
-       try{
+        try{
             if(actionsDo.at(f)->getName()==name)
                 return true;
         }
@@ -68,7 +68,7 @@ bool Person::canActionGet(std::string name)
 {
     for(unsigned int f=0; f < actionsGet.size(); f++)
     {
-       try{
+        try{
             if(actionsGet.at(f)->getName()==name)
                 return true;
         }
@@ -151,8 +151,8 @@ void Person::dropItem(string object, int count)
                 if(this->itemsHeld.at(index)->getName()==object)
                 {
 
-                        itemsHeld.erase(itemsHeld.begin()+index);
-                        holding++;
+                    itemsHeld.erase(itemsHeld.begin()+index);
+                    holding++;
 
                 }
             }catch(exception e){cout<<"No more items \n";}
@@ -169,7 +169,7 @@ void Person::printAllItems()
 
     for(unsigned int f=0; f < itemsHeld.size(); f++)
     {
-       try{ cout<<" "<<itemsHeld.at(f)->getName();}
+        try{ cout<<" "<<itemsHeld.at(f)->getName();}
         catch(exception e){cout<<" none";}
     }
     cout<<endl;
@@ -190,6 +190,15 @@ void Person::printDetails()
     cout<<"-----------------------"<<endl;
 
 
+}
+
+void Person::setCurrLocation(Location *loc)
+{
+    Person * temp = this;
+    if(currentLocation != 0)
+        currentLocation->removePerson(temp);
+    currentLocation=loc;
+    currentLocation->addPerson(temp);
 }
 
 void Person::setName(std::string newName){
@@ -242,9 +251,6 @@ vector<Action*> Person::getActionsGet(){
 
 Location* Person::getCurrLocation(){
     return currentLocation;}
-
-void Person::setCurrLocation(Location *loc){
-    currentLocation=loc;}
 
 std::vector<Relationship*> Person::getRelationships(){
     return relationships;}

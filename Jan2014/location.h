@@ -3,10 +3,14 @@
 
 #include <string>
 #include <vector>
+#include "person.h"
+
+class Person;
 
 class Location
 {
 public:
+    Location();
     Location(std::string _location);
 
     void addGoTo(Location* loc);
@@ -22,6 +26,10 @@ public:
     bool canComeFrom(Location* loc);
     bool canComeFrom(std::string loc);
 
+    void addPerson(Person* person);
+    int removePerson(Person *person);
+    std::vector<Person*> getCurrentPeople();
+
 private:
     std::string country;
     std::string city;
@@ -29,6 +37,8 @@ private:
 
     std::vector<Location*> goToLocations;
     std::vector<Location*> comeFromLocations;
+
+    std::vector<Person*> peopleAtLocation;
 };
 
 #endif // LOCATION_H

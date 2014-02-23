@@ -17,6 +17,7 @@ Form::Form(QWidget *parent) :
     ui->setupUi(this);
 
     current = new Person();
+    currentLocation = new Location();
     //updateLists();
 }
 
@@ -143,65 +144,68 @@ void Form::on_buttonPersonInfo_released()
         ui->infoTabWidget->setCurrentIndex(0);
 
         current = controller->getPerson(ui->listPeople->currentItem()->text().toStdString());
-
-        ui->labelCurrentPerson->setText(QString (current->getName().c_str()));
-
-        //Add Items to current Items List
-        vector<WorldObject*> currItems = current->getItemsHeld();
-        ui->listPersonItems->clear();
-        for(int index=0;index<(int)currItems.size();index++)
-        {
-            QString item=currItems.at(index)->getName().c_str();
-            ui->listPersonItems->addItem(item);
-        }
-        ui->listPersonItems->setCurrentRow(0);
-
-        //Set Money
-        int currMoney = current->getMoney();
-        ui->personMoneyInput->setValue(currMoney);
-
-        //Set Health
-        int currHealth = current->getHealth();
-        ui->personHealthInput->setValue(currHealth);
-
-        //Set Mood
-        int currMood = current->getMood();
-        ui->personMoodInput->setValue(currMood);
-
-        //Set Relationships
-        vector<Relationship*> rels = current->getRelationships();
-        ui->listPersonRelationship->clear();
-        for(int index=0; index<(int)rels.size();index++)
-        {
-            QString rel =rels.at(index)->getTwo().c_str();
-            ui->listPersonRelationship->addItem(rel);
-        }
-        ui->listPersonRelationship->setCurrentRow(0);
-
-        //Set Location
-        ui->listPersonLocations->clear();
-        Location* currLocation = current->getCurrLocation();
-        QString currLoc = "";
-        vector<Location*> gotoLocations;
-
-        if(currLocation != 0)
-        {
-            currLoc = currLocation->getName().c_str();
-            gotoLocations = currLocation->getGoTo();
-        }
-        else
-        {
-            currLoc = "No Current Location";
-            gotoLocations = controller->getLocationVector();
-        }
-
-        ui->personCurrentLocation->setText(currLoc);
-        for(int index=0; index<(int)gotoLocations.size();index++)
-            ui->listPersonLocations->addItem(gotoLocations.at(index)->getName().c_str());
-
-
+        refreshPersonTab();
     }
 }
+
+void Form::refreshPersonTab()
+{
+    ui->labelCurrentPerson->setText(QString (current->getName().c_str()));
+
+    //Add Items to current Items List
+    vector<WorldObject*> currItems = current->getItemsHeld();
+    ui->listPersonItems->clear();
+    for(int index=0;index<(int)currItems.size();index++)
+    {
+        QString item=currItems.at(index)->getName().c_str();
+        ui->listPersonItems->addItem(item);
+    }
+    ui->listPersonItems->setCurrentRow(0);
+
+    //Set Money
+    int currMoney = current->getMoney();
+    ui->personMoneyInput->setValue(currMoney);
+
+    //Set Health
+    int currHealth = current->getHealth();
+    ui->personHealthInput->setValue(currHealth);
+
+    //Set Mood
+    int currMood = current->getMood();
+    ui->personMoodInput->setValue(currMood);
+
+    //Set Relationships
+    vector<Relationship*> rels = current->getRelationships();
+    ui->listPersonRelationship->clear();
+    for(int index=0; index<(int)rels.size();index++)
+    {
+        QString rel =rels.at(index)->getTwo().c_str();
+        ui->listPersonRelationship->addItem(rel);
+    }
+    ui->listPersonRelationship->setCurrentRow(0);
+
+    //Set Location
+    ui->listPersonLocations->clear();
+    Location* currLocation = current->getCurrLocation();
+    QString currLoc = "";
+    vector<Location*> gotoLocations;
+
+    if(currLocation != 0)
+    {
+        currLoc = currLocation->getName().c_str();
+        gotoLocations = currLocation->getGoTo();
+    }
+    else
+    {
+        currLoc = "No Current Location";
+        gotoLocations = controller->getLocationVector();
+    }
+
+    ui->personCurrentLocation->setText(currLoc);
+    for(int index=0; index<(int)gotoLocations.size();index++)
+        ui->listPersonLocations->addItem(gotoLocations.at(index)->getName().c_str());
+}
+
 void Form::on_listPeople_itemDoubleClicked(){
     on_buttonPersonInfo_released();}
 
@@ -300,6 +304,7 @@ void Form::on_listPersonLocations_itemDoubleClicked(QListWidgetItem *item)
         current->setCurrLocation(newLoc);
         on_buttonPersonInfo_released();
     }
+    refreshLocationTab();
 
 }
 
@@ -402,4 +407,70 @@ void Form::on_buttonItemRemoveGet_released()
         currentItem->removeActionGet(removeItem.toStdString());
         on_buttonItemInfo_released();
     }
+}
+
+void Form::on_buttonLocationInfo_released()
+{
+    if(ui->listLocations->currentRow()>=0)
+    {
+        ui->infoTabWidget->setCurrentIndex(2);
+        currentLocation = controller->getLocation(ui->listLocations->currentItem()->text().toStdString());
+
+        refreshLocationTab();
+
+    }
+}
+
+void Form::refreshLocationTab()
+{
+    //Set Current Item label
+    ui->labelLocationCurrent->setText(currentLocation->getName().c_str());
+
+    //Add to locations to
+    vector<Location*> locationsTo = currentLocation->getGoTo();
+    ui->listLocationsGoTo->clear();
+    for(int index=0; index<(int)locationsTo.size();index++)
+    {
+        ui->listLocationsGoTo->addItem(locationsTo.at(index)->getName().c_str());
+    }
+
+    //Add to locations from
+    vector<Location*> locationsFrom = currentLocation->getComeFrom();
+    ui->listLocationsComeFrom->clear();
+    for(int index=0; index<(int)locationsFrom.size();index++)
+    {
+        ui->listLocationsComeFrom->addItem(locationsFrom.at(index)->getName().c_str());
+    }
+
+    //Add People Currently there
+    vector<Person*> currentPeople = currentLocation->getCurrentPeople();
+    ui->listLocationsPeople->clear();
+    for(int index=0; index<(int)currentPeople.size();index++)
+    {
+        ui->listLocationsPeople->addItem(currentPeople.at(index)->getName().c_str());
+    }
+}
+
+void Form::on_listLocations_itemDoubleClicked()
+{
+    on_buttonLocationInfo_released();
+}
+
+void Form::on_listLocationsGoTo_itemDoubleClicked(QListWidgetItem *item)
+{
+    currentLocation = controller->getLocation(item->text().toStdString());
+    refreshLocationTab();
+}
+
+void Form::on_listLocationsComeFrom_itemDoubleClicked(QListWidgetItem *item)
+{
+    currentLocation = controller->getLocation(item->text().toStdString());
+    refreshLocationTab();
+}
+
+void Form::on_listLocationsPeople_itemDoubleClicked(QListWidgetItem *item)
+{
+    current = controller->getPerson(item->text().toStdString());
+    refreshPersonTab();
+    ui->infoTabWidget->setCurrentIndex(0);
 }

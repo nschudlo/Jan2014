@@ -8,6 +8,7 @@
 #include "location.h"
 
 class Relationship;
+class Location;
 
 class Person
 {

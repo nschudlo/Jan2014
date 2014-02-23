@@ -58,16 +58,30 @@ private slots:
 
     void on_buttonItemRemoveGet_released();
 
+    void on_buttonLocationInfo_released();
+
+    void on_listLocations_itemDoubleClicked();
+
+    void on_listLocationsGoTo_itemDoubleClicked(QListWidgetItem *item);
+
+    void on_listLocationsComeFrom_itemDoubleClicked(QListWidgetItem *item);
+
+    void on_listLocationsPeople_itemDoubleClicked(QListWidgetItem *item);
+
 private:
     Ui::Form *ui;
     Controller *controller;
     Person * current;
     WorldObject * currentItem;
+    Location * currentLocation;
 
     void updatePeople();
     void updateLocations();
     void updateItems();
     void updateActions();
+
+    void refreshLocationTab();
+    void refreshPersonTab();
 };
 
 #endif // FORM_H

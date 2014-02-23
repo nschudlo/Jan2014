@@ -72,6 +72,13 @@ public:
     QPushButton *buttonItemAddGet;
     QPushButton *buttonItemRemoveGet;
     QWidget *tabLocation;
+    QListWidget *listLocationsGoTo;
+    QLabel *labelLocationCurrent;
+    QLabel *label_9;
+    QListWidget *listLocationsComeFrom;
+    QLabel *label_10;
+    QListWidget *listLocationsPeople;
+    QLabel *label_11;
     QWidget *tabAction;
 
     void setupUi(QWidget *Form)
@@ -223,6 +230,27 @@ public:
         infoTabWidget->addTab(tabItem, QString());
         tabLocation = new QWidget();
         tabLocation->setObjectName(QStringLiteral("tabLocation"));
+        listLocationsGoTo = new QListWidget(tabLocation);
+        listLocationsGoTo->setObjectName(QStringLiteral("listLocationsGoTo"));
+        listLocationsGoTo->setGeometry(QRect(40, 50, 131, 131));
+        labelLocationCurrent = new QLabel(tabLocation);
+        labelLocationCurrent->setObjectName(QStringLiteral("labelLocationCurrent"));
+        labelLocationCurrent->setGeometry(QRect(20, 10, 191, 20));
+        label_9 = new QLabel(tabLocation);
+        label_9->setObjectName(QStringLiteral("label_9"));
+        label_9->setGeometry(QRect(30, 30, 101, 16));
+        listLocationsComeFrom = new QListWidget(tabLocation);
+        listLocationsComeFrom->setObjectName(QStringLiteral("listLocationsComeFrom"));
+        listLocationsComeFrom->setGeometry(QRect(210, 50, 131, 131));
+        label_10 = new QLabel(tabLocation);
+        label_10->setObjectName(QStringLiteral("label_10"));
+        label_10->setGeometry(QRect(210, 30, 101, 16));
+        listLocationsPeople = new QListWidget(tabLocation);
+        listLocationsPeople->setObjectName(QStringLiteral("listLocationsPeople"));
+        listLocationsPeople->setGeometry(QRect(400, 50, 131, 131));
+        label_11 = new QLabel(tabLocation);
+        label_11->setObjectName(QStringLiteral("label_11"));
+        label_11->setGeometry(QRect(400, 30, 111, 16));
         infoTabWidget->addTab(tabLocation, QString());
         tabAction = new QWidget();
         tabAction->setObjectName(QStringLiteral("tabAction"));
@@ -230,7 +258,7 @@ public:
 
         retranslateUi(Form);
 
-        infoTabWidget->setCurrentIndex(1);
+        infoTabWidget->setCurrentIndex(2);
 
 
         QMetaObject::connectSlotsByName(Form);
@@ -267,6 +295,10 @@ public:
         buttonItemAddGet->setText(QApplication::translate("Form", "Add Get", 0));
         buttonItemRemoveGet->setText(QApplication::translate("Form", "Remove Get", 0));
         infoTabWidget->setTabText(infoTabWidget->indexOf(tabItem), QApplication::translate("Form", "Item", 0));
+        labelLocationCurrent->setText(QApplication::translate("Form", "Current Location:", 0));
+        label_9->setText(QApplication::translate("Form", "Possible Locations", 0));
+        label_10->setText(QApplication::translate("Form", "Come From", 0));
+        label_11->setText(QApplication::translate("Form", "Current People Here", 0));
         infoTabWidget->setTabText(infoTabWidget->indexOf(tabLocation), QApplication::translate("Form", "Location", 0));
         infoTabWidget->setTabText(infoTabWidget->indexOf(tabAction), QApplication::translate("Form", "Action", 0));
     } // retranslateUi
