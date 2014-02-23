@@ -140,6 +140,8 @@ void Form::on_buttonPersonInfo_released()
 {
     if(ui->listPeople->currentRow()>=0)
     {
+        ui->infoTabWidget->setCurrentIndex(0);
+
         current = controller->getPerson(ui->listPeople->currentItem()->text().toStdString());
 
         ui->labelCurrentPerson->setText(QString (current->getName().c_str()));
@@ -220,8 +222,6 @@ void Form::on_personMoodInput_valueChanged(int arg1)
     current->setMood(arg1);
 }
 
-enum relationship{Parent=0, Child=1, Sibling=2, Married=3, Family=4, SO=5, Strangers=6,
-                  Friends=7, Enemies=8, Teacher=9, Student=10, Working=11, Community=12};
 
 void Form::on_personRelTypeInput_valueChanged(int arg1)
 {
@@ -301,4 +301,105 @@ void Form::on_listPersonLocations_itemDoubleClicked(QListWidgetItem *item)
         on_buttonPersonInfo_released();
     }
 
+}
+
+void Form::on_listWorldObjects_itemDoubleClicked()
+{
+    on_buttonItemInfo_released();
+}
+
+void Form::on_buttonItemInfo_released()
+{
+    if(ui->listWorldObjects->currentRow()>=0)
+    {
+        ui->infoTabWidget->setCurrentIndex(1);
+        currentItem = controller->getItem(ui->listWorldObjects->currentItem()->text().toStdString());
+
+        //Set Current Item label
+        ui->labelCurrentItem->setText(currentItem->getName().c_str());
+
+        //Add to action do
+        vector<Action*> actionsDo = currentItem->getActionsDo();
+        ui->listItemActionDo->clear();
+        for(int index=0; index<(int)actionsDo.size();index++)
+        {
+            ui->listItemActionDo->addItem(actionsDo.at(index)->getName().c_str());
+        }
+
+        //Add to action get
+        vector<Action*> actionsGet = currentItem->getActionsGet();
+        ui->listItemActionGet->clear();
+        for(int index=0; index<(int)actionsGet.size();index++)
+        {
+            ui->listItemActionGet->addItem(actionsGet.at(index)->getName().c_str());
+        }
+    }
+}
+
+void Form::on_buttonItemAddDo_released()
+{
+    if(!ui->listActions->count()==0)
+    {
+        QString newItem = ui->listActions->currentItem()->text();
+        Action* action = controller->getAction(newItem.toStdString());
+
+        if(action!=0)
+        {
+            int actionCount = ui->listItemActionDo->count();
+            for(int index=0; index<actionCount;index++)
+            {
+                if(ui->listItemActionDo->item(index)->text().compare(newItem)==0)
+                    return;
+            }
+
+            currentItem->addActionDo(action);
+            on_buttonItemInfo_released();
+
+        }
+    }
+}
+
+void Form::on_buttonItemRemoveDo_released()
+{
+    if(ui->listItemActionDo->currentRow()>=0)
+    {
+        QString removeItem = ui->listItemActionDo->currentItem()->text();
+        currentItem->removeActionDo(removeItem.toStdString());
+        on_buttonItemInfo_released();
+    }
+}
+
+
+
+void Form::on_buttonItemAddGet_released()
+{
+    if(!ui->listActions->count()==0)
+    {
+        QString newItem = ui->listActions->currentItem()->text();
+        Action* action = controller->getAction(newItem.toStdString());
+
+        if(action!=0)
+        {
+            int actionCount = ui->listItemActionGet->count();
+            for(int index=0; index<actionCount;index++)
+            {
+                if(ui->listItemActionGet->item(index)->text().compare(newItem)==0)
+                    return;
+            }
+
+            currentItem->addActionGet(action);
+            on_buttonItemInfo_released();
+
+        }
+    }
+}
+
+void Form::on_buttonItemRemoveGet_released()
+{
+    if(ui->listItemActionGet->currentRow()>=0)
+    {
+        QString removeItem = ui->listItemActionGet->currentItem()->text();
+        currentItem->removeActionGet(removeItem.toStdString());
+        on_buttonItemInfo_released();
+    }
 }

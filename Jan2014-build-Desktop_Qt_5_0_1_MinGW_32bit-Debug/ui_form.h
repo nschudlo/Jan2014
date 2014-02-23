@@ -62,6 +62,15 @@ public:
     QSpinBox *personMoodInput;
     QLabel *label_6;
     QWidget *tabItem;
+    QLabel *labelCurrentItem;
+    QListWidget *listItemActionDo;
+    QListWidget *listItemActionGet;
+    QLabel *label_7;
+    QLabel *label_8;
+    QPushButton *buttonItemAddDo;
+    QPushButton *buttonItemRemoveDo;
+    QPushButton *buttonItemAddGet;
+    QPushButton *buttonItemRemoveGet;
     QWidget *tabLocation;
     QWidget *tabAction;
 
@@ -184,6 +193,33 @@ public:
         infoTabWidget->addTab(tabPerson, QString());
         tabItem = new QWidget();
         tabItem->setObjectName(QStringLiteral("tabItem"));
+        labelCurrentItem = new QLabel(tabItem);
+        labelCurrentItem->setObjectName(QStringLiteral("labelCurrentItem"));
+        labelCurrentItem->setGeometry(QRect(20, 10, 71, 16));
+        listItemActionDo = new QListWidget(tabItem);
+        listItemActionDo->setObjectName(QStringLiteral("listItemActionDo"));
+        listItemActionDo->setGeometry(QRect(10, 60, 131, 131));
+        listItemActionGet = new QListWidget(tabItem);
+        listItemActionGet->setObjectName(QStringLiteral("listItemActionGet"));
+        listItemActionGet->setGeometry(QRect(280, 60, 130, 131));
+        label_7 = new QLabel(tabItem);
+        label_7->setObjectName(QStringLiteral("label_7"));
+        label_7->setGeometry(QRect(20, 40, 61, 16));
+        label_8 = new QLabel(tabItem);
+        label_8->setObjectName(QStringLiteral("label_8"));
+        label_8->setGeometry(QRect(290, 40, 60, 16));
+        buttonItemAddDo = new QPushButton(tabItem);
+        buttonItemAddDo->setObjectName(QStringLiteral("buttonItemAddDo"));
+        buttonItemAddDo->setGeometry(QRect(150, 80, 75, 23));
+        buttonItemRemoveDo = new QPushButton(tabItem);
+        buttonItemRemoveDo->setObjectName(QStringLiteral("buttonItemRemoveDo"));
+        buttonItemRemoveDo->setGeometry(QRect(150, 120, 75, 23));
+        buttonItemAddGet = new QPushButton(tabItem);
+        buttonItemAddGet->setObjectName(QStringLiteral("buttonItemAddGet"));
+        buttonItemAddGet->setGeometry(QRect(420, 80, 75, 23));
+        buttonItemRemoveGet = new QPushButton(tabItem);
+        buttonItemRemoveGet->setObjectName(QStringLiteral("buttonItemRemoveGet"));
+        buttonItemRemoveGet->setGeometry(QRect(420, 120, 75, 23));
         infoTabWidget->addTab(tabItem, QString());
         tabLocation = new QWidget();
         tabLocation->setObjectName(QStringLiteral("tabLocation"));
@@ -194,7 +230,7 @@ public:
 
         retranslateUi(Form);
 
-        infoTabWidget->setCurrentIndex(0);
+        infoTabWidget->setCurrentIndex(1);
 
 
         QMetaObject::connectSlotsByName(Form);
@@ -223,6 +259,13 @@ public:
         personCurrentLocation->setText(QApplication::translate("Form", "Current Location:", 0));
         label_6->setText(QApplication::translate("Form", "Mood", 0));
         infoTabWidget->setTabText(infoTabWidget->indexOf(tabPerson), QApplication::translate("Form", "Person", 0));
+        labelCurrentItem->setText(QApplication::translate("Form", "Current Item", 0));
+        label_7->setText(QApplication::translate("Form", "Actions Do", 0));
+        label_8->setText(QApplication::translate("Form", "Actions Get", 0));
+        buttonItemAddDo->setText(QApplication::translate("Form", "Add Do", 0));
+        buttonItemRemoveDo->setText(QApplication::translate("Form", "Remove Do", 0));
+        buttonItemAddGet->setText(QApplication::translate("Form", "Add Get", 0));
+        buttonItemRemoveGet->setText(QApplication::translate("Form", "Remove Get", 0));
         infoTabWidget->setTabText(infoTabWidget->indexOf(tabItem), QApplication::translate("Form", "Item", 0));
         infoTabWidget->setTabText(infoTabWidget->indexOf(tabLocation), QApplication::translate("Form", "Location", 0));
         infoTabWidget->setTabText(infoTabWidget->indexOf(tabAction), QApplication::translate("Form", "Action", 0));

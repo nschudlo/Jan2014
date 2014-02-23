@@ -108,3 +108,13 @@ Location* Controller::getLocation(string name)
     }
     return 0;
 }
+
+Action* Controller::getAction(string name)
+{
+    for(int index=0; index<(int)actions.size();index++)
+    {
+        if(actions.at(index)->getName()==name)
+            return actions.at(index);
+    }
+    return 0;
+}

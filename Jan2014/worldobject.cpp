@@ -83,4 +83,26 @@ bool WorldObject::canActionGet(std::string name)
     return false;
 }
 
+void WorldObject::removeActionDo(std::string act)
+{
+    for(int index=0; index<(int)actionsDo.size();index++)
+    {
+        if(actionsDo.at(index)->getName().compare(act)==0)
+        {
+            actionsDo.erase(actionsDo.begin()+index);
+        }
+    }
+}
+
+void WorldObject::removeActionGet(std::string act)
+{
+    for(int index=0; index<(int)actionsGet.size();index++)
+    {
+        if(actionsGet.at(index)->getName().compare(act)==0)
+        {
+            actionsGet.erase(actionsGet.begin()+index);
+        }
+    }
+}
+
 

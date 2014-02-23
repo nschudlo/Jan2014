@@ -23,6 +23,7 @@ public:
     Person *getPerson(std::string name);
     WorldObject* getItem(std::string name);
     Location* getLocation(std::string name);
+    Action* getAction(std::string name);
 
 private:
     Controller(){};// Private so that it can  not be called

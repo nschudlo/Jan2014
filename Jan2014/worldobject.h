@@ -13,6 +13,8 @@ public:
 
     void addActionDo(Action *act);
     void addActionGet(Action *act);
+    void removeActionDo(std::string act);
+    void removeActionGet(std::string act);
     void listActions();
 
     std::vector<Action*> getActionsDo();

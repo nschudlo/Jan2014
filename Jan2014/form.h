@@ -46,10 +46,23 @@ private slots:
 
     void on_personMoodInput_valueChanged(int arg1);
 
+    void on_buttonItemInfo_released();
+
+    void on_buttonItemAddDo_released();
+
+    void on_buttonItemRemoveDo_released();
+
+    void on_listWorldObjects_itemDoubleClicked();
+
+    void on_buttonItemAddGet_released();
+
+    void on_buttonItemRemoveGet_released();
+
 private:
     Ui::Form *ui;
     Controller *controller;
     Person * current;
+    WorldObject * currentItem;
 
     void updatePeople();
     void updateLocations();
