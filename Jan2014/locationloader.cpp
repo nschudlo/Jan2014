@@ -92,7 +92,7 @@ void LocationLoader::testString(string line, string &currentLocation)
 
 string LocationLoader::vectorToString(vector<string> vec, int start, int end)
 {
-    if(end>vec.size())
+    if(end>(int)vec.size())
         end=vec.size();
 
     string output="";

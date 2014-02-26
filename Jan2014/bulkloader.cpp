@@ -2,6 +2,7 @@
 #include <person.h>
 #include <relationship.h>
 #include <worldobject.h>
+#include "locationloader.h"
 #include <boost/foreach.hpp>
 #include <boost/tokenizer.hpp>
 #include <boost/lexical_cast.hpp>
@@ -26,13 +27,17 @@ using namespace std;
 BulkLoader::BulkLoader(vector<WorldObject*> *_o,
                        vector<Relationship*> *_r,
                        vector<Person*> *_p,
-                       vector<Action*> *_a, string filename)
+                       vector<Action*> *_a,
+                       vector<Location*> *_l, string filename)
 {
 
     worldObjects = _o;
     relationships = _r;
     people = _p;
     actions = _a;
+    locations = _l;
+
+    LocationLoader(locations, "locations.txt");
 
     loadfile(filename);
 
@@ -54,7 +59,6 @@ void BulkLoader::loadfile(string filename)
         //types everytime
         for(int cycle=0; cycle<=CYCLE_MAX; cycle++)
         {
-            cout<<"NEW CYCLE"<<endl;
             currentPerson = "";
             while(getline(file, line))
             {
@@ -131,7 +135,6 @@ void BulkLoader::testString(string line, int cycle, string &currentPerson, strin
                     break;
                 }
 
-                //cout<<type<<endl;
                 WorldObject* object = createObject(info[0]);
                 Person* currPerson = getPerson(currentPerson);
                 if(currPerson != 0)
@@ -212,6 +215,21 @@ void BulkLoader::testString(string line, int cycle, string &currentPerson, strin
                     }
                 }
             }
+            else
+                if(type.compare("Location")==0)
+                {
+
+                     Person* currPerson = getPerson(currentPerson);
+                     string locName = vectorToString(info,0,(int)info.size());
+                     Location* loc = getLocation(locName);
+                     if(loc == 0)
+                     {
+                         cout<<"ERROR: location "<<locName<<" not found"<<endl;
+                         break;
+                     }
+
+                     currPerson->setCurrLocation(loc);
+                }
             break;
         }
     }
@@ -284,4 +302,28 @@ Action* BulkLoader::getAction(std::string name)
     }
 
     return 0;
+}
+
+Location* BulkLoader::getLocation(std::string name)
+{
+    for(int index=0; index<(int)locations->size(); index++)
+    {
+        if(locations->at(index)->getName()==name)
+            return locations->at(index);
+    }
+
+    return 0;
+}
+
+string BulkLoader::vectorToString(vector<string> vec, int start, int end)
+{
+    if(end>(int)vec.size())
+        end=vec.size();
+
+    string output="";
+    for(int index=start; index<(int)end; index++)
+    {
+        output = output+vec.at(index)+" ";
+    }
+    return output;
 }

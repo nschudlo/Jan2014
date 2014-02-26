@@ -68,6 +68,10 @@ private slots:
 
     void on_listLocationsPeople_itemDoubleClicked(QListWidgetItem *item);
 
+    void on_buttonAddRelationship_released();
+
+    void on_buttonRemoveRelationship_released();
+
 private:
     Ui::Form *ui;
     Controller *controller;

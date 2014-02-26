@@ -84,13 +84,28 @@ Relationship* Person::getRelationship(string name)
     for (unsigned int index=0; index<relationships.size();index++)
     {
         try{
-            if(relationships.at(index)->getOne()==name || relationships.at(index)->getTwo()==name)
+            if(/*relationships.at(index)->getOne()==name || */relationships.at(index)->getTwo()==name)
                 return relationships.at(index);
         }catch(exception e){cout<<"No more items \n";}
     }
 
     return 0;
 }
+
+void Person::removeRelationship(string name)
+{
+    for(int index=0; index<(int)relationships.size();index++)
+    {
+        if(relationships.at(index)->getTwo()==name)
+        {
+            relationships.erase(relationships.begin()+index);
+            cout<<"Removed Relationship: "<<this->name<<", "<<name<<endl;
+            return;
+        }
+    }
+    return;
+}
+
 
 int Person::isHolding(string objectName)
 {
@@ -200,6 +215,7 @@ void Person::setCurrLocation(Location *loc)
     currentLocation=loc;
     currentLocation->addPerson(temp);
 }
+
 
 void Person::setName(std::string newName){
     this->name = newName;}

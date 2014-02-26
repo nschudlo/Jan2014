@@ -61,6 +61,8 @@ public:
     QLabel *personCurrentLocation;
     QSpinBox *personMoodInput;
     QLabel *label_6;
+    QPushButton *buttonAddRelationship;
+    QPushButton *buttonRemoveRelationship;
     QWidget *tabItem;
     QLabel *labelCurrentItem;
     QListWidget *listItemActionDo;
@@ -166,30 +168,30 @@ public:
         label_4->setGeometry(QRect(260, 40, 71, 16));
         personRelStrengthInput = new QSpinBox(tabPerson);
         personRelStrengthInput->setObjectName(QStringLiteral("personRelStrengthInput"));
-        personRelStrengthInput->setGeometry(QRect(390, 120, 42, 22));
+        personRelStrengthInput->setGeometry(QRect(390, 100, 42, 22));
         personRelStrengthInput->setMaximum(2);
         personRelTypeInput = new QSpinBox(tabPerson);
         personRelTypeInput->setObjectName(QStringLiteral("personRelTypeInput"));
-        personRelTypeInput->setGeometry(QRect(390, 70, 42, 22));
+        personRelTypeInput->setGeometry(QRect(390, 60, 42, 22));
         personRelTypeInput->setMaximum(12);
         personRelType = new QLabel(tabPerson);
         personRelType->setObjectName(QStringLiteral("personRelType"));
-        personRelType->setGeometry(QRect(390, 90, 71, 16));
+        personRelType->setGeometry(QRect(390, 80, 71, 16));
         personRelStrength = new QLabel(tabPerson);
         personRelStrength->setObjectName(QStringLiteral("personRelStrength"));
-        personRelStrength->setGeometry(QRect(390, 140, 71, 16));
+        personRelStrength->setGeometry(QRect(390, 120, 71, 16));
         personRelPrintout = new QLabel(tabPerson);
         personRelPrintout->setObjectName(QStringLiteral("personRelPrintout"));
         personRelPrintout->setGeometry(QRect(250, 190, 291, 16));
         listPersonLocations = new QListWidget(tabPerson);
         listPersonLocations->setObjectName(QStringLiteral("listPersonLocations"));
-        listPersonLocations->setGeometry(QRect(460, 60, 131, 131));
+        listPersonLocations->setGeometry(QRect(480, 60, 131, 131));
         label_5 = new QLabel(tabPerson);
         label_5->setObjectName(QStringLiteral("label_5"));
-        label_5->setGeometry(QRect(470, 40, 101, 16));
+        label_5->setGeometry(QRect(490, 40, 101, 16));
         personCurrentLocation = new QLabel(tabPerson);
         personCurrentLocation->setObjectName(QStringLiteral("personCurrentLocation"));
-        personCurrentLocation->setGeometry(QRect(460, 20, 191, 20));
+        personCurrentLocation->setGeometry(QRect(480, 20, 191, 20));
         personMoodInput = new QSpinBox(tabPerson);
         personMoodInput->setObjectName(QStringLiteral("personMoodInput"));
         personMoodInput->setGeometry(QRect(370, 10, 42, 22));
@@ -197,6 +199,12 @@ public:
         label_6 = new QLabel(tabPerson);
         label_6->setObjectName(QStringLiteral("label_6"));
         label_6->setGeometry(QRect(340, 10, 46, 20));
+        buttonAddRelationship = new QPushButton(tabPerson);
+        buttonAddRelationship->setObjectName(QStringLiteral("buttonAddRelationship"));
+        buttonAddRelationship->setGeometry(QRect(390, 140, 75, 23));
+        buttonRemoveRelationship = new QPushButton(tabPerson);
+        buttonRemoveRelationship->setObjectName(QStringLiteral("buttonRemoveRelationship"));
+        buttonRemoveRelationship->setGeometry(QRect(390, 170, 75, 23));
         infoTabWidget->addTab(tabPerson, QString());
         tabItem = new QWidget();
         tabItem->setObjectName(QStringLiteral("tabItem"));
@@ -258,7 +266,7 @@ public:
 
         retranslateUi(Form);
 
-        infoTabWidget->setCurrentIndex(2);
+        infoTabWidget->setCurrentIndex(3);
 
 
         QMetaObject::connectSlotsByName(Form);
@@ -286,6 +294,8 @@ public:
         label_5->setText(QApplication::translate("Form", "Possible Locations", 0));
         personCurrentLocation->setText(QApplication::translate("Form", "Current Location:", 0));
         label_6->setText(QApplication::translate("Form", "Mood", 0));
+        buttonAddRelationship->setText(QApplication::translate("Form", "Add Rel", 0));
+        buttonRemoveRelationship->setText(QApplication::translate("Form", "Remove Rel", 0));
         infoTabWidget->setTabText(infoTabWidget->indexOf(tabPerson), QApplication::translate("Form", "Person", 0));
         labelCurrentItem->setText(QApplication::translate("Form", "Current Item", 0));
         label_7->setText(QApplication::translate("Form", "Actions Do", 0));

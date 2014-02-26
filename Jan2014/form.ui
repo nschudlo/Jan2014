@@ -157,7 +157,7 @@
     </sizepolicy>
    </property>
    <property name="currentIndex">
-    <number>2</number>
+    <number>3</number>
    </property>
    <widget class="QWidget" name="tabPerson">
     <attribute name="title">
@@ -304,7 +304,7 @@
      <property name="geometry">
       <rect>
        <x>390</x>
-       <y>120</y>
+       <y>100</y>
        <width>42</width>
        <height>22</height>
       </rect>
@@ -317,7 +317,7 @@
      <property name="geometry">
       <rect>
        <x>390</x>
-       <y>70</y>
+       <y>60</y>
        <width>42</width>
        <height>22</height>
       </rect>
@@ -330,7 +330,7 @@
      <property name="geometry">
       <rect>
        <x>390</x>
-       <y>90</y>
+       <y>80</y>
        <width>71</width>
        <height>16</height>
       </rect>
@@ -343,7 +343,7 @@
      <property name="geometry">
       <rect>
        <x>390</x>
-       <y>140</y>
+       <y>120</y>
        <width>71</width>
        <height>16</height>
       </rect>
@@ -368,7 +368,7 @@
     <widget class="QListWidget" name="listPersonLocations">
      <property name="geometry">
       <rect>
-       <x>460</x>
+       <x>480</x>
        <y>60</y>
        <width>131</width>
        <height>131</height>
@@ -378,7 +378,7 @@
     <widget class="QLabel" name="label_5">
      <property name="geometry">
       <rect>
-       <x>470</x>
+       <x>490</x>
        <y>40</y>
        <width>101</width>
        <height>16</height>
@@ -391,7 +391,7 @@
     <widget class="QLabel" name="personCurrentLocation">
      <property name="geometry">
       <rect>
-       <x>460</x>
+       <x>480</x>
        <y>20</y>
        <width>191</width>
        <height>20</height>
@@ -425,6 +425,32 @@
      </property>
      <property name="text">
       <string>Mood</string>
+     </property>
+    </widget>
+    <widget class="QPushButton" name="buttonAddRelationship">
+     <property name="geometry">
+      <rect>
+       <x>390</x>
+       <y>140</y>
+       <width>75</width>
+       <height>23</height>
+      </rect>
+     </property>
+     <property name="text">
+      <string>Add Rel</string>
+     </property>
+    </widget>
+    <widget class="QPushButton" name="buttonRemoveRelationship">
+     <property name="geometry">
+      <rect>
+       <x>390</x>
+       <y>170</y>
+       <width>75</width>
+       <height>23</height>
+      </rect>
+     </property>
+     <property name="text">
+      <string>Remove Rel</string>
      </property>
     </widget>
    </widget>

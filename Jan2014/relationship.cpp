@@ -24,6 +24,7 @@ Relationship::Relationship(Person *_one, Person *_two, int type, int status)
 
     relationshipState = type;//friends
     relationshipStrength = status;//average
+    cout<<"Relationship created: "<<one->getName()<<", "<<two->getName()<<endl;
 }
 
 void Relationship::setState(int state, int strength)

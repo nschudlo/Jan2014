@@ -53,6 +53,7 @@ public:
 
 
     void addRelationship(Relationship *rel);
+    void removeRelationship(std::string name);
     void listRelationships();
     Relationship* getRelationship(std::string name);
     std::vector<Relationship*> getRelationships();

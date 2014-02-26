@@ -12,6 +12,7 @@ public:
                std::vector<Relationship*> *_r,
                std::vector<Person*> *_p,
                std::vector<Action *> *_a,
+               std::vector<Location *> *_l,
                std::string filename);
 
     Person* createPerson(std::string name, int gender);
@@ -24,6 +25,8 @@ public:
     Person* getPerson(std::string name);
     WorldObject* getItem(std::string name);
     Action* getAction(std::string name);
+    Location* getLocation(std::string name);
+    std::string vectorToString(std::vector<std::string> vec, int start, int end);
 
 private:
     //std::string types[] = {"Item", "Person", "Relationship"};
@@ -33,6 +36,7 @@ private:
     std::vector<Relationship*> *relationships;
     std::vector<Person*> *people;
     std::vector<Action*> *actions;
+    std::vector<Location*> *locations;
 
 };
 

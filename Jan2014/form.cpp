@@ -15,6 +15,7 @@ Form::Form(QWidget *parent) :
     controller = Controller::Instance();
     controller->startLoad();
     ui->setupUi(this);
+    ui->infoTabWidget->setCurrentIndex(0);
 
     current = new Person();
     currentLocation = new Location();
@@ -295,6 +296,34 @@ void Form::on_listPersonRelationship_currentRowChanged(int currentRow)
     }
 }
 
+void Form::on_buttonAddRelationship_released()
+{
+    if(ui->listPeople->currentRow() >= 0)
+    {
+        string name2 = ui->listPeople->currentItem()->text().toStdString();
+        if(current->getName()!=name2)
+        {
+            Person* person2 = controller->getPerson(name2);
+            if(person2 != 0)
+            {
+                controller->addRelationship(current,person2,6,1);
+            }
+        }
+    }
+    refreshPersonTab();
+}
+
+void Form::on_buttonRemoveRelationship_released()
+{
+    if(ui->listPersonRelationship->currentRow() >=0)
+    {
+        string person2 = ui->listPersonRelationship->currentItem()->text().toStdString();
+
+        current->removeRelationship(person2);
+        refreshPersonTab();
+    }
+}
+
 void Form::on_listPersonLocations_itemDoubleClicked(QListWidgetItem *item)
 {
     Location* newLoc = controller->getLocation(item->text().toStdString());
@@ -474,3 +503,4 @@ void Form::on_listLocationsPeople_itemDoubleClicked(QListWidgetItem *item)
     refreshPersonTab();
     ui->infoTabWidget->setCurrentIndex(0);
 }
+

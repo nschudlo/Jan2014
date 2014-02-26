@@ -24,19 +24,17 @@ Controller* Controller::Instance()
 }
 
 /**
- *  Main function of the class.
- * @brief Controller::doThings
+ *  Loads the World Objects, People, Relationships, Actions, and Locations
+ * @brief Controller::startLoad()
  */
 void Controller::startLoad()
 {
+    BulkLoader(&worldObjects,&relationships,&people,&actions,&locations, "BulkLoad.txt");
 
-    BulkLoader(&worldObjects,&relationships,&people,&actions, "BulkLoad.txt");
-    LocationLoader(&locations, "locations.txt");
+    //getPerson("Nick")->printDetails();
+    //getPerson("Nikki")->printDetails();
 
-    getPerson("Nick")->printDetails();
-    getPerson("Nikki")->printDetails();
-
-   //nick->getItemsHeld().at(0)->listActions();
+    //nick->getItemsHeld().at(0)->listActions();
 }
 
 
@@ -65,10 +63,19 @@ Relationship *Controller::addRelationship(Person *one, Person *two, int type, in
 {
     if(one != 0 && two != 0)
     {
-        relationships.push_back(new Relationship(one, two, type, status));
-        return relationships.back();
+        if(one->getRelationship(two->getName())==0)
+        {
+            relationships.push_back(new Relationship(one, two, type, status));
+            return relationships.back();
+        }
     }
     return 0;
+}
+
+Action *Controller::createAction(std::string name)
+{
+    actions.push_back(new Action(name));
+    return actions.back();
 }
 
 Person* Controller::getPerson(std::string name)
@@ -91,12 +98,6 @@ WorldObject* Controller::getItem(std::string name)
     }
 
     return 0;
-}
-
-Action *Controller::createAction(std::string name)
-{
-    actions.push_back(new Action(name));
-    return actions.back();
 }
 
 Location* Controller::getLocation(string name)

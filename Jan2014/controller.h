@@ -25,17 +25,16 @@ public:
     Location* getLocation(std::string name);
     Action* getAction(std::string name);
 
-private:
-    Controller(){};// Private so that it can  not be called
-    Controller(Controller const&){};             // copy constructor is private
-    Controller& operator=(Controller const&){};  // assignment operator is private
-    static Controller* m_pInstance;
-
     Person *createPerson(std::string name, int gender);
     WorldObject* createObject(std::string name);
     Relationship* addRelationship(Person *one, Person *two, int type, int status);
     Action* createAction(std::string name);
 
+private:
+    Controller(){};// Private so that it can  not be called
+    Controller(Controller const&){};             // copy constructor is private
+    Controller& operator=(Controller const&){};  // assignment operator is private
+    static Controller* m_pInstance;
 
     std::vector<Location*> locations;
     std::vector<WorldObject*> worldObjects;

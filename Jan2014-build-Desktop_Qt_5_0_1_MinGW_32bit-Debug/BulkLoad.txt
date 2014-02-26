@@ -44,6 +44,7 @@
 <Item>donut
 <Item>GlassWater
 <Relationship>Nikki 6 2
+<Location>Town Square
 
 <Person>Nikki 1
 <Item>Stethoscope
