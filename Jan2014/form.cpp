@@ -1,6 +1,7 @@
 #include "form.h"
 #include "ui_form.h"
 #include "controller.h"
+#include "worldinterpreter.h"
 #include <vector>
 #include <iostream>
 
@@ -16,6 +17,8 @@ Form::Form(QWidget *parent) :
     controller->startLoad();
     ui->setupUi(this);
     ui->infoTabWidget->setCurrentIndex(0);
+
+    interpreter = WorldInterpreter();
 
     current = new Person();
     currentLocation = new Location();
@@ -504,3 +507,8 @@ void Form::on_listLocationsPeople_itemDoubleClicked(QListWidgetItem *item)
     ui->infoTabWidget->setCurrentIndex(0);
 }
 
+
+void Form::on_buttonTest_released()
+{
+    cout<<interpreter.personIsAt("Nick","Bank")<<endl;
+}

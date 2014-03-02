@@ -9,5 +9,7 @@ INPUT(
 ./debug/location.o
 ./debug/locationloader.o
 ./debug/form.o
+./debug/director.o
+./debug/worldinterpreter.o
 ./debug/moc_form.o
 );

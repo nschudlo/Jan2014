@@ -1,13 +1,16 @@
 #include "person.h"
 #include "worldobject.h"
 #include <iostream>
-
+#include <boost/algorithm/string.hpp>
+using namespace boost::algorithm;
 using namespace std;
+
 
 Person::Person(){}
 
 Person::Person(string name, int gender)
 {
+    trim(name);
     this->name = name;
     this->mood = 5;
     this->gender = gender;

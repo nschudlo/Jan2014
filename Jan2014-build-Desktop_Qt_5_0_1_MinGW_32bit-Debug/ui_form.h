@@ -28,7 +28,6 @@ class Ui_Form
 {
 public:
     QPushButton *buttonUpdateLists;
-    QPushButton *pushButton_2;
     QTextBrowser *textBrowser;
     QListWidget *listPeople;
     QListWidget *listWorldObjects;
@@ -82,6 +81,7 @@ public:
     QListWidget *listLocationsPeople;
     QLabel *label_11;
     QWidget *tabAction;
+    QPushButton *buttonTest;
 
     void setupUi(QWidget *Form)
     {
@@ -91,9 +91,6 @@ public:
         buttonUpdateLists = new QPushButton(Form);
         buttonUpdateLists->setObjectName(QStringLiteral("buttonUpdateLists"));
         buttonUpdateLists->setGeometry(QRect(300, 230, 75, 23));
-        pushButton_2 = new QPushButton(Form);
-        pushButton_2->setObjectName(QStringLiteral("pushButton_2"));
-        pushButton_2->setGeometry(QRect(40, 220, 75, 23));
         textBrowser = new QTextBrowser(Form);
         textBrowser->setObjectName(QStringLiteral("textBrowser"));
         textBrowser->setGeometry(QRect(20, 10, 361, 201));
@@ -263,6 +260,9 @@ public:
         tabAction = new QWidget();
         tabAction->setObjectName(QStringLiteral("tabAction"));
         infoTabWidget->addTab(tabAction, QString());
+        buttonTest = new QPushButton(Form);
+        buttonTest->setObjectName(QStringLiteral("buttonTest"));
+        buttonTest->setGeometry(QRect(450, 100, 75, 23));
 
         retranslateUi(Form);
 
@@ -276,7 +276,6 @@ public:
     {
         Form->setWindowTitle(QApplication::translate("Form", "Form", 0));
         buttonUpdateLists->setText(QApplication::translate("Form", "Update Lists", 0));
-        pushButton_2->setText(QApplication::translate("Form", "Cancel", 0));
         buttonPersonInfo->setText(QApplication::translate("Form", "Person Info", 0));
         buttonItemInfo->setText(QApplication::translate("Form", "Item Info", 0));
         buttonLocationInfo->setText(QApplication::translate("Form", "Location Info", 0));
@@ -311,6 +310,7 @@ public:
         label_11->setText(QApplication::translate("Form", "Current People Here", 0));
         infoTabWidget->setTabText(infoTabWidget->indexOf(tabLocation), QApplication::translate("Form", "Location", 0));
         infoTabWidget->setTabText(infoTabWidget->indexOf(tabAction), QApplication::translate("Form", "Action", 0));
+        buttonTest->setText(QApplication::translate("Form", "Test", 0));
     } // retranslateUi
 
 };

@@ -1,0 +1,251 @@
+Story Breakdown
+---------------------------
+
+Start as a mid level police man. Average income, average reputation. 
+
+Discover a drug trafficing ring.
+
+Cut main supply/Save main supply
+
+Save the police chief's wife from the mob/ capture the police chief's wife as ransom
+
+Rob a bank/Foil the bank robbing plot
+
+Arrest the mob boss head/ escape arrest
+
+
+
+Levels of Reputation
+-----------------------------
+Police Reputation - Higher means more police
+Mob Reputation - Higher means more Mob
+(Both can be high as long as they both don't know about the other actions)
+Police Wanted Level - Higher means police will pursue to arrest/kill
+Mob Wanted Level - Higher means mob will try to kill
+
+Detective
+Respected Police
+Corrupt Police
+Vigilante for justice-breaks laws
+Criminal
+Part of the Mob
+
+Discover Drug Trafficing Ring
+-----------------------------------------
+
+Routine house call
+Hear yelling, no one answers the door
+Find some way in 
+Discover a cocain packaging house
+Guy offers bribe
+	Arrest, take bribe, possibly beat up and leave..., possibly kill and leave..., blow up the house
+Call it in, don't call it in
+Eventually the scene is discovered, whether you called it in or not
+
+This scene goes from the drug trade being unknown to being known. Your choices within it determine your path.
+
+This scene is used as a key to the prototype. The choices here will determine the options available to the system. 
+
+
+----------------------------------------------------------------------
+Major Plot Point #1 - Intercepting Drug Shipment 
+----------------------------------------------------------------------
+A major drug shipment is coming into the city by another criminal. 
+Everyone wants it. Everyone needs information and equipment, backup.
+At this point in the game you can be a police still, a vigilante, or a mobster.
+If you are a police the goal is to aquire the information about the drop from the sources you have. It is assumed the shipment is coming from the mob.
+If you are a mobster, the information can be found by investigating the gang. It is assumed the shipment is coming from the gang. Or the information can come from the police.
+
+Requires
+	Information about the dropoff location (important)
+	Weapons (optional)
+	Vehicle (optional)
+	Backup (optional)
+	
+---------------------------------------
+Plot's to aquire information!
+---------------------------------------
+Interogate the arrested member of the mob
+
+Requires
+	Member of the mob in custody
+	High enough Police reputation to be allowed to interogate
+	
+Restrictions maybe
+	Can not kill mobster - police will interupt before you kill
+	
+This plot allows the player to interogate and ask questions, possibly attack the prisoner, but not kill.
+---------------------------------------
+Watch the interogation of the member of the mob
+
+Requires
+	Member of the mob in custody
+	High enough Police reputation to be in the police
+		or
+	Friend with a Police officer (in the case of a vigilante)
+
+The player stands in the viewing room before the interogation begins and watches the interogation.
+The player has an opportunity to go into the room before the actual interogator.
+---------------------------------------
+Investigate Mob/Gang Headquarters (Depending on which path you are on)
+
+Requires
+	Player knows headquarters locationn
+	Player to be at headquarters location
+	
+Player can try to be sneaky and break in quietly.
+Player can choose to kill mob/gang members who get in the way, then search for information.
+Player can choose to subdue mob/gang members and interogate them for information.
+Player can burn the headquarters down, and leave with no information.  Make a statement!
+---------------------------------------
+Visit mob/gang member in jail
+
+Requires
+	No Police wanted level
+	Optional - knowledge of mobsters home (Used as threatening tool, could be a picture of it)
+	Optional - a lot of money (Used to bribe mobster)
+	Optional - weapon (Used to kill mobster)
+	Optional - silenced weapon (Used to kill mobster)
+	
+Player can ask questions. 
+Player can threaten mobsters/gangster family -with optional knowledge.
+Player can bribe mobster/gangster -with optional money.
+Player can kill mobster/gangster - raises alarm, and wanted level. If silenced then alarm will not immediately be raised until spotted. 
+---------------------------------------
+Steal the Information from the Police Station
+
+Requires
+	Police station to have information
+	Mob Reputation high enough to be trusted
+	In the Police Station
+	
+Player needs some form of access to the police station before this can happen. This also requires the police
+station to have the information it needs. The police will only have the information if you had it and they 
+got it from you (arrest, corrupt police, bribe)
+---------------------------------------
+Buy the information from a corrupt cop/friend
+
+Requires
+	Police have information
+	A lot of money
+	Policeman with low police reputation
+	You and this policeman in same location
+	You are not a policeman (this would defeat the purpose of buying the info)
+	
+	
+The player approaches the police with offer. Police can take it or not. Can offer more.
+If offer fails, police reputation goes down, mob reputation goes down, police wanted level goes up.
+If offer succeeds, mob reputation goes up, friendship with cop goes up, money goes down. 
+If you kill police wanted level goes up a lot.
+
+
+
+
+---------------------------------------
+Ways To Lose Information - Could mean the the other side has the information or it was fake/wrong
+---------------------------------------
+Arrested by Police
+	
+Requires
+	High Police wanted level
+	Player in same location as Police
+	
+The police will take weapons, information, and some money from the player.
+The Police wanted level will go down. The Mob Reputation level will also go down.
+---------------------------------------
+Bullied by the Police
+
+Requires
+	Low Police wanted level
+	Player in same location as Police
+	Low Mob Reputation Level
+	Low Police Reputation Level
+	
+The police have no reason to arrest you. Since you are low in the Mob pool as well, they aren't worried about 
+extorting you. Most likely for vigilante.
+---------------------------------------
+Sold out by a Bad Friend
+
+Requires
+	Player has Friend with bad relationship-recently bad
+	
+You discover a friend has sold you out and gave the information to the police or the mob. They've left town.
+This is sort of a default go to in a bad situation. 
+---------------------------------------
+Information turns out to be Fake
+
+Requires
+	Player has information
+	
+You discover the information was fake. It was planted or a lie.
+---------------------------------------
+Information turns out to be wrong
+
+Requires
+	Player has information
+	
+You discover the information you have is wrong. How do you know? I don't know.
+---------------------------------------
+Information Stolen
+
+Requires
+	Player has information
+	Player has Mob Wanted Level
+	
+It is known the the player has the information. When the go to re-evaluate the information is gone.
+---------------------------------------
+Amnesia ...
+
+Requires
+	Player has information
+	
+Player forgets where they put it...
+
+
+
+---------------------------------------
+Ways to arrest gang member
+---------------------------------------
+Investigate the House to find illegal drugs
+
+Requires
+	Player at the house
+	Evidence
+	Planted evidence
+	
+The player can try to find evidence of drugs, or the player can plant drugs.
+This results in a warrant for arrest, or immediate arrest.
+Player goes to police station if arresting. Police Reputation goes up.
+---------------------------------------
+Find gang members selling drugs
+
+Requires
+	Player in the streets
+	Gang members in the street
+	
+The player can search the streets and find gang members selling drugs. This story may trigger randomly when the player is on the street.
+---------------------------------------
+Check Database
+
+Requires
+	Player at Police Station
+	Gang member has warrant for arrest
+	
+The player can check the database for any arrest warrants. Can then go to gangster's house.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+	

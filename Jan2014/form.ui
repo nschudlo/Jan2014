@@ -26,19 +26,6 @@
     <string>Update Lists</string>
    </property>
   </widget>
-  <widget class="QPushButton" name="pushButton_2">
-   <property name="geometry">
-    <rect>
-     <x>40</x>
-     <y>220</y>
-     <width>75</width>
-     <height>23</height>
-    </rect>
-   </property>
-   <property name="text">
-    <string>Cancel</string>
-   </property>
-  </widget>
   <widget class="QTextBrowser" name="textBrowser">
    <property name="geometry">
     <rect>
@@ -662,6 +649,19 @@
      <string>Action</string>
     </attribute>
    </widget>
+  </widget>
+  <widget class="QPushButton" name="buttonTest">
+   <property name="geometry">
+    <rect>
+     <x>450</x>
+     <y>100</y>
+     <width>75</width>
+     <height>23</height>
+    </rect>
+   </property>
+   <property name="text">
+    <string>Test</string>
+   </property>
   </widget>
  </widget>
  <resources/>

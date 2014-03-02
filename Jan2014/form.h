@@ -4,6 +4,7 @@
 #include <QtWidgets/QWidget>
 #include <QtWidgets/QListWidget>
 #include "controller.h"
+#include "worldinterpreter.h"
 
 
 namespace Ui {
@@ -72,12 +73,15 @@ private slots:
 
     void on_buttonRemoveRelationship_released();
 
+    void on_buttonTest_released();
+
 private:
     Ui::Form *ui;
     Controller *controller;
     Person * current;
     WorldObject * currentItem;
     Location * currentLocation;
+    WorldInterpreter interpreter;
 
     void updatePeople();
     void updateLocations();

@@ -1,5 +1,7 @@
 #include "location.h"
 #include <iostream>
+#include <boost/algorithm/string.hpp>
+using namespace boost::algorithm;
 
 Location::Location(){}
 
@@ -7,6 +9,7 @@ Location::Location(std::string _location)
 {
     //country = _country;
     //city = _city;
+    trim(_location);
     location = _location;
 }
 

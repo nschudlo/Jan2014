@@ -37,14 +37,14 @@
 <Action>cut get
 
 #Define People here. Included all items, actions, and relationships after the person
-<Person>Nick 0
+<Person>Nick  0
 <Action>eat do
 <Action>stab get
 <Item>knife 
 <Item>donut
 <Item>GlassWater
 <Relationship>Nikki 6 2
-<Location>Town Square
+<Location>Town Square 
 
 <Person>Nikki 1
 <Item>Stethoscope

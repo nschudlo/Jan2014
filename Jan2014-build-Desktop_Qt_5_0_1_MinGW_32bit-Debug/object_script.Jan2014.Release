@@ -9,5 +9,7 @@ INPUT(
 ./release/location.o
 ./release/locationloader.o
 ./release/form.o
+./release/director.o
+./release/worldinterpreter.o
 ./release/moc_form.o
 );

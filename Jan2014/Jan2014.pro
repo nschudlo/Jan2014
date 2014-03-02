@@ -25,7 +25,9 @@ SOURCES += main.cpp \
     action.cpp \
     location.cpp \
     locationloader.cpp \
-    form.cpp
+    form.cpp \
+    director.cpp \
+    worldinterpreter.cpp
 
 HEADERS += \
     worldobject.h \
@@ -36,7 +38,9 @@ HEADERS += \
     action.h \
     location.h \
     locationloader.h \
-    form.h
+    form.h \
+    director.h \
+    worldinterpreter.h
 
 INCLUDEPATH += C:\boost_1_55_0
 

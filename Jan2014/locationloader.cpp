@@ -3,6 +3,8 @@
 
 #include <boost/tokenizer.hpp>
 #include <boost/lexical_cast.hpp>
+#include <boost/algorithm/string.hpp>
+using namespace boost::algorithm;
 
 #include <iostream>
 #include <fstream>
@@ -100,6 +102,7 @@ string LocationLoader::vectorToString(vector<string> vec, int start, int end)
     {
         output = output+vec.at(index)+" ";
     }
+    trim(output);
     return output;
 }
 

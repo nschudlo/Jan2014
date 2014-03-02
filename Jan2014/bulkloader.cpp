@@ -6,6 +6,8 @@
 #include <boost/foreach.hpp>
 #include <boost/tokenizer.hpp>
 #include <boost/lexical_cast.hpp>
+#include <boost/algorithm/string.hpp>
+using namespace boost::algorithm;
 
 #include <iostream>
 #include <fstream>
@@ -38,6 +40,8 @@ BulkLoader::BulkLoader(vector<WorldObject*> *_o,
     locations = _l;
 
     LocationLoader(locations, "locations.txt");
+
+    Person test = Person("Test  ", 1);
 
     loadfile(filename);
 
@@ -325,5 +329,6 @@ string BulkLoader::vectorToString(vector<string> vec, int start, int end)
     {
         output = output+vec.at(index)+" ";
     }
+    trim(output);
     return output;
 }
