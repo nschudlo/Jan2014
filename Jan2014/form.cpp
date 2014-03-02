@@ -334,7 +334,8 @@ void Form::on_listPersonLocations_itemDoubleClicked(QListWidgetItem *item)
     if(newLoc!=0)
     {
         current->setCurrLocation(newLoc);
-        on_buttonPersonInfo_released();
+        //on_buttonPersonInfo_released();
+        refreshPersonTab();
     }
     refreshLocationTab();
 
@@ -510,5 +511,21 @@ void Form::on_listLocationsPeople_itemDoubleClicked(QListWidgetItem *item)
 
 void Form::on_buttonTest_released()
 {
-    cout<<interpreter.personIsAt("Nick","Bank")<<endl;
+    cout<<interpreter.personIsAt("nick","bank")<<endl;
+    /*
+    cout<<"----------------"<<endl;
+    cout<<"Parent "<<interpreter.relationshipParent("nick", "nikki")<<endl;
+    cout<<"Child "<<interpreter.relationshipChild("nick", "nikki")<<endl;
+    cout<<"Sibling "<<interpreter.relationshipSibling("nick", "nikki")<<endl;
+    cout<<"Married "<<interpreter.relationshipMarried("nick", "nikki")<<endl;
+    cout<<"Family "<<interpreter.relationshipFamily("nick", "nikki")<<endl;
+    cout<<"SO "<<interpreter.relationshipSO("nick", "nikki")<<endl;
+    cout<<"Strangers "<<interpreter.relationshipStrangers("nick", "nikki")<<endl;
+    cout<<"Friends "<<interpreter.relationshipFriends("nick", "nikki")<<endl;
+    cout<<"Enemies "<<interpreter.relationshipEnemies("nick", "nikki")<<endl;
+    cout<<"Teacher "<<interpreter.relationshipTeacher("nick", "nikki")<<endl;
+    cout<<"Student "<<interpreter.relationshipStudent("nick", "nikki")<<endl;
+    cout<<"Working "<<interpreter.relationshipWorking("nick", "nikki")<<endl;
+    cout<<"Community "<<interpreter.relationshipCommunity("nick", "nikki")<<endl;
+    */
 }

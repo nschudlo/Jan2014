@@ -11,6 +11,7 @@ Person::Person(){}
 Person::Person(string name, int gender)
 {
     trim(name);
+    to_lower(name);
     this->name = name;
     this->mood = 5;
     this->gender = gender;

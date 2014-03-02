@@ -28,20 +28,20 @@
 #<Action>stab
 
 #Define all items here. Included all actions that it can do and can happen to it here
-<Item>knife
+<Item>Knife
 <Action>cut do
 <Action>break get
-<Item>apple
+<Item>Apple
 <Action>cut get
-<Item>carrot
+<Item>Carrot
 <Action>cut get
 
 #Define People here. Included all items, actions, and relationships after the person
 <Person>Nick  0
 <Action>eat do
 <Action>stab get
-<Item>knife 
-<Item>donut
+<Item>Knife 
+<Item>Donut
 <Item>GlassWater
 <Relationship>Nikki 6 2
 <Location>Town Square 

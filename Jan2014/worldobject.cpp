@@ -1,11 +1,15 @@
 #include "worldobject.h"
 #include <iostream>
 #include <string>
+#include <boost/algorithm/string.hpp>
+using namespace boost::algorithm;
 
 using namespace std;
 
 WorldObject::WorldObject(std::string name)
 {
+    trim(name);
+    to_lower(name);
     this->name = name;
     this->maxItemsPossible = 1;
     cout<< "Created an object: " << this->name << endl;

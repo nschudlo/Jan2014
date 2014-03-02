@@ -103,6 +103,7 @@ string LocationLoader::vectorToString(vector<string> vec, int start, int end)
         output = output+vec.at(index)+" ";
     }
     trim(output);
+    to_lower(output);
     return output;
 }
 

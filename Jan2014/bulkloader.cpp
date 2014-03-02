@@ -97,6 +97,8 @@ void BulkLoader::testString(string line, int cycle, string &currentPerson, strin
         //Count the number of parameters
         int numParams = std::distance(tok.begin(),tok.end())-1;
 
+        //This changes all uppercase in any names to lower
+        to_lower(info[0]);
 
         //For every cycle after the first, store which person was last seen
         //This is for use in the bulk load file. The bulk load can
@@ -225,6 +227,7 @@ void BulkLoader::testString(string line, int cycle, string &currentPerson, strin
 
                      Person* currPerson = getPerson(currentPerson);
                      string locName = vectorToString(info,0,(int)info.size());
+                     //to_lower(locName);
                      Location* loc = getLocation(locName);
                      if(loc == 0)
                      {
@@ -330,5 +333,6 @@ string BulkLoader::vectorToString(vector<string> vec, int start, int end)
         output = output+vec.at(index)+" ";
     }
     trim(output);
+    to_lower(output);
     return output;
 }

@@ -10,6 +10,7 @@ Location::Location(std::string _location)
     //country = _country;
     //city = _city;
     trim(_location);
+    to_lower(_location);
     location = _location;
 }
 
