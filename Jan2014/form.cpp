@@ -208,6 +208,27 @@ void Form::refreshPersonTab()
     ui->personCurrentLocation->setText(currLoc);
     for(int index=0; index<(int)gotoLocations.size();index++)
         ui->listPersonLocations->addItem(gotoLocations.at(index)->getName().c_str());
+
+    //Set Reps and Wanted
+    ui->policeRep->setValue(current->getPoliceRep());
+    ui->mobRep->setValue(current->getMobRep());
+    ui->policeWanted->setValue(current->getPoliceWanted());
+    ui->mobWanted->setValue(current->getMobWanted());
+
+    //Set storyrank
+    ui->storyRank->setValue(current->getStoryRank());
+    if(current->getStoryRank()==0)
+    {
+        ui->citizenCheckBox->setChecked(true);
+
+    }
+    else
+    {
+        ui->citizenCheckBox->setChecked(false);
+
+    }
+    //on_storyRank_valueChanged(current->getStoryRank());
+
 }
 
 void Form::on_listPeople_itemDoubleClicked(){
@@ -528,4 +549,53 @@ void Form::on_buttonTest_released()
     cout<<"Working "<<interpreter.relationshipWorking("nick", "nikki")<<endl;
     cout<<"Community "<<interpreter.relationshipCommunity("nick", "nikki")<<endl;
     */
+}
+
+void Form::on_policeRep_valueChanged(int arg1){
+    current->setPoliceRep(arg1);
+    refreshPersonTab();}
+
+void Form::on_mobRep_valueChanged(int arg1){
+    current->setMobRep(arg1);
+    refreshPersonTab();}
+
+void Form::on_policeWanted_valueChanged(int arg1){
+    current->setPoliceWanted(arg1);
+    refreshPersonTab();}
+
+void Form::on_mobWanted_valueChanged(int arg1){
+    current->setMobWanted(arg1);
+    refreshPersonTab();}
+
+
+void Form::on_storyRank_valueChanged(int arg1)
+{
+    current->setStoryRank(arg1);
+    QString rank = "";
+    switch(current->getStoryRank())
+    {
+    case 0: rank="Citizen";break;
+    case 1: rank="Mobster";break;
+    case 2: rank="Vigilante";break;
+    case 3: rank="Police";break;
+    }
+
+    ui->rankLabel->setText(rank);
+}
+
+void Form::on_citizenCheckBox_toggled(bool checked)
+{
+    if(checked)
+    {
+        current->setStoryRank(0);
+        ui->storyRank->setValue(0);
+        ui->storyRank->setEnabled(false);
+    }
+    else
+    {
+        current->setStoryRank(1); //Just needs to be not 0
+        ui->storyRank->setValue(current->getStoryRank());
+        ui->storyRank->setEnabled(true);
+    }
+
 }

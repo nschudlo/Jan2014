@@ -1,0 +1,75 @@
+---------------------------------------
+Plot's to acquire information!
+---------------------------------------
+Interrogate the arrested member of the gang
+
+Requires
+	Member of the gang in custody
+	High enough Police reputation to be allowed to interrogate
+	
+Restrictions maybe
+	Can not kill mobster - police will interrupt before you kill
+	
+This plot allows the player to interrogate and ask questions, possibly attack the prisoner, but not kill.
+---------------------------------------
+Watch the interrogation of the member of the mob
+
+Requires
+	Member of the mob in custody
+	High enough Police reputation to be in the police
+		or
+	Friend with a Police officer (in the case of a vigilante)
+
+The player stands in the viewing room before the interrogation begins and watches the interrogation.
+The player has an opportunity to go into the room before the actual interrogator.
+---------------------------------------
+Investigate Mob/Gang Headquarters (Depending on which path you are on)
+
+Requires
+	Player knows headquarters location
+	Player to be at headquarters location
+	
+Player can try to be sneaky and break in quietly.
+Player can choose to kill mob/gang members who get in the way, then search for information.
+Player can choose to subdue mob/gang members and interrogate them for information.
+Player can burn the headquarters down, and leave with no information.  Make a statement!
+---------------------------------------
+Visit mob/gang member in jail
+
+Requires
+	No Police wanted level
+	Optional - knowledge of mobsters home (Used as threatening tool, could be a picture of it)
+	Optional - a lot of money (Used to bribe mobster)
+	Optional - weapon (Used to kill mobster)
+	Optional - silenced weapon (Used to kill mobster)
+	
+Player can ask questions. 
+Player can threaten mobsters/gangster family -with optional knowledge.
+Player can bribe mobster/gangster -with optional money.
+Player can kill mobster/gangster - raises alarm, and wanted level. If silenced then alarm will not immediately be raised until spotted. 
+---------------------------------------
+Steal the Information from the Police Station
+
+Requires
+	Police station to have information
+	Mob Reputation high enough to be trusted
+	In the Police Station
+	
+Player needs some form of access to the police station before this can happen. This also requires the police
+station to have the information it needs. The police will only have the information if you had it and they 
+got it from you (arrest, corrupt police, bribe)
+---------------------------------------
+Buy the information from a corrupt cop/friend
+
+Requires
+	Police have information
+	A lot of money
+	Policeman with low police reputation
+	You and this policeman in same location
+	You are not a policeman (this would defeat the purpose of buying the info)
+	
+	
+The player approaches the police with offer. Police can take it or not. Can offer more.
+If offer fails, police reputation goes down, mob reputation goes down, police wanted level goes up.
+If offer succeeds, mob reputation goes up, friendship with cop goes up, money goes down. 
+If you kill police wanted level goes up a lot.

@@ -1,0 +1,59 @@
+---------------------------------------
+Ways To Lose Information - Could mean the the other side has the information or it was fake/wrong
+---------------------------------------
+Arrested by Police
+	
+Requires
+	High Police wanted level
+	Player in same location as Police
+	
+The police will take weapons, information, and some money from the player.
+The Police wanted level will go down. The Mob Reputation level will also go down.
+---------------------------------------
+Bullied by the Police
+
+Requires
+	Low Police wanted level
+	Player in same location as Police
+	Low Mob Reputation Level
+	Low Police Reputation Level
+	
+The police have no reason to arrest you. Since you are low in the Mob pool as well, they aren't worried about 
+extorting you. Most likely for vigilante.
+---------------------------------------
+Sold out by a Bad Friend
+
+Requires
+	Player has Friend with bad relationship-recently bad
+	
+You discover a friend has sold you out and gave the information to the police or the mob. They've left town.
+This is sort of a default go to in a bad situation. 
+---------------------------------------
+Information turns out to be Fake
+
+Requires
+	Player has information
+	
+You discover the information was fake. It was planted or a lie.
+---------------------------------------
+Information turns out to be wrong
+
+Requires
+	Player has information
+	
+You discover the information you have is wrong. How do you know? I don't know.
+---------------------------------------
+Information Stolen
+
+Requires
+	Player has information
+	Player has Mob Wanted Level
+	
+It is known the the player has the information. When the go to re-evaluate the information is gone.
+---------------------------------------
+Amnesia ...
+
+Requires
+	Player has information
+	
+Player forgets where they put it...

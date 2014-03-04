@@ -339,3 +339,102 @@ bool WorldInterpreter::relationshipCommunity(string person1, string person2)
 
     return rel->getState()==Community;
 }
+
+
+bool WorldInterpreter::policeRepGreaterThan(std::string person, int rep)
+{
+    Person* per = controller->getPerson(person);
+    if(per==0)
+        return false;
+
+    return per->getPoliceRep()>rep;
+}
+
+bool WorldInterpreter::policeRepLessThan(std::string person, int rep)
+{
+    Person* per = controller->getPerson(person);
+    if(per==0)
+        return false;
+
+    return per->getPoliceRep()<rep;
+}
+
+bool WorldInterpreter::mobRepGreaterThan(std::string person, int rep)
+{
+    Person* per = controller->getPerson(person);
+    if(per==0)
+        return false;
+
+    return per->getMobRep()>rep;
+}
+
+bool WorldInterpreter::mobRepLessThan(std::string person, int rep)
+{
+    Person* per = controller->getPerson(person);
+    if(per==0)
+        return false;
+    return per->getMobRep()<rep;
+}
+
+bool WorldInterpreter::policeWantedLessThan(std::string person, int wanted)
+{
+    Person* per = controller->getPerson(person);
+    if(per==0)
+        return false;
+    return per->getPoliceWanted()<wanted;
+}
+
+bool WorldInterpreter::policeWantedGreaterThan(std::string person, int wanted)
+{
+    Person* per = controller->getPerson(person);
+    if(per==0)
+        return false;
+    return per->getPoliceWanted()>wanted;
+}
+
+bool WorldInterpreter::mobWantedGreaterThan(std::string person, int wanted)
+{
+    Person* per = controller->getPerson(person);
+    if(per==0)
+        return false;
+    return per->getMobWanted()>wanted;
+}
+
+bool WorldInterpreter::mobWantedLessThan(std::string person, int wanted)
+{
+    Person* per = controller->getPerson(person);
+    if(per==0)
+        return false;
+    return per->getMobWanted()<wanted;
+}
+
+bool WorldInterpreter::isPolice(std::string person)
+{
+    Person* per = controller->getPerson(person);
+    if(per==0)
+        return false;
+    return per->getStoryRank()==2;
+}
+
+bool WorldInterpreter::isVigilante(std::string person)
+{
+    Person* per = controller->getPerson(person);
+    if(per==0)
+        return false;
+    return per->getStoryRank()==1;
+
+}
+
+bool WorldInterpreter::isMobster(std::string person)
+{
+    Person* per = controller->getPerson(person);
+    if(per==0)
+        return false;
+    return per->getStoryRank()==0;
+
+}
+
+bool WorldInterpreter::isGang(std::string person)
+{
+
+}

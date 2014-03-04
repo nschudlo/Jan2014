@@ -19,6 +19,13 @@ Person::Person(string name, int gender)
     this->money = 200;
     this->currentLocation=0;
 
+    this->policeRep=0;
+    this->mobRep=0;
+    this->policeWanted=0;
+    this->mobWanted=0;
+
+    this->storyRank=0;
+
     cout<<"Created a person named: "<<this->name<<endl;
 }
 
@@ -274,3 +281,70 @@ Location* Person::getCurrLocation(){
 
 std::vector<Relationship*> Person::getRelationships(){
     return relationships;}
+
+
+//Cops and Robbers Story Functions
+void Person::setPoliceRep(int rep){
+    policeRep=rep;
+    recheckStoryRank();}
+
+void Person::setMobRep(int rep){
+    mobRep=rep;
+    recheckStoryRank();}
+
+void Person::setPoliceWanted(int wanted){
+    policeWanted=wanted;
+    recheckStoryRank();}
+
+void Person::setMobWanted(int wanted){
+    mobWanted=wanted;
+    recheckStoryRank();}
+
+int Person::getPoliceRep(){
+    return policeRep;}
+
+int Person::getMobRep(){
+    return mobRep;}
+
+int Person::getPoliceWanted(){
+    return policeWanted;}
+
+int Person::getMobWanted(){
+    return mobWanted;}
+
+void Person::setStoryRank(int rank){
+    storyRank=rank;
+    recheckStoryRank();}
+
+int Person::getStoryRank(){
+    return storyRank;}
+
+enum ranking{Police=3,Vigilante=2,Mobster=1,Citizen=0};
+
+void Person::recheckStoryRank()
+{
+    if(storyRank != Citizen)
+    {
+        if(policeRep > 5)
+        {
+            if(policeWanted < 5)
+                storyRank = Police;
+            else
+                storyRank = Vigilante;
+        }
+        else //PoliceRep < 5
+        {
+            if(mobRep>5)
+            {
+                if(mobWanted<5)
+                    storyRank=Mobster;
+                else
+                    storyRank=Vigilante;
+            }
+            else
+            {
+                storyRank=Vigilante;
+            }
+        }
+    }
+}

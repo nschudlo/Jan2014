@@ -75,6 +75,18 @@ private slots:
 
     void on_buttonTest_released();
 
+    void on_policeRep_valueChanged(int arg1);
+
+    void on_mobRep_valueChanged(int arg1);
+
+    void on_policeWanted_valueChanged(int arg1);
+
+    void on_mobWanted_valueChanged(int arg1);
+
+    void on_storyRank_valueChanged(int arg1);
+
+    void on_citizenCheckBox_toggled(bool checked);
+
 private:
     Ui::Form *ui;
     Controller *controller;

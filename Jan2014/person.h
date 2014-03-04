@@ -58,6 +58,22 @@ public:
     Relationship* getRelationship(std::string name);
     std::vector<Relationship*> getRelationships();
 
+
+    void setPoliceRep(int rep);
+    void setMobRep(int rep);
+    void setPoliceWanted(int wanted);
+    void setMobWanted(int wanted);
+
+    int getPoliceRep();
+    int getMobRep();
+    int getPoliceWanted();
+    int getMobWanted();
+
+    void setStoryRank(int rank);
+    int getStoryRank();
+
+    void recheckStoryRank();
+
 private:
     std::string name;
     int gender; //0=male 1=female
@@ -71,6 +87,24 @@ private:
     std::vector<Relationship*> relationships;
     std::vector<Action*> actionsDo;
     std::vector<Action*> actionsGet;
+
+
+    //These values have to do with cops and robbers
+    int policeRep;
+    int mobRep;
+    int policeWanted;
+    int mobWanted;
+
+    //The various levels you can be
+    //3=Police, 2=Vigilante, 1=Mobster, 0=Citizen
+    int storyRank;
+
+    //For other characters
+    //0=Gang Member, 1=Shop Owner, 2=Bartender, 3=Police, 4=Mobster
+    int profession;
+
+
+
 };
 
 #endif // PERSON_H

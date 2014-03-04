@@ -42,6 +42,20 @@ public:
     bool relationshipWorking(std::string person1, std::string person2);
     bool relationshipCommunity(std::string person1, std::string person2);
 
+    bool policeRepGreaterThan(std::string person, int rep);
+    bool policeRepLessThan(std::string person, int rep);
+    bool mobRepGreaterThan(std::string person, int rep);
+    bool mobRepLessThan(std::string person, int rep);
+    bool policeWantedLessThan(std::string person, int wanted);
+    bool policeWantedGreaterThan(std::string person, int wanted);
+    bool mobWantedGreaterThan(std::string person, int wanted);
+    bool mobWantedLessThan(std::string person, int wanted);
+
+    bool isPolice(std::string person);
+    bool isVigilante(std::string person);
+    bool isMobster(std::string person);
+    bool isGang(std::string person);
+
 
 private:
     std::vector<Location*> locations;

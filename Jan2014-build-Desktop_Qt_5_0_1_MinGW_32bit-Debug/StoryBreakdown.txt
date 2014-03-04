@@ -3,7 +3,7 @@ Story Breakdown
 
 Start as a mid level police man. Average income, average reputation. 
 
-Discover a drug trafficing ring.
+Discover a drug trafficking ring.
 
 Cut main supply/Save main supply
 
@@ -30,13 +30,13 @@ Vigilante for justice-breaks laws
 Criminal
 Part of the Mob
 
-Discover Drug Trafficing Ring
+Discover Drug Trafficking Ring
 -----------------------------------------
 
 Routine house call
 Hear yelling, no one answers the door
 Find some way in 
-Discover a cocain packaging house
+Discover a cocaine packaging house
 Guy offers bribe
 	Arrest, take bribe, possibly beat up and leave..., possibly kill and leave..., blow up the house
 Call it in, don't call it in
@@ -53,30 +53,30 @@ Major Plot Point #1 - Intercepting Drug Shipment
 A major drug shipment is coming into the city by another criminal. 
 Everyone wants it. Everyone needs information and equipment, backup.
 At this point in the game you can be a police still, a vigilante, or a mobster.
-If you are a police the goal is to aquire the information about the drop from the sources you have. It is assumed the shipment is coming from the mob.
+If you are a police the goal is to acquire the information about the drop from the sources you have. It is assumed the shipment is coming from the mob.
 If you are a mobster, the information can be found by investigating the gang. It is assumed the shipment is coming from the gang. Or the information can come from the police.
 
 Requires
-	Information about the dropoff location (important)
+	Information about the drop off location (important)
 	Weapons (optional)
 	Vehicle (optional)
 	Backup (optional)
 	
 ---------------------------------------
-Plot's to aquire information!
+Plot's to acquire information!
 ---------------------------------------
-Interogate the arrested member of the mob
+Interrogate the arrested member of the mob
 
 Requires
 	Member of the mob in custody
-	High enough Police reputation to be allowed to interogate
+	High enough Police reputation to be allowed to interrogate
 	
 Restrictions maybe
-	Can not kill mobster - police will interupt before you kill
+	Can not kill mobster - police will interrupt before you kill
 	
-This plot allows the player to interogate and ask questions, possibly attack the prisoner, but not kill.
+This plot allows the player to interrogate and ask questions, possibly attack the prisoner, but not kill.
 ---------------------------------------
-Watch the interogation of the member of the mob
+Watch the interrogation of the member of the mob
 
 Requires
 	Member of the mob in custody
@@ -84,18 +84,18 @@ Requires
 		or
 	Friend with a Police officer (in the case of a vigilante)
 
-The player stands in the viewing room before the interogation begins and watches the interogation.
-The player has an opportunity to go into the room before the actual interogator.
+The player stands in the viewing room before the interrogation begins and watches the interrogation.
+The player has an opportunity to go into the room before the actual interrogator.
 ---------------------------------------
 Investigate Mob/Gang Headquarters (Depending on which path you are on)
 
 Requires
-	Player knows headquarters locationn
+	Player knows headquarters location
 	Player to be at headquarters location
 	
 Player can try to be sneaky and break in quietly.
 Player can choose to kill mob/gang members who get in the way, then search for information.
-Player can choose to subdue mob/gang members and interogate them for information.
+Player can choose to subdue mob/gang members and interrogate them for information.
 Player can burn the headquarters down, and leave with no information.  Make a statement!
 ---------------------------------------
 Visit mob/gang member in jail

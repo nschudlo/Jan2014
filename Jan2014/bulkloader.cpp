@@ -159,7 +159,7 @@ void BulkLoader::testString(string line, int cycle, string &currentPerson, strin
                     break;
                 }
 
-               // Person* personOne=getPerson(info[0]);
+                // Person* personOne=getPerson(info[0]);
                 //Person* personTwo=getPerson(info[1]);
 
                 Person* personOne = getPerson(currentPerson);
@@ -225,18 +225,36 @@ void BulkLoader::testString(string line, int cycle, string &currentPerson, strin
                 if(type.compare("Location")==0)
                 {
 
-                     Person* currPerson = getPerson(currentPerson);
-                     string locName = vectorToString(info,0,(int)info.size());
-                     //to_lower(locName);
-                     Location* loc = getLocation(locName);
-                     if(loc == 0)
-                     {
-                         cout<<"ERROR: location "<<locName<<" not found"<<endl;
-                         break;
-                     }
+                    Person* currPerson = getPerson(currentPerson);
+                    string locName = vectorToString(info,0,(int)info.size());
+                    //to_lower(locName);
+                    Location* loc = getLocation(locName);
+                    if(loc == 0)
+                    {
+                        cout<<"ERROR: location "<<locName<<" not found"<<endl;
+                        break;
+                    }
 
-                     currPerson->setCurrLocation(loc);
+                    currPerson->setCurrLocation(loc);
                 }
+                else
+                    if(type.compare("StoryValues")==0)
+                    {
+                        if(info.size()!=4)
+                        {
+                            cout<<"ERROR: <StoryValue> not followed by 4 values"<<endl;
+                            break;
+                        }
+                        else
+                        {
+                            Person* currPerson = getPerson(currentPerson);
+                            currPerson->setPoliceRep(atoi(info[0].c_str()));
+                            currPerson->setMobRep(atoi(info[1].c_str()));
+                            currPerson->setPoliceWanted(atoi(info[2].c_str()));
+                            currPerson->setMobWanted(atoi(info[3].c_str()));
+                        }
+
+                    }
             break;
         }
     }

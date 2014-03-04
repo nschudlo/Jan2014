@@ -1,0 +1,29 @@
+---------------------------------------
+Ways to arrest gang member
+---------------------------------------
+Investigate the House to find illegal drugs
+
+Requires
+	Player at the house
+	Evidence
+	Planted evidence
+	
+The player can try to find evidence of drugs, or the player can plant drugs.
+This results in a warrant for arrest, or immediate arrest.
+Player goes to police station if arresting. Police Reputation goes up.
+---------------------------------------
+Find gang members selling drugs
+
+Requires
+	Player in the streets
+	Gang members in the street
+	
+The player can search the streets and find gang members selling drugs. This story may trigger randomly when the player is on the street.
+---------------------------------------
+Check Database
+
+Requires
+	Player at Police Station
+	Gang member has warrant for arrest
+	
+The player can check the database for any arrest warrants. Can then go to gangster's house.

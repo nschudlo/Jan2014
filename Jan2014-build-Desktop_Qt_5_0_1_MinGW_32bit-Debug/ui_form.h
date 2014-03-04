@@ -13,13 +13,17 @@
 #include <QtWidgets/QAction>
 #include <QtWidgets/QApplication>
 #include <QtWidgets/QButtonGroup>
+#include <QtWidgets/QCheckBox>
+#include <QtWidgets/QGroupBox>
+#include <QtWidgets/QHBoxLayout>
 #include <QtWidgets/QHeaderView>
 #include <QtWidgets/QLabel>
 #include <QtWidgets/QListWidget>
 #include <QtWidgets/QPushButton>
+#include <QtWidgets/QSpacerItem>
 #include <QtWidgets/QSpinBox>
 #include <QtWidgets/QTabWidget>
-#include <QtWidgets/QTextBrowser>
+#include <QtWidgets/QVBoxLayout>
 #include <QtWidgets/QWidget>
 
 QT_BEGIN_NAMESPACE
@@ -27,16 +31,15 @@ QT_BEGIN_NAMESPACE
 class Ui_Form
 {
 public:
+    QTabWidget *mainTabWidget;
+    QWidget *tab;
+    QPushButton *buttonTest;
     QPushButton *buttonUpdateLists;
-    QTextBrowser *textBrowser;
-    QListWidget *listPeople;
-    QListWidget *listWorldObjects;
     QListWidget *listLocations;
-    QListWidget *listActions;
-    QPushButton *buttonPersonInfo;
-    QPushButton *buttonItemInfo;
     QPushButton *buttonLocationInfo;
-    QPushButton *buttonActionInfo;
+    QListWidget *listActions;
+    QPushButton *buttonItemInfo;
+    QListWidget *listPeople;
     QTabWidget *infoTabWidget;
     QWidget *tabPerson;
     QLabel *label;
@@ -62,6 +65,29 @@ public:
     QLabel *label_6;
     QPushButton *buttonAddRelationship;
     QPushButton *buttonRemoveRelationship;
+    QGroupBox *groupBox;
+    QWidget *layoutWidget;
+    QVBoxLayout *verticalLayout;
+    QHBoxLayout *horizontalLayout;
+    QLabel *label_12;
+    QSpacerItem *horizontalSpacer;
+    QSpinBox *policeRep;
+    QHBoxLayout *horizontalLayout_2;
+    QLabel *label_13;
+    QSpacerItem *horizontalSpacer_2;
+    QSpinBox *mobRep;
+    QHBoxLayout *horizontalLayout_3;
+    QLabel *label_14;
+    QSpacerItem *horizontalSpacer_3;
+    QSpinBox *policeWanted;
+    QHBoxLayout *horizontalLayout_4;
+    QLabel *label_15;
+    QSpacerItem *horizontalSpacer_4;
+    QSpinBox *mobWanted;
+    QLabel *label_16;
+    QSpinBox *storyRank;
+    QLabel *rankLabel;
+    QCheckBox *citizenCheckBox;
     QWidget *tabItem;
     QLabel *labelCurrentItem;
     QListWidget *listItemActionDo;
@@ -81,46 +107,45 @@ public:
     QListWidget *listLocationsPeople;
     QLabel *label_11;
     QWidget *tabAction;
-    QPushButton *buttonTest;
+    QPushButton *buttonPersonInfo;
+    QListWidget *listWorldObjects;
+    QPushButton *buttonActionInfo;
+    QWidget *tab_2;
 
     void setupUi(QWidget *Form)
     {
         if (Form->objectName().isEmpty())
             Form->setObjectName(QStringLiteral("Form"));
         Form->resize(664, 713);
-        buttonUpdateLists = new QPushButton(Form);
+        mainTabWidget = new QTabWidget(Form);
+        mainTabWidget->setObjectName(QStringLiteral("mainTabWidget"));
+        mainTabWidget->setGeometry(QRect(0, 0, 671, 711));
+        tab = new QWidget();
+        tab->setObjectName(QStringLiteral("tab"));
+        buttonTest = new QPushButton(tab);
+        buttonTest->setObjectName(QStringLiteral("buttonTest"));
+        buttonTest->setGeometry(QRect(400, 10, 75, 23));
+        buttonUpdateLists = new QPushButton(tab);
         buttonUpdateLists->setObjectName(QStringLiteral("buttonUpdateLists"));
-        buttonUpdateLists->setGeometry(QRect(300, 230, 75, 23));
-        textBrowser = new QTextBrowser(Form);
-        textBrowser->setObjectName(QStringLiteral("textBrowser"));
-        textBrowser->setGeometry(QRect(20, 10, 361, 201));
-        listPeople = new QListWidget(Form);
-        listPeople->setObjectName(QStringLiteral("listPeople"));
-        listPeople->setGeometry(QRect(20, 260, 151, 161));
-        listWorldObjects = new QListWidget(Form);
-        listWorldObjects->setObjectName(QStringLiteral("listWorldObjects"));
-        listWorldObjects->setGeometry(QRect(180, 260, 151, 161));
-        listLocations = new QListWidget(Form);
+        buttonUpdateLists->setGeometry(QRect(290, 10, 75, 23));
+        listLocations = new QListWidget(tab);
         listLocations->setObjectName(QStringLiteral("listLocations"));
-        listLocations->setGeometry(QRect(340, 260, 151, 161));
-        listActions = new QListWidget(Form);
-        listActions->setObjectName(QStringLiteral("listActions"));
-        listActions->setGeometry(QRect(500, 260, 151, 161));
-        buttonPersonInfo = new QPushButton(Form);
-        buttonPersonInfo->setObjectName(QStringLiteral("buttonPersonInfo"));
-        buttonPersonInfo->setGeometry(QRect(60, 430, 75, 23));
-        buttonItemInfo = new QPushButton(Form);
-        buttonItemInfo->setObjectName(QStringLiteral("buttonItemInfo"));
-        buttonItemInfo->setGeometry(QRect(210, 430, 75, 23));
-        buttonLocationInfo = new QPushButton(Form);
+        listLocations->setGeometry(QRect(330, 40, 151, 161));
+        buttonLocationInfo = new QPushButton(tab);
         buttonLocationInfo->setObjectName(QStringLiteral("buttonLocationInfo"));
-        buttonLocationInfo->setGeometry(QRect(380, 430, 75, 23));
-        buttonActionInfo = new QPushButton(Form);
-        buttonActionInfo->setObjectName(QStringLiteral("buttonActionInfo"));
-        buttonActionInfo->setGeometry(QRect(530, 430, 75, 23));
-        infoTabWidget = new QTabWidget(Form);
+        buttonLocationInfo->setGeometry(QRect(370, 210, 75, 23));
+        listActions = new QListWidget(tab);
+        listActions->setObjectName(QStringLiteral("listActions"));
+        listActions->setGeometry(QRect(490, 40, 151, 161));
+        buttonItemInfo = new QPushButton(tab);
+        buttonItemInfo->setObjectName(QStringLiteral("buttonItemInfo"));
+        buttonItemInfo->setGeometry(QRect(200, 210, 75, 23));
+        listPeople = new QListWidget(tab);
+        listPeople->setObjectName(QStringLiteral("listPeople"));
+        listPeople->setGeometry(QRect(10, 40, 151, 161));
+        infoTabWidget = new QTabWidget(tab);
         infoTabWidget->setObjectName(QStringLiteral("infoTabWidget"));
-        infoTabWidget->setGeometry(QRect(20, 470, 631, 231));
+        infoTabWidget->setGeometry(QRect(10, 250, 631, 421));
         QSizePolicy sizePolicy(QSizePolicy::Expanding, QSizePolicy::Expanding);
         sizePolicy.setHorizontalStretch(0);
         sizePolicy.setVerticalStretch(0);
@@ -202,6 +227,108 @@ public:
         buttonRemoveRelationship = new QPushButton(tabPerson);
         buttonRemoveRelationship->setObjectName(QStringLiteral("buttonRemoveRelationship"));
         buttonRemoveRelationship->setGeometry(QRect(390, 170, 75, 23));
+        groupBox = new QGroupBox(tabPerson);
+        groupBox->setObjectName(QStringLiteral("groupBox"));
+        groupBox->setGeometry(QRect(10, 210, 391, 141));
+        layoutWidget = new QWidget(groupBox);
+        layoutWidget->setObjectName(QStringLiteral("layoutWidget"));
+        layoutWidget->setGeometry(QRect(20, 20, 141, 116));
+        verticalLayout = new QVBoxLayout(layoutWidget);
+        verticalLayout->setObjectName(QStringLiteral("verticalLayout"));
+        verticalLayout->setContentsMargins(0, 0, 0, 0);
+        horizontalLayout = new QHBoxLayout();
+        horizontalLayout->setObjectName(QStringLiteral("horizontalLayout"));
+        label_12 = new QLabel(layoutWidget);
+        label_12->setObjectName(QStringLiteral("label_12"));
+
+        horizontalLayout->addWidget(label_12);
+
+        horizontalSpacer = new QSpacerItem(40, 20, QSizePolicy::Expanding, QSizePolicy::Minimum);
+
+        horizontalLayout->addItem(horizontalSpacer);
+
+        policeRep = new QSpinBox(layoutWidget);
+        policeRep->setObjectName(QStringLiteral("policeRep"));
+        policeRep->setMaximum(10);
+
+        horizontalLayout->addWidget(policeRep);
+
+
+        verticalLayout->addLayout(horizontalLayout);
+
+        horizontalLayout_2 = new QHBoxLayout();
+        horizontalLayout_2->setObjectName(QStringLiteral("horizontalLayout_2"));
+        label_13 = new QLabel(layoutWidget);
+        label_13->setObjectName(QStringLiteral("label_13"));
+
+        horizontalLayout_2->addWidget(label_13);
+
+        horizontalSpacer_2 = new QSpacerItem(40, 20, QSizePolicy::Expanding, QSizePolicy::Minimum);
+
+        horizontalLayout_2->addItem(horizontalSpacer_2);
+
+        mobRep = new QSpinBox(layoutWidget);
+        mobRep->setObjectName(QStringLiteral("mobRep"));
+        mobRep->setMaximum(10);
+
+        horizontalLayout_2->addWidget(mobRep);
+
+
+        verticalLayout->addLayout(horizontalLayout_2);
+
+        horizontalLayout_3 = new QHBoxLayout();
+        horizontalLayout_3->setObjectName(QStringLiteral("horizontalLayout_3"));
+        label_14 = new QLabel(layoutWidget);
+        label_14->setObjectName(QStringLiteral("label_14"));
+
+        horizontalLayout_3->addWidget(label_14);
+
+        horizontalSpacer_3 = new QSpacerItem(40, 20, QSizePolicy::Expanding, QSizePolicy::Minimum);
+
+        horizontalLayout_3->addItem(horizontalSpacer_3);
+
+        policeWanted = new QSpinBox(layoutWidget);
+        policeWanted->setObjectName(QStringLiteral("policeWanted"));
+        policeWanted->setMaximum(10);
+
+        horizontalLayout_3->addWidget(policeWanted);
+
+
+        verticalLayout->addLayout(horizontalLayout_3);
+
+        horizontalLayout_4 = new QHBoxLayout();
+        horizontalLayout_4->setObjectName(QStringLiteral("horizontalLayout_4"));
+        label_15 = new QLabel(layoutWidget);
+        label_15->setObjectName(QStringLiteral("label_15"));
+
+        horizontalLayout_4->addWidget(label_15);
+
+        horizontalSpacer_4 = new QSpacerItem(40, 20, QSizePolicy::Expanding, QSizePolicy::Minimum);
+
+        horizontalLayout_4->addItem(horizontalSpacer_4);
+
+        mobWanted = new QSpinBox(layoutWidget);
+        mobWanted->setObjectName(QStringLiteral("mobWanted"));
+        mobWanted->setMaximum(10);
+
+        horizontalLayout_4->addWidget(mobWanted);
+
+
+        verticalLayout->addLayout(horizontalLayout_4);
+
+        label_16 = new QLabel(groupBox);
+        label_16->setObjectName(QStringLiteral("label_16"));
+        label_16->setGeometry(QRect(200, 30, 61, 16));
+        storyRank = new QSpinBox(groupBox);
+        storyRank->setObjectName(QStringLiteral("storyRank"));
+        storyRank->setGeometry(QRect(260, 30, 42, 22));
+        storyRank->setMaximum(3);
+        rankLabel = new QLabel(groupBox);
+        rankLabel->setObjectName(QStringLiteral("rankLabel"));
+        rankLabel->setGeometry(QRect(310, 30, 61, 16));
+        citizenCheckBox = new QCheckBox(groupBox);
+        citizenCheckBox->setObjectName(QStringLiteral("citizenCheckBox"));
+        citizenCheckBox->setGeometry(QRect(200, 60, 70, 17));
         infoTabWidget->addTab(tabPerson, QString());
         tabItem = new QWidget();
         tabItem->setObjectName(QStringLiteral("tabItem"));
@@ -260,9 +387,19 @@ public:
         tabAction = new QWidget();
         tabAction->setObjectName(QStringLiteral("tabAction"));
         infoTabWidget->addTab(tabAction, QString());
-        buttonTest = new QPushButton(Form);
-        buttonTest->setObjectName(QStringLiteral("buttonTest"));
-        buttonTest->setGeometry(QRect(450, 100, 75, 23));
+        buttonPersonInfo = new QPushButton(tab);
+        buttonPersonInfo->setObjectName(QStringLiteral("buttonPersonInfo"));
+        buttonPersonInfo->setGeometry(QRect(50, 210, 75, 23));
+        listWorldObjects = new QListWidget(tab);
+        listWorldObjects->setObjectName(QStringLiteral("listWorldObjects"));
+        listWorldObjects->setGeometry(QRect(170, 40, 151, 161));
+        buttonActionInfo = new QPushButton(tab);
+        buttonActionInfo->setObjectName(QStringLiteral("buttonActionInfo"));
+        buttonActionInfo->setGeometry(QRect(520, 210, 75, 23));
+        mainTabWidget->addTab(tab, QString());
+        tab_2 = new QWidget();
+        tab_2->setObjectName(QStringLiteral("tab_2"));
+        mainTabWidget->addTab(tab_2, QString());
 
         retranslateUi(Form);
 
@@ -275,11 +412,10 @@ public:
     void retranslateUi(QWidget *Form)
     {
         Form->setWindowTitle(QApplication::translate("Form", "Form", 0));
+        buttonTest->setText(QApplication::translate("Form", "Test", 0));
         buttonUpdateLists->setText(QApplication::translate("Form", "Update Lists", 0));
-        buttonPersonInfo->setText(QApplication::translate("Form", "Person Info", 0));
-        buttonItemInfo->setText(QApplication::translate("Form", "Item Info", 0));
         buttonLocationInfo->setText(QApplication::translate("Form", "Location Info", 0));
-        buttonActionInfo->setText(QApplication::translate("Form", "Action Info", 0));
+        buttonItemInfo->setText(QApplication::translate("Form", "Item Info", 0));
         label->setText(QApplication::translate("Form", "Items", 0));
         buttonAddItem->setText(QApplication::translate("Form", "Add Item", 0));
         buttonRemoveItem->setText(QApplication::translate("Form", "Remove Item", 0));
@@ -295,6 +431,14 @@ public:
         label_6->setText(QApplication::translate("Form", "Mood", 0));
         buttonAddRelationship->setText(QApplication::translate("Form", "Add Rel", 0));
         buttonRemoveRelationship->setText(QApplication::translate("Form", "Remove Rel", 0));
+        groupBox->setTitle(QApplication::translate("Form", "Cops and Robbers", 0));
+        label_12->setText(QApplication::translate("Form", "Police Reputation", 0));
+        label_13->setText(QApplication::translate("Form", "Mob Reputation", 0));
+        label_14->setText(QApplication::translate("Form", "Police Wanted", 0));
+        label_15->setText(QApplication::translate("Form", "Mob Wanted", 0));
+        label_16->setText(QApplication::translate("Form", "Story Rank", 0));
+        rankLabel->setText(QApplication::translate("Form", "Rank", 0));
+        citizenCheckBox->setText(QApplication::translate("Form", "Citizen", 0));
         infoTabWidget->setTabText(infoTabWidget->indexOf(tabPerson), QApplication::translate("Form", "Person", 0));
         labelCurrentItem->setText(QApplication::translate("Form", "Current Item", 0));
         label_7->setText(QApplication::translate("Form", "Actions Do", 0));
@@ -310,7 +454,10 @@ public:
         label_11->setText(QApplication::translate("Form", "Current People Here", 0));
         infoTabWidget->setTabText(infoTabWidget->indexOf(tabLocation), QApplication::translate("Form", "Location", 0));
         infoTabWidget->setTabText(infoTabWidget->indexOf(tabAction), QApplication::translate("Form", "Action", 0));
-        buttonTest->setText(QApplication::translate("Form", "Test", 0));
+        buttonPersonInfo->setText(QApplication::translate("Form", "Person Info", 0));
+        buttonActionInfo->setText(QApplication::translate("Form", "Action Info", 0));
+        mainTabWidget->setTabText(mainTabWidget->indexOf(tab), QApplication::translate("Form", "World", 0));
+        mainTabWidget->setTabText(mainTabWidget->indexOf(tab_2), QApplication::translate("Form", "Tab 2", 0));
     } // retranslateUi
 
 };
