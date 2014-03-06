@@ -11,5 +11,7 @@ INPUT(
 ./release/form.o
 ./release/director.o
 ./release/worldinterpreter.o
+./release/story.o
+./release/storygoal.o
 ./release/moc_form.o
 );

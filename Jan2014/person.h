@@ -74,6 +74,12 @@ public:
 
     void recheckStoryRank();
 
+    void setStoryRole(int role);
+    int getStoryRole();
+
+    bool isMainChar();
+    void setIsMainChar(bool val);
+
 private:
     std::string name;
     int gender; //0=male 1=female
@@ -90,6 +96,7 @@ private:
 
 
     //These values have to do with cops and robbers
+    bool mainChar;
     int policeRep;
     int mobRep;
     int policeWanted;
@@ -99,9 +106,10 @@ private:
     //3=Police, 2=Vigilante, 1=Mobster, 0=Citizen
     int storyRank;
 
-    //For other characters
-    //0=Gang Member, 1=Shop Owner, 2=Bartender, 3=Police, 4=Mobster
-    int profession;
+    //For other characters. StoryRank is citizen for these types
+    //1=Shopper, 2=Shop Owner, 3=Bartender, 4=Police, 5=Mobster
+    //6=Banker, 7=Gang Member, 8=DockWorker
+    int storyRole;
 
 
 

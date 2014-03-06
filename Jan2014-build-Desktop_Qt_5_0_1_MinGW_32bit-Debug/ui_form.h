@@ -88,6 +88,9 @@ public:
     QSpinBox *storyRank;
     QLabel *rankLabel;
     QCheckBox *citizenCheckBox;
+    QLabel *label_17;
+    QLabel *roleLabel;
+    QSpinBox *storyRole;
     QWidget *tabItem;
     QLabel *labelCurrentItem;
     QListWidget *listItemActionDo;
@@ -329,6 +332,17 @@ public:
         citizenCheckBox = new QCheckBox(groupBox);
         citizenCheckBox->setObjectName(QStringLiteral("citizenCheckBox"));
         citizenCheckBox->setGeometry(QRect(200, 60, 70, 17));
+        citizenCheckBox->setChecked(true);
+        label_17 = new QLabel(groupBox);
+        label_17->setObjectName(QStringLiteral("label_17"));
+        label_17->setGeometry(QRect(200, 90, 61, 16));
+        roleLabel = new QLabel(groupBox);
+        roleLabel->setObjectName(QStringLiteral("roleLabel"));
+        roleLabel->setGeometry(QRect(310, 90, 71, 16));
+        storyRole = new QSpinBox(groupBox);
+        storyRole->setObjectName(QStringLiteral("storyRole"));
+        storyRole->setGeometry(QRect(260, 90, 42, 22));
+        storyRole->setMaximum(8);
         infoTabWidget->addTab(tabPerson, QString());
         tabItem = new QWidget();
         tabItem->setObjectName(QStringLiteral("tabItem"));
@@ -439,6 +453,8 @@ public:
         label_16->setText(QApplication::translate("Form", "Story Rank", 0));
         rankLabel->setText(QApplication::translate("Form", "Rank", 0));
         citizenCheckBox->setText(QApplication::translate("Form", "Citizen", 0));
+        label_17->setText(QApplication::translate("Form", "Story Role", 0));
+        roleLabel->setText(QApplication::translate("Form", "Role", 0));
         infoTabWidget->setTabText(infoTabWidget->indexOf(tabPerson), QApplication::translate("Form", "Person", 0));
         labelCurrentItem->setText(QApplication::translate("Form", "Current Item", 0));
         label_7->setText(QApplication::translate("Form", "Actions Do", 0));

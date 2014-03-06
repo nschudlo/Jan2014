@@ -87,13 +87,15 @@ private slots:
 
     void on_citizenCheckBox_toggled(bool checked);
 
+    void on_storyRole_valueChanged(int arg1);
+
 private:
     Ui::Form *ui;
     Controller *controller;
     Person * current;
     WorldObject * currentItem;
     Location * currentLocation;
-    WorldInterpreter interpreter;
+    WorldInterpreter *interpreter;
 
     void updatePeople();
     void updateLocations();

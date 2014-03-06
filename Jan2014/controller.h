@@ -31,9 +31,9 @@ public:
     Action* createAction(std::string name);
 
 private:
-    Controller(){};// Private so that it can  not be called
-    Controller(Controller const&){};             // copy constructor is private
-    Controller& operator=(Controller const&){};  // assignment operator is private
+    Controller(){}// Private so that it can  not be called
+   // Controller(Controller const&){}             // copy constructor is private
+   // Controller& operator=(Controller const&){}  // assignment operator is private
     static Controller* m_pInstance;
 
     std::vector<Location*> locations;

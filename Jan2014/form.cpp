@@ -2,6 +2,8 @@
 #include "ui_form.h"
 #include "controller.h"
 #include "worldinterpreter.h"
+#include "story.h"
+
 #include <vector>
 #include <iostream>
 
@@ -18,7 +20,7 @@ Form::Form(QWidget *parent) :
     ui->setupUi(this);
     ui->infoTabWidget->setCurrentIndex(0);
 
-    interpreter = WorldInterpreter();
+    interpreter = WorldInterpreter::Instance();
 
     current = new Person();
     currentLocation = new Location();
@@ -29,6 +31,32 @@ Form::~Form()
 {
     delete ui;
 }
+
+void Form::on_buttonTest_released()
+{
+    Story test=Story();
+    cout<< test.evaluatePre()<<endl;
+
+
+    //cout<<interpreter.isGangMember("nick")<<endl;
+    /*
+    cout<<"----------------"<<endl;
+    cout<<"Parent "<<interpreter.relationshipParent("nick", "nikki")<<endl;
+    cout<<"Child "<<interpreter.relationshipChild("nick", "nikki")<<endl;
+    cout<<"Sibling "<<interpreter.relationshipSibling("nick", "nikki")<<endl;
+    cout<<"Married "<<interpreter.relationshipMarried("nick", "nikki")<<endl;
+    cout<<"Family "<<interpreter.relationshipFamily("nick", "nikki")<<endl;
+    cout<<"SO "<<interpreter.relationshipSO("nick", "nikki")<<endl;
+    cout<<"Strangers "<<interpreter.relationshipStrangers("nick", "nikki")<<endl;
+    cout<<"Friends "<<interpreter.relationshipFriends("nick", "nikki")<<endl;
+    cout<<"Enemies "<<interpreter.relationshipEnemies("nick", "nikki")<<endl;
+    cout<<"Teacher "<<interpreter.relationshipTeacher("nick", "nikki")<<endl;
+    cout<<"Student "<<interpreter.relationshipStudent("nick", "nikki")<<endl;
+    cout<<"Working "<<interpreter.relationshipWorking("nick", "nikki")<<endl;
+    cout<<"Community "<<interpreter.relationshipCommunity("nick", "nikki")<<endl;
+    */
+}
+
 
 void Form::updateLists()
 {
@@ -216,18 +244,22 @@ void Form::refreshPersonTab()
     ui->mobWanted->setValue(current->getMobWanted());
 
     //Set storyrank
-    ui->storyRank->setValue(current->getStoryRank());
-    if(current->getStoryRank()==0)
+    if(current->isMainChar())
     {
-        ui->citizenCheckBox->setChecked(true);
-
+        ui->storyRank->setEnabled(true);
+        ui->storyRole->setEnabled(false);
+        current->recheckStoryRank();
+        ui->storyRank->setValue(current->getStoryRank());
+        ui->storyRole->setValue(0);
     }
     else
     {
-        ui->citizenCheckBox->setChecked(false);
-
+        ui->storyRank->setEnabled(false);
+        ui->storyRole->setEnabled(true);
+        ui->storyRank->setValue(0);
+        ui->storyRole->setValue(current->getStoryRole());
     }
-    //on_storyRank_valueChanged(current->getStoryRank());
+
 
 }
 
@@ -530,27 +562,6 @@ void Form::on_listLocationsPeople_itemDoubleClicked(QListWidgetItem *item)
 }
 
 
-void Form::on_buttonTest_released()
-{
-    cout<<interpreter.personIsAt("nick","bank")<<endl;
-    /*
-    cout<<"----------------"<<endl;
-    cout<<"Parent "<<interpreter.relationshipParent("nick", "nikki")<<endl;
-    cout<<"Child "<<interpreter.relationshipChild("nick", "nikki")<<endl;
-    cout<<"Sibling "<<interpreter.relationshipSibling("nick", "nikki")<<endl;
-    cout<<"Married "<<interpreter.relationshipMarried("nick", "nikki")<<endl;
-    cout<<"Family "<<interpreter.relationshipFamily("nick", "nikki")<<endl;
-    cout<<"SO "<<interpreter.relationshipSO("nick", "nikki")<<endl;
-    cout<<"Strangers "<<interpreter.relationshipStrangers("nick", "nikki")<<endl;
-    cout<<"Friends "<<interpreter.relationshipFriends("nick", "nikki")<<endl;
-    cout<<"Enemies "<<interpreter.relationshipEnemies("nick", "nikki")<<endl;
-    cout<<"Teacher "<<interpreter.relationshipTeacher("nick", "nikki")<<endl;
-    cout<<"Student "<<interpreter.relationshipStudent("nick", "nikki")<<endl;
-    cout<<"Working "<<interpreter.relationshipWorking("nick", "nikki")<<endl;
-    cout<<"Community "<<interpreter.relationshipCommunity("nick", "nikki")<<endl;
-    */
-}
-
 void Form::on_policeRep_valueChanged(int arg1){
     current->setPoliceRep(arg1);
     refreshPersonTab();}
@@ -574,7 +585,7 @@ void Form::on_storyRank_valueChanged(int arg1)
     QString rank = "";
     switch(current->getStoryRank())
     {
-    case 0: rank="Citizen";break;
+    case 0: rank="No Rank";break;
     case 1: rank="Mobster";break;
     case 2: rank="Vigilante";break;
     case 3: rank="Police";break;
@@ -585,17 +596,51 @@ void Form::on_storyRank_valueChanged(int arg1)
 
 void Form::on_citizenCheckBox_toggled(bool checked)
 {
-    if(checked)
+    if(checked)//Not main char
     {
-        current->setStoryRank(0);
-        ui->storyRank->setValue(0);
-        ui->storyRank->setEnabled(false);
+        current->setIsMainChar(false);
+    }
+    else//Main char
+    {
+        current->setIsMainChar(true);
+    }
+
+    refreshPersonTab();
+
+}
+
+void Form::on_storyRole_valueChanged(int arg1)
+{
+    QString role = "";
+
+    if(arg1==0)
+    {
+        if(current->isMainChar())
+            ui->roleLabel->setText("No Role");
+        else
+        {
+            //current->setStoryRole(1);
+            ui->storyRole->setValue(1);
+        }
     }
     else
     {
-        current->setStoryRank(1); //Just needs to be not 0
-        ui->storyRank->setValue(current->getStoryRank());
-        ui->storyRank->setEnabled(true);
+        current->setStoryRole(arg1);
+        switch(current->getStoryRole())
+        {
+        case 0: role="error";break; //should never get here
+        case 1: role="Shopper";break;
+        case 2: role="Shop Owner";break;
+        case 3: role="Bartender";break;
+        case 4: role="Police";break;
+        case 5: role="Mobster";break;
+        case 6: role="Banker";break;
+        case 7: role="Gang Member";break;
+        case 8: role="Dock Worker";break;
+        }
+        ui->roleLabel->setText(role);
     }
+
+
 
 }

@@ -25,6 +25,8 @@ Person::Person(string name, int gender)
     this->mobWanted=0;
 
     this->storyRank=0;
+    this->storyRole=1;
+    this->mainChar=false;
 
     cout<<"Created a person named: "<<this->name<<endl;
 }
@@ -319,11 +321,24 @@ void Person::setStoryRank(int rank){
 int Person::getStoryRank(){
     return storyRank;}
 
+void Person::setStoryRole(int role){
+    storyRole=role;}
+
+int Person::getStoryRole(){
+    return storyRole;}
+
+bool Person::isMainChar(){
+    return mainChar;}
+
+void Person::setIsMainChar(bool val){
+    mainChar=val;}
+
 enum ranking{Police=3,Vigilante=2,Mobster=1,Citizen=0};
 
 void Person::recheckStoryRank()
 {
-    if(storyRank != Citizen)
+    //if(storyRank != Citizen)
+    if(mainChar)
     {
         if(policeRep > 5)
         {

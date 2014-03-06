@@ -11,5 +11,7 @@ INPUT(
 ./debug/form.o
 ./debug/director.o
 ./debug/worldinterpreter.o
+./debug/story.o
+./debug/storygoal.o
 ./debug/moc_form.o
 );

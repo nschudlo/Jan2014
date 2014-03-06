@@ -8,13 +8,13 @@
 class WorldInterpreter
 {
 public:
-    WorldInterpreter();
+    static WorldInterpreter* Instance();
 
     bool personIsAt(std::string person, std::string location);
     bool personIsAtSameLocationAs(std::string person1, std::string person2);
     bool personIsHolding(std::string person, std::string object);
-    bool personCanDoAction(std::string person, std::string action);
-    bool personCanGetAction(std::string person,std::string action);
+    bool personCanDoAction(std::string person, std::string action);//untested
+    bool personCanGetAction(std::string person,std::string action);//untested
     bool personHealthGreaterThan(std::string person, int healthValue);
     bool personHealthLessThan(std::string person, int healthValue);
     bool personMoneyGreaterThan(std::string person, int moneyValue);
@@ -54,10 +54,21 @@ public:
     bool isPolice(std::string person);
     bool isVigilante(std::string person);
     bool isMobster(std::string person);
-    bool isGang(std::string person);
+
+    bool isGangMember(std::string person);
+    bool isShopper(std::string person);
+    bool isShopOwner(std::string person);
+    bool isBartender(std::string person);
+    bool isBanker(std::string person);
+    bool isDockWorker(std::string person);
 
 
 private:
+    WorldInterpreter();
+   // WorldInterpreter(WorldInterpreter const&){};             // copy constructor is private
+    //WorldInterpreter& operator=(WorldInterpreter const&){};  // assignment operator is private
+    static WorldInterpreter* m_pInstance;
+
     std::vector<Location*> locations;
     std::vector<WorldObject*> worldObjects;
     std::vector<Relationship*> relationships;

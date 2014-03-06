@@ -6,6 +6,15 @@ using namespace std;
 enum relationship{Parent=0, Child=1, Sibling=2, Married=3, Family=4, SO=5, Strangers=6,
                   Friends=7, Enemies=8, Teacher=9, Student=10, Working=11, Community=12};
 
+WorldInterpreter* WorldInterpreter::m_pInstance = NULL;
+
+WorldInterpreter* WorldInterpreter::Instance()
+{
+    if (!m_pInstance)   // Only allow one instance of class to be generated.
+        m_pInstance = new WorldInterpreter;
+    return m_pInstance;
+}
+
 WorldInterpreter::WorldInterpreter()
 {
     controller = Controller::Instance();
@@ -82,6 +91,22 @@ bool WorldInterpreter::personHealthLessThan(string person, int healthValue)
     if(per==0)
         return false;
     return per->getHealth() < healthValue;
+}
+
+bool WorldInterpreter::personMoneyGreaterThan(string person, int moneyValue)
+{
+    Person* per = controller->getPerson(person);
+    if(per==0)
+        return false;
+    return per->getMoney() > moneyValue;
+}
+
+bool WorldInterpreter::personMoneyLessThan(string person, int moneyValue)
+{
+    Person* per = controller->getPerson(person);
+    if(per==0)
+        return false;
+    return per->getMoney() < moneyValue;
 }
 
 bool WorldInterpreter::personIsMale(string person)
@@ -408,12 +433,19 @@ bool WorldInterpreter::mobWantedLessThan(std::string person, int wanted)
     return per->getMobWanted()<wanted;
 }
 
+enum storyRoles{Shopper=1, ShopOwner=2, Bartender=3, Police=4, Mobster=5,
+                Banker=6, GangMember=7, DockWorker=8};
+
 bool WorldInterpreter::isPolice(std::string person)
 {
     Person* per = controller->getPerson(person);
     if(per==0)
         return false;
-    return per->getStoryRank()==2;
+
+    if(per->isMainChar())
+        return per->getStoryRank()==3;
+
+    return per->getStoryRole()==Police;
 }
 
 bool WorldInterpreter::isVigilante(std::string person)
@@ -421,7 +453,8 @@ bool WorldInterpreter::isVigilante(std::string person)
     Person* per = controller->getPerson(person);
     if(per==0)
         return false;
-    return per->getStoryRank()==1;
+
+    return per->getStoryRank()==2;
 
 }
 
@@ -430,11 +463,77 @@ bool WorldInterpreter::isMobster(std::string person)
     Person* per = controller->getPerson(person);
     if(per==0)
         return false;
-    return per->getStoryRank()==0;
+
+    if(per->isMainChar())
+        return per->getStoryRank()==1;
+
+    return per->getStoryRole()==Mobster;
 
 }
 
-bool WorldInterpreter::isGang(std::string person)
+bool WorldInterpreter::isGangMember(std::string person)
 {
+    Person* per = controller->getPerson(person);
+    if(per==0)
+        return false;
 
+    if(per->isMainChar())
+        return false;
+
+    return per->getStoryRole()==GangMember;
+}
+
+bool WorldInterpreter::isShopper(std::string person)
+{
+    Person* per = controller->getPerson(person);
+    if(per==0)
+        return false;
+
+    if(per->isMainChar())
+        return false;
+    return per->getStoryRole()==Shopper;
+}
+
+bool WorldInterpreter::isShopOwner(std::string person)
+{
+    Person* per = controller->getPerson(person);
+    if(per==0)
+        return false;
+
+    if(per->isMainChar())
+        return false;
+    return per->getStoryRole()==ShopOwner;
+}
+
+bool WorldInterpreter::isBartender(std::string person)
+{
+    Person* per = controller->getPerson(person);
+    if(per==0)
+        return false;
+
+    if(per->isMainChar())
+        return false;
+    return per->getStoryRole()==Bartender;
+}
+
+bool WorldInterpreter::isBanker(std::string person)
+{
+    Person* per = controller->getPerson(person);
+    if(per==0)
+        return false;
+
+    if(per->isMainChar())
+        return false;
+    return per->getStoryRole()==Banker;
+}
+
+bool WorldInterpreter::isDockWorker(std::string person)
+{
+    Person* per = controller->getPerson(person);
+    if(per==0)
+        return false;
+
+    if(per->isMainChar())
+        return false;
+    return per->getStoryRole()==DockWorker;
 }
