@@ -11,7 +11,7 @@ using namespace boost::algorithm;
 
 #include <iostream>
 #include <fstream>
-#include <string>
+//#include <string>
 //CYCLE_MAX is used to count the number of different items in the bulk load file
 //<Item><Action><Person><Relationship>
 #define CYCLE_MAX 3

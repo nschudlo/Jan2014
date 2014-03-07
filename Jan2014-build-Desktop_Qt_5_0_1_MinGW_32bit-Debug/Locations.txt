@@ -3,13 +3,16 @@
 	<GoTo><Both>Ice Cream Bar
 	<GoTo><Both>Bank
 	<GoTo><Both>Barber
-	<GoTo>Main Street
+	<GoTo><Both>Main Street
 <Location>Oak Street
 	<GoTo><Both>Nick's House
 	<GoTo><Both>Park
 	<GoTo><Both>Nikki's House
-	<GoTo>Town Square
+	<GoTo><Both>Town Square
 <Location>Main Street
 	<GoTo><Both>Office Building
 	<GoTo><Both>Library
 	<GoTo><Both>Bank
+	<GoTo><Both>Jail
+<Location>Jail
+	<GoTo><Both>JailCell

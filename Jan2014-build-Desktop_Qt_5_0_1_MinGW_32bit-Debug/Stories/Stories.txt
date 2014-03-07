@@ -1,0 +1,7 @@
+<Story>
+<Name>buyIceCream
+<Precondition>personIsAt a ice cream bar
+<Precondition>personMoneyGreaterThan a 100
+<Description>[a] is at the ice cream bar. They have enough money for ice cream so they buy an ice cream.
+<ValueEnd>personIsHolding a icecream
+<EndGoal>

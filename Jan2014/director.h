@@ -4,15 +4,30 @@
 #include <string>
 #include <vector>
 
+#include "storygoal.h"
+#include "story.h"
+
 class Director
 {
 public:
-    Director();
+    static Director* Instance();
 
-    void loadAuthorGoals(std::string filename);
+    void loadGoals(std::string filename);
+    void loadStories(std::string filename);
 
 private:
+    Director(){}
+    static Director* m_pInstance;
 
+    void evaluateGoalLine(std::string line);
+    void evaluateStoryLine(std::string line);
+    std::string vectorToString(std::vector<std::string> vec,int start, int end);
+
+    StoryGoal *currentGoal;
+    Story *currentStory;
+
+    std::vector<StoryGoal*> storyGoals;
+    std::vector<Story*> stories;
 
 };
 

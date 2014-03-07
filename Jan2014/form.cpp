@@ -3,6 +3,7 @@
 #include "controller.h"
 #include "worldinterpreter.h"
 #include "story.h"
+#include "evaluator.h"
 
 #include <vector>
 #include <iostream>
@@ -21,6 +22,8 @@ Form::Form(QWidget *parent) :
     ui->infoTabWidget->setCurrentIndex(0);
 
     interpreter = WorldInterpreter::Instance();
+    director = Director::Instance();
+    evaluator = Evaluator::Instance();
 
     current = new Person();
     currentLocation = new Location();
@@ -34,9 +37,29 @@ Form::~Form()
 
 void Form::on_buttonTest_released()
 {
-    Story test=Story();
-    cout<< test.evaluatePre()<<endl;
+    /*********************************/
+    /*vector<Person*> a,b;
+    vector<string> conds;
+    conds.push_back("personIsAt a bank");
+    conds.push_back("personIsHolding a carrot");
+    conds.push_back("personIsAt b jail");
+    conds.push_back("isPolice b");
 
+    evaluator->evaluate(conds, &a, &b);
+
+    for(int index=0; index<(int)a.size();index++)
+        cout<<"a has: "<<a.at(index)->getName()<<endl;
+
+    for(int index=0; index<(int)b.size();index++)
+        cout<<"b has: "<<b.at(index)->getName()<<endl;
+    */
+    /**********************************/
+
+    //Story test=Story();
+    //cout<< test.evaluatePre()<<endl;
+
+    //director->loadGoals("./Stories/Goals.txt");
+    director->loadStories("./Stories/Stories.txt");
 
     //cout<<interpreter.isGangMember("nick")<<endl;
     /*

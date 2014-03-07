@@ -13,5 +13,6 @@ INPUT(
 ./release/worldinterpreter.o
 ./release/story.o
 ./release/storygoal.o
+./release/evaluator.o
 ./release/moc_form.o
 );

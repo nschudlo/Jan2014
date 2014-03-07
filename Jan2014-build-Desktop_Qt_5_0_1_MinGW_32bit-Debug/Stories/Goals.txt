@@ -1,0 +1,26 @@
+#<Goal>
+#<Name>
+#<ValueStart>
+#<ValueEnd>
+#<EndGoal>
+
+<Goal>
+<Name>getInformation
+<Person>isMainCharacter a
+<Person>isPolice a
+<Person>personIsAt b bank
+<Person>personIsAt c park
+<ValueEnd>personIsHolding a information true
+<EndGoal>
+
+#<Goal>
+#<Name>loseInformation
+#<ValueStart>personIsHolding nick information true
+#<ValueEnd>personIsHolding nick information false
+#<EndGoal>
+
+#<Goal>
+#<Name>arrestPerson
+#<Person>isGangMember a true
+#<ValueEnd>personIsAt a jailcell true
+#<EndGoal>

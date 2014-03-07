@@ -1,0 +1,16 @@
+Goal-Get info
+
+Stories that have RESULT getInfo
+	Interrogate Gang member
+		REQUIRES
+			Gang Member in Police Station
+		RESULT
+			You having info
+			
+Stories that have RESULT gang member in police station
+	ArrestWarrant
+	DisturbanceAtHome
+		REQUIRES
+			Nothing, just a phone call into the station
+		RESULT
+			Gang Member in Police Station

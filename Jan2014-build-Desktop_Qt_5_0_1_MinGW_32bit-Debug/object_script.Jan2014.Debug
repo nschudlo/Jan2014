@@ -13,5 +13,6 @@ INPUT(
 ./debug/worldinterpreter.o
 ./debug/story.o
 ./debug/storygoal.o
+./debug/evaluator.o
 ./debug/moc_form.o
 );

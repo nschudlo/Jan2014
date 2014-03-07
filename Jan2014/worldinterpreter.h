@@ -51,6 +51,7 @@ public:
     bool mobWantedGreaterThan(std::string person, int wanted);
     bool mobWantedLessThan(std::string person, int wanted);
 
+    bool isMainCharacter(std::string person);
     bool isPolice(std::string person);
     bool isVigilante(std::string person);
     bool isMobster(std::string person);

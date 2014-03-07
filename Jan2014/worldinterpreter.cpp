@@ -436,6 +436,15 @@ bool WorldInterpreter::mobWantedLessThan(std::string person, int wanted)
 enum storyRoles{Shopper=1, ShopOwner=2, Bartender=3, Police=4, Mobster=5,
                 Banker=6, GangMember=7, DockWorker=8};
 
+bool WorldInterpreter::isMainCharacter(string person)
+{
+    Person* per = controller->getPerson(person);
+    if(per==0)
+        return false;
+
+    return per->isMainChar();
+}
+
 bool WorldInterpreter::isPolice(std::string person)
 {
     Person* per = controller->getPerson(person);
