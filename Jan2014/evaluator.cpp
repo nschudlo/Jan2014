@@ -15,19 +15,19 @@ using namespace std;
 #define macroMulti(functionName,firstVal,secondVal)\
 {if(firstVal=="a")\
 {   for(int index=0;index<(int)a->size();index++)\
-    if(!interpreter->functionName(a->at(index)->getName(),secondVal))\
+    if(interpreter->functionName(a->at(index)->getName(),secondVal)!=evalBool)\
     vecRemove(a,index--);\
     if(a->size()==0)\
     return false;}\
     else if(firstVal=="b"){\
     for(int index=0;index<(int)b->size();index++)\
-    if(!interpreter->functionName(b->at(index)->getName(),secondVal))\
+    if(interpreter->functionName(b->at(index)->getName(),secondVal)!=evalBool)\
     vecRemove(b,index--);\
     if(b->size()==0)\
     return false;}\
     else if(firstVal=="c"){\
     for(int index=0;index<(int)c->size();index++)\
-    if(!interpreter->functionName(c->at(index)->getName(),secondVal))\
+    if(interpreter->functionName(c->at(index)->getName(),secondVal)!=evalBool)\
     vecRemove(c,index--);\
     if(c->size()==0)\
     return false;}\
@@ -38,19 +38,19 @@ using namespace std;
 #define macroSingle(functionName,firstVal)\
 {if(firstVal=="a")\
 {   for(int index=0;index<(int)a->size();index++)\
-    if(!interpreter->functionName(a->at(index)->getName()))\
+    if(interpreter->functionName(a->at(index)->getName())!=evalBool)\
     vecRemove(a,index--);\
     if(a->size()==0)\
     return false;}\
     else if(firstVal=="b"){\
     for(int index=0;index<(int)b->size();index++)\
-    if(!interpreter->functionName(b->at(index)->getName()))\
+    if(interpreter->functionName(b->at(index)->getName())!=evalBool)\
     vecRemove(b,index--);\
     if(b->size()==0)\
     return false;}\
     else if(firstVal=="c"){\
     for(int index=0;index<(int)c->size();index++)\
-    if(!interpreter->functionName(c->at(index)->getName()))\
+    if(interpreter->functionName(c->at(index)->getName())!=evalBool)\
     vecRemove(c,index--);\
     if(c->size()==0)\
     return false;}\
@@ -65,6 +65,37 @@ Evaluator* Evaluator::Instance()
         m_pInstance = new Evaluator;
     return m_pInstance;
 }
+
+/*
+macroMulti(functionName,firstVal,secondVal)
+{
+    if(firstVal=="a")
+    {
+        for(int index=0;index<(int)a->size();index++)
+            if(interpreter->functionName(a->at(index)->getName(),secondVal)!=evalBool)
+                vecRemove(a,index--);
+
+        if(a->size()==0)
+            return false;
+    }
+    else if(firstVal=="b"){
+        for(int index=0;index<(int)b->size();index++)
+            if(!interpreter->functionName(b->at(index)->getName(),secondVal))
+                vecRemove(b,index--);
+        if(b->size()==0)
+            return false;}
+    else if(firstVal=="c"){
+        for(int index=0;index<(int)c->size();index++)
+            if(!interpreter->functionName(c->at(index)->getName(),secondVal))
+                vecRemove(c,index--);
+        if(c->size()==0)
+            return false;}
+    else{
+        if(!interpreter->functionName(firstVal,secondVal))
+            return false;
+    }
+}
+*/
 
 Evaluator::Evaluator(){
     controller=Controller::Instance();
@@ -126,14 +157,14 @@ int Evaluator::evaluate(vector<string> _conditions, vector<Person*> *_a,vector<P
 
 int Evaluator::cycleConditions()
 {
-    int countTrue =0;
+    int countCorrect =0;
     for(int index=0; index<(int)conditions.size();index++)
     {
         string pre = conditions.at(index);
         if(evaluatePre(pre))
-            countTrue++;
+            countCorrect++;
     }
-    return countTrue;
+    return countCorrect;
 }
 
 bool Evaluator::evaluatePre(string pre)
@@ -141,6 +172,20 @@ bool Evaluator::evaluatePre(string pre)
 
     boost::tokenizer<> tok(pre);
     boost::tokenizer<>::iterator i=tok.begin();
+
+    //Pull out the boolean value
+    string evalBoolString = *i++;
+    bool evalBool = false;
+    if(evalBoolString=="true")
+        evalBool = true;
+    else if(evalBoolString=="false")
+        evalBool = false;
+    else
+    {
+        cout<<"ERROR: condition did not start with true or false!"<<endl;
+        return false;
+    }
+
 
     //Pull out the type of check
     string type = *i++;

@@ -7,6 +7,9 @@
 #include <boost/algorithm/string.hpp>
 using namespace boost::algorithm;
 
+#define AUTHORGOAL 1
+#define STORYGOAL 0
+
 using namespace std;
 
 Director* Director::m_pInstance = NULL;
@@ -16,6 +19,63 @@ Director* Director::Instance()
     if (!m_pInstance)   // Only allow one instance of class to be generated.
         m_pInstance = new Director;
     return m_pInstance;
+}
+
+void Director::runStoryLoop()
+{
+    /*
+    for(all current goals (X))
+    {
+        if((X) is author goal)
+        {
+            if((X) is true)
+                trigger authorial event
+            else
+                if(no other goals before authorial)
+                {
+                    find all stories with result = authorial goal
+                    pick one (Y)
+                    for(all of (Y)'s pre that are false (YPRE))
+                    {
+                        create goals to make (YPRE) true
+                    }
+                }
+        }
+        else if((X) is not author goal) //making it a story goal
+        {
+            if((X)'s pre are all true)
+                trigger story event
+            else
+            {
+                for(all of (X)'s pre that are false (XPRE))
+                {
+                    if((XPRE) has goal already)
+                        add 1 to it
+                    else
+                        add (XPRE) to the goals
+                }
+
+            }
+        }
+    }
+    */
+    //for(all current goals (X))
+    for(int goalsIndex=0; goalsIndex<(int)storyGoals.size();goalsIndex++)
+    {
+        StoryGoal* X = storyGoals.at(goalsIndex);
+
+        if(X->isAuthorGoal())
+        {
+
+        }
+        else //Not author goal
+        {
+
+        }
+
+    }
+
+
 }
 
 
@@ -56,15 +116,10 @@ void Director::evaluateGoalLine(string line)
     vector<string> info;
     info.assign(tokenIterator, tok.end());
 
-    //Count the number of parameters
-    //int numParams = std::distance(tok.begin(),tok.end())-1;
-
-    //This changes all uppercase in any names to lower
-    //to_lower(info[0]);
-
     if(type=="Goal")
     {
         currentGoal = new StoryGoal();
+        currentGoal->setType(AUTHORGOAL);
     }
     else if(type=="Name")
     {
@@ -116,15 +171,11 @@ void Director::evaluateStoryLine(string line)
     if(line[0] == '#' || line.empty())
         return;
 
+    //Tokenize the line but only using the  < > and space as tokens
     typedef boost::tokenizer<boost::char_separator<char> > tokenizer;
     boost::char_separator<char> sep("<> ");
     tokenizer tok(line, sep);
     tokenizer::iterator tokenIterator = tok.begin();
-
-
-    //tokenize the line
-    //boost::tokenizer<> tok(line);
-    //boost::tokenizer<>::iterator tokenIterator=tok.begin();
 
     //Pull out the <type> from the line
     string type = *tokenIterator++;
@@ -132,12 +183,6 @@ void Director::evaluateStoryLine(string line)
     //Assign the remaining tokens to the info string vector
     vector<string> info;
     info.assign(tokenIterator, tok.end());
-
-    //Count the number of parameters
-    //int numParams = std::distance(tok.begin(),tok.end())-1;
-
-    //This changes all uppercase in any names to lower
-    //to_lower(info[0]);
 
     if(type=="Story")
     {

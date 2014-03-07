@@ -2,11 +2,15 @@
 #include <iostream>
 #include <boost/tokenizer.hpp>
 
+#define AUTHORGOAL 1
+#define STORYGOAL 0
+
 using namespace std;
 
 StoryGoal::StoryGoal()
 {
     name = "No Name Goal";
+    typeOfGoal = STORYGOAL;
     evaluator = Evaluator::Instance();
 }
 
@@ -25,6 +29,18 @@ string StoryGoal::getName(){
 
 void StoryGoal::setName(string _name){
     name = _name;}
+
+int StoryGoal::getType(){
+    return typeOfGoal;}
+
+void StoryGoal::setType(int _type){
+    typeOfGoal=_type;}
+
+bool StoryGoal::isAuthorGoal(){
+    return typeOfGoal==AUTHORGOAL;}
+
+bool StoryGoal::isStoryGoal(){
+    return typeOfGoal==STORYGOAL;}
 
 void StoryGoal::addChanges(string _change){
     changes.push_back(_change);}

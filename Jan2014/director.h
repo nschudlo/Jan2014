@@ -12,6 +12,8 @@ class Director
 public:
     static Director* Instance();
 
+    void runStoryLoop();
+
     void loadGoals(std::string filename);
     void loadStories(std::string filename);
 

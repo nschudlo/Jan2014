@@ -61,7 +61,15 @@ std::vector<Person*> Story::getCPerson(){
 bool Story::evaluatePre()
 {
     if(evaluator->evaluate(preStoryValues,&a,&b,&c)==(int)preStoryValues.size())
+    {
         preEvaluation = true;
+        if(a.size()>0)
+            chosenA = a.at(0)->getName();
+        if(b.size()>0)
+            chosenB = b.at(0)->getName();
+        if(c.size()>0)
+            chosenC = c.at(0)->getName();
+    }
     else
         preEvaluation = false;
 
@@ -72,10 +80,15 @@ void Story::printOut()
 {
     cout<<"Story: "<<name<<endl;
 
-    chosenA = "nick";
     if(preEvaluation)
     {
-        cout<<replace_all_copy(description,"[a]",chosenA);
+        string tempDesc=description;
+
+        replace_all(tempDesc,"[a]",chosenA);
+        replace_all(tempDesc,"[b]",chosenB);
+        replace_all(tempDesc,"[c]",chosenC);
+
+        cout<<tempDesc<<endl;
     }
     else
     {

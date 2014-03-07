@@ -1,26 +1,16 @@
-#<Goal>
-#<Name>
-#<ValueStart>
-#<ValueEnd>
-#<EndGoal>
-
 <Goal>
 <Name>getInformation
 <Person>isMainCharacter a
-<Person>isPolice a
-<Person>personIsAt b bank
-<Person>personIsAt c park
-<ValueEnd>personIsHolding a information true
+<ValueEnd>true personIsHolding a information
 <EndGoal>
 
 #<Goal>
 #<Name>loseInformation
-#<ValueStart>personIsHolding nick information true
-#<ValueEnd>personIsHolding nick information false
+#<ValueEnd>false personIsHolding nick information
 #<EndGoal>
 
 #<Goal>
 #<Name>arrestPerson
 #<Person>isGangMember a true
-#<ValueEnd>personIsAt a jailcell true
+#<ValueEnd>true personIsAt a jailcell
 #<EndGoal>
