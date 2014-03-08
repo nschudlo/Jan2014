@@ -15,10 +15,10 @@ public:
     bool personIsHolding(std::string person, std::string object);
     bool personCanDoAction(std::string person, std::string action);//untested
     bool personCanGetAction(std::string person,std::string action);//untested
-    bool personHealthGreaterThan(std::string person, int healthValue);
-    bool personHealthLessThan(std::string person, int healthValue);
-    bool personMoneyGreaterThan(std::string person, int moneyValue);
-    bool personMoneyLessThan(std::string person, int moneyValue);
+    bool personHealthGreaterThan(std::string person, std::string healthValue);
+    bool personHealthLessThan(std::string person, std::string healthValue);
+    bool personMoneyGreaterThan(std::string person, std::string moneyValue);
+    bool personMoneyLessThan(std::string person, std::string moneyValue);
     bool personIsMale(std::string person);
     bool personIsFemale(std::string person);
 
@@ -42,14 +42,14 @@ public:
     bool relationshipWorking(std::string person1, std::string person2);
     bool relationshipCommunity(std::string person1, std::string person2);
 
-    bool policeRepGreaterThan(std::string person, int rep);
-    bool policeRepLessThan(std::string person, int rep);
-    bool mobRepGreaterThan(std::string person, int rep);
-    bool mobRepLessThan(std::string person, int rep);
-    bool policeWantedLessThan(std::string person, int wanted);
-    bool policeWantedGreaterThan(std::string person, int wanted);
-    bool mobWantedGreaterThan(std::string person, int wanted);
-    bool mobWantedLessThan(std::string person, int wanted);
+    bool policeRepGreaterThan(std::string person, std::string rep);
+    bool policeRepLessThan(std::string person, std::string rep);
+    bool mobRepGreaterThan(std::string person, std::string rep);
+    bool mobRepLessThan(std::string person, std::string rep);
+    bool policeWantedLessThan(std::string person, std::string wanted);
+    bool policeWantedGreaterThan(std::string person, std::string wanted);
+    bool mobWantedGreaterThan(std::string person, std::string wanted);
+    bool mobWantedLessThan(std::string person, std::string wanted);
 
     bool isMainCharacter(std::string person);
     bool isPolice(std::string person);

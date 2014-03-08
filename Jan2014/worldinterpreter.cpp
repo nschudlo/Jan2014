@@ -1,5 +1,6 @@
 #include "worldinterpreter.h"
 #include "controller.h"
+#include <cstdlib>
 
 using namespace std;
 
@@ -77,36 +78,40 @@ bool WorldInterpreter::personCanGetAction(string person, string action)
     return per->canActionGet(action);
 }
 
-bool WorldInterpreter::personHealthGreaterThan(string person, int healthValue)
+bool WorldInterpreter::personHealthGreaterThan(string person, string healthValue)
 {
+    int hv = atoi(healthValue.c_str());
     Person* per = controller->getPerson(person);
     if(per==0)
         return false;
-    return per->getHealth() > healthValue;
+    return per->getHealth() > hv;
 }
 
-bool WorldInterpreter::personHealthLessThan(string person, int healthValue)
+bool WorldInterpreter::personHealthLessThan(string person, string healthValue)
 {
+    int hv = atoi(healthValue.c_str());
     Person* per = controller->getPerson(person);
     if(per==0)
         return false;
-    return per->getHealth() < healthValue;
+    return per->getHealth() < hv;
 }
 
-bool WorldInterpreter::personMoneyGreaterThan(string person, int moneyValue)
+bool WorldInterpreter::personMoneyGreaterThan(string person, string moneyValue)
 {
+    int hv = atoi(moneyValue.c_str());
     Person* per = controller->getPerson(person);
     if(per==0)
         return false;
-    return per->getMoney() > moneyValue;
+    return per->getMoney() > hv;
 }
 
-bool WorldInterpreter::personMoneyLessThan(string person, int moneyValue)
+bool WorldInterpreter::personMoneyLessThan(string person, string moneyValue)
 {
+    int hv = atoi(moneyValue.c_str());
     Person* per = controller->getPerson(person);
     if(per==0)
         return false;
-    return per->getMoney() < moneyValue;
+    return per->getMoney() < hv;
 }
 
 bool WorldInterpreter::personIsMale(string person)
@@ -366,71 +371,79 @@ bool WorldInterpreter::relationshipCommunity(string person1, string person2)
 }
 
 
-bool WorldInterpreter::policeRepGreaterThan(std::string person, int rep)
+bool WorldInterpreter::policeRepGreaterThan(std::string person, string rep)
 {
+    int r = atoi(rep.c_str());
     Person* per = controller->getPerson(person);
     if(per==0)
         return false;
 
-    return per->getPoliceRep()>rep;
+    return per->getPoliceRep()>r;
 }
 
-bool WorldInterpreter::policeRepLessThan(std::string person, int rep)
+bool WorldInterpreter::policeRepLessThan(std::string person, string rep)
 {
+    int r = atoi(rep.c_str());
     Person* per = controller->getPerson(person);
     if(per==0)
         return false;
 
-    return per->getPoliceRep()<rep;
+    return per->getPoliceRep()<r;
 }
 
-bool WorldInterpreter::mobRepGreaterThan(std::string person, int rep)
+bool WorldInterpreter::mobRepGreaterThan(std::string person, string rep)
 {
+    int r = atoi(rep.c_str());
     Person* per = controller->getPerson(person);
     if(per==0)
         return false;
 
-    return per->getMobRep()>rep;
+    return per->getMobRep()>r;
 }
 
-bool WorldInterpreter::mobRepLessThan(std::string person, int rep)
+bool WorldInterpreter::mobRepLessThan(std::string person, string rep)
 {
+    int r = atoi(rep.c_str());
     Person* per = controller->getPerson(person);
     if(per==0)
         return false;
-    return per->getMobRep()<rep;
+    return per->getMobRep()<r;
 }
 
-bool WorldInterpreter::policeWantedLessThan(std::string person, int wanted)
+bool WorldInterpreter::policeWantedLessThan(std::string person, string wanted)
 {
+    int w = atoi(wanted.c_str());
     Person* per = controller->getPerson(person);
     if(per==0)
         return false;
-    return per->getPoliceWanted()<wanted;
+    return per->getPoliceWanted()<w;
 }
 
-bool WorldInterpreter::policeWantedGreaterThan(std::string person, int wanted)
+bool WorldInterpreter::policeWantedGreaterThan(std::string person, string wanted)
 {
+    int w = atoi(wanted.c_str());
     Person* per = controller->getPerson(person);
     if(per==0)
         return false;
-    return per->getPoliceWanted()>wanted;
+    return per->getPoliceWanted()>w;
 }
 
-bool WorldInterpreter::mobWantedGreaterThan(std::string person, int wanted)
+bool WorldInterpreter::mobWantedGreaterThan(std::string person, string wanted)
 {
+    int w = atoi(wanted.c_str());
     Person* per = controller->getPerson(person);
     if(per==0)
         return false;
-    return per->getMobWanted()>wanted;
+    return per->getMobWanted()>w;
 }
 
-bool WorldInterpreter::mobWantedLessThan(std::string person, int wanted)
+bool WorldInterpreter::mobWantedLessThan(std::string person, string wanted)
 {
+    int w = atoi(wanted.c_str());
     Person* per = controller->getPerson(person);
     if(per==0)
         return false;
-    return per->getMobWanted()<wanted;
+    return per->getMobWanted()<w;
 }
 
 enum storyRoles{Shopper=1, ShopOwner=2, Bartender=3, Police=4, Mobster=5,

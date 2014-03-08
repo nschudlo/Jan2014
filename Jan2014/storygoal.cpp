@@ -52,12 +52,26 @@ void StoryGoal::printOut()
         cout<<"\tChange: "<<changes.at(index)<<endl;
 }
 
-void StoryGoal::addPerson(std::string person)
+void StoryGoal::addPerson(std::string person){
+    personConditions.push_back(person);}
+
+bool StoryGoal::evaluateChanges()
 {
-    personConditions.push_back(person);
+    //Haven't actually checked if any of this makes any sense...
+    bool evaluation = false;
+    int numTrue = evaluator->evaluate(changes,&a,&b,&c);
+    if(numTrue==(int)changes.size())
+    {
+        cout<<"All goal conditions met"<<endl;
+        //do something with a,b,c
+        evaluation=true;
+    }
+
+    evaluatePersonConditions();//To reset the people
+    return evaluation;
 }
 
-void StoryGoal::completeGoal()
+void StoryGoal::evaluatePersonConditions()
 {
     vector<Person*> _a,_b,_c;
 
@@ -67,6 +81,11 @@ void StoryGoal::completeGoal()
     a=_a;
     b=_b;
     c=_c;
+}
+
+void StoryGoal::completeGoal()
+{
+    evaluatePersonConditions();
 
     for(int index=0; index<(int)a.size();index++)
         cout<<"a has: "<<a.at(index)->getName()<<endl;

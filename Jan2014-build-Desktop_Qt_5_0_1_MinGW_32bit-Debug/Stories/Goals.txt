@@ -4,6 +4,8 @@
 <ValueEnd>true personIsHolding a information
 <EndGoal>
 
+#Possibly add a <Trigger>
+
 #<Goal>
 #<Name>loseInformation
 #<ValueEnd>false personIsHolding nick information

@@ -269,6 +269,7 @@ void Form::refreshPersonTab()
     //Set storyrank
     if(current->isMainChar())
     {
+        ui->citizenCheckBox->setChecked(false);
         ui->storyRank->setEnabled(true);
         ui->storyRole->setEnabled(false);
         current->recheckStoryRank();
@@ -277,6 +278,7 @@ void Form::refreshPersonTab()
     }
     else
     {
+        ui->citizenCheckBox->setChecked(true);
         ui->storyRank->setEnabled(false);
         ui->storyRole->setEnabled(true);
         ui->storyRank->setValue(0);

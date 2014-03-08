@@ -1,0 +1,45 @@
+#define macroMulti(functionName,firstVal,secondVal)\
+{if(firstVal=="a")\
+{   for(int index=0;index<(int)a->size();index++)\
+    if(interpreter->functionName(a->at(index)->getName(),secondVal)!=evalBool)\
+    vecRemove(a,index--);\
+    if(a->size()==0)\
+    return false;}\
+    else if(firstVal=="b"){\
+    for(int index=0;index<(int)b->size();index++)\
+    if(interpreter->functionName(b->at(index)->getName(),secondVal)!=evalBool)\
+    vecRemove(b,index--);\
+    if(b->size()==0)\
+    return false;}\
+    else if(firstVal=="c"){\
+    for(int index=0;index<(int)c->size();index++)\
+    if(interpreter->functionName(c->at(index)->getName(),secondVal)!=evalBool)\
+    vecRemove(c,index--);\
+    if(c->size()==0)\
+    return false;}\
+    else{\
+    if(!interpreter->functionName(firstVal,secondVal))\
+    return false;}}
+
+#define macroSingle(functionName,firstVal)\
+{if(firstVal=="a")\
+{   for(int index=0;index<(int)a->size();index++)\
+    if(interpreter->functionName(a->at(index)->getName())!=evalBool)\
+    vecRemove(a,index--);\
+    if(a->size()==0)\
+    return false;}\
+    else if(firstVal=="b"){\
+    for(int index=0;index<(int)b->size();index++)\
+    if(interpreter->functionName(b->at(index)->getName())!=evalBool)\
+    vecRemove(b,index--);\
+    if(b->size()==0)\
+    return false;}\
+    else if(firstVal=="c"){\
+    for(int index=0;index<(int)c->size();index++)\
+    if(interpreter->functionName(c->at(index)->getName())!=evalBool)\
+    vecRemove(c,index--);\
+    if(c->size()==0)\
+    return false;}\
+    else{\
+    if(!interpreter->functionName(firstVal))\
+    return false;}}

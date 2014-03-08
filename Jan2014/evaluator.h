@@ -28,7 +28,10 @@ private:
 
     std::vector<std::string> conditions;
 
-    std::vector<Person*> *a,*b,*c;
+    std::vector<Person*> *a,*b,*c, *temp;
+    std::vector<int> remA,remB,remC,remTemp;
+    std::vector<int> countA,countB,countC,countTemp;
+    int aCount,bCount,cCount;
 
 
 };

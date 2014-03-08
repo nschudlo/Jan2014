@@ -27,6 +27,9 @@ public:
     void addPerson(std::string person);
     void completeGoal();
 
+    bool evaluateChanges();
+    void evaluatePersonConditions();
+
 private:
     std::string name;
     std::string goal;
