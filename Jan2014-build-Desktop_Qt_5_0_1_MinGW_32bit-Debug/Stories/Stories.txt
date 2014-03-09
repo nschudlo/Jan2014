@@ -4,12 +4,21 @@
 #<Precondition>false personMoneyLessThan a 100
 #<Description>[a] is at the ice cream bar. They have enough money for ice cream so they buy an ice cream.
 #<ValueEnd>personIsHolding a icecream
-#<EndGoal>
+#<EndStory>
+
+#<Story>
+#<Name>arrestPerson
+#<Precondition>true isPolice a
+#<Precondition>false isPolice b
+#<Description>[a] arrests [b] and takes them to jail.
+#<ValueEnd>personIsAt b jailcell
+#<EndStory>
 
 <Story>
-<Name>arrestPerson
-<Precondition>true isPolice a
-<Precondition>false isPolice b
-<Description>[a] arrests [b] and takes them to jail.
-<ValueEnd>personIsAt b jailcell
-<EndGoal>
+<Name>unarmedBankRobbery
+<MPrecondition>true isPolice a
+<MPrecondition>true personIsMale a
+<Precondition>true personIsAt a bank
+<Precondition>false personIsHolding a gun
+<ValueEnd>personHealthLessThan a 100
+<EndStory>

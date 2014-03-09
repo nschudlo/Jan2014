@@ -12,7 +12,7 @@ public:
     StoryGoal();
     StoryGoal(std::string _name, std::string _change);
 
-    void printOut();
+    std::string printOut();
 
     std::string getName();
     void setName(std::string _name);
@@ -30,15 +30,28 @@ public:
     bool evaluateChanges();
     void evaluatePersonConditions();
 
+    int getNumOfAttempts();
+    void setNumOfAttempts(int _num);
+    void addAttempt();
+
+    void setMaxAttempts(int _max);
+    int getMaxAttempts();
+
 private:
     std::string name;
     std::string goal;
     Evaluator *evaluator;
     int typeOfGoal;
 
+    int numOfAttempts;
+    int maxAttempts;
+
     std::vector<std::string> changes;
 
     std::vector<Person*> a,b,c;
+    //Not sure if the goal should choose these
+    //Or if the story should choose them
+    //Person* chosenA,chosenB,chosenC;
 
     std::vector<std::string> personConditions;
 

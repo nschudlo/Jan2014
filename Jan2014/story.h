@@ -12,13 +12,14 @@ class Story
 public:
     Story();
 
-    void printOut();
+    std::string printOut();
     bool evaluatePre();
     std::string getName();
     void setName(std::string _name);
     std::string getDescription();
     void setDescription(std::string _description);
 
+    void addMPreCondition(std::string precondition);
     void addPreCondition(std::string precondition);
     void addChanges(std::string change);
 
@@ -30,6 +31,7 @@ private:
     std::string name;
     std::string description;
     std::vector<std::string> preStoryValues;
+    std::vector<std::string> preStoryValuesM;
     std::vector<std::string> changes;
 
     bool preEvaluation;

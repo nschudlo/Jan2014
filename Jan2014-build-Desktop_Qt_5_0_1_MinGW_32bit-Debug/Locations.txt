@@ -1,14 +1,14 @@
 <Location>Town Square
-	<GoTo><Both>Red Lobster
+	<GoTo><Both>Restaurant
 	<GoTo><Both>Ice Cream Bar
 	<GoTo><Both>Bank
 	<GoTo><Both>Barber
 	<GoTo><Both>Main Street
+	<GoTo><Both>Oak Street
 <Location>Oak Street
-	<GoTo><Both>Nick's House
+	<GoTo><Both>Nicks House
 	<GoTo><Both>Park
-	<GoTo><Both>Nikki's House
-	<GoTo><Both>Town Square
+	<GoTo><Both>Pauls House
 <Location>Main Street
 	<GoTo><Both>Office Building
 	<GoTo><Both>Library
@@ -16,3 +16,15 @@
 	<GoTo><Both>Jail
 <Location>Jail
 	<GoTo><Both>JailCell
+<Location>Dock Street
+	<GoTo><Both>Main Street
+	<GoTo>Docks
+<Location>Docks
+	<GoTo><Both>Boat A
+	<GoTo><Both>Boat B
+	<GoTo><Both>Boat C
+	<GoTo>Canal Street
+<Location>Canal Street
+	<GoTo><Both>Steves House
+	<GoTo><Both>Jimmys House
+	<GoTo>Town Square

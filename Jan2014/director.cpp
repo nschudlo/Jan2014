@@ -81,6 +81,11 @@ void Director::runStoryLoop()
 
 void Director::loadGoals(string filename)
 {
+    cout<<"*****************"<<endl;
+    cout<<"Clearing all current goals..."<<endl;
+
+    storyGoals.clear();
+
     string line;
     ifstream file(filename.c_str());
 
@@ -122,22 +127,20 @@ void Director::evaluateGoalLine(string line)
         currentGoal->setType(AUTHORGOAL);
     }
     else if(type=="Name")
-    {
         currentGoal->setName(vectorToString(info,0,(int)info.size()));
-    }
     else if(type=="Person")
-    {
         currentGoal->addPerson(vectorToString(info,0,(int)info.size()));
-    }
     else if(type=="ValueEnd")
-    {
         currentGoal->addChanges(vectorToString(info,0,(int)info.size()));
-    }
     else if(type=="EndGoal")
     {
         currentGoal->completeGoal();
         storyGoals.push_back(currentGoal);
-        storyGoals.back()->printOut();
+        cout<<"*****************"<<endl;
+        cout<<"Added Goal:"<<endl;
+        cout<<storyGoals.back()->printOut()<<endl;
+        cout<<"*****************"<<endl;
+
     }
     else
     {
@@ -147,6 +150,11 @@ void Director::evaluateGoalLine(string line)
 
 void Director::loadStories(string filename)
 {
+    cout<<"*****************"<<endl;
+    cout<<"Clearing all current stories..."<<endl;
+
+    stories.clear();
+
     string line;
     ifstream file(filename.c_str());
 
@@ -185,36 +193,57 @@ void Director::evaluateStoryLine(string line)
     info.assign(tokenIterator, tok.end());
 
     if(type=="Story")
-    {
         currentStory = new Story();
-    }
     else if(type=="Name")
-    {
         currentStory->setName(vectorToString(info,0,(int)info.size()));
-    }
     else if(type=="Description")
-    {
         currentStory->setDescription(vectorToString(info,0,(int)info.size()));
-    }
+    else if(type=="MPrecondition")
+        currentStory->addMPreCondition(vectorToString(info,0,(int)info.size()));
     else if(type=="Precondition")
-    {
         currentStory->addPreCondition(vectorToString(info,0,(int)info.size()));
-    }
     else if(type=="ValueEnd")
-    {
         currentStory->addChanges(vectorToString(info,0,(int)info.size()));
-    }
-    else if(type=="EndGoal")
+    else if(type=="EndStory")
     {
-        currentStory->evaluatePre();
         stories.push_back(currentStory);
-        stories.back()->printOut();
+
+        cout<<"*****************"<<endl;
+        cout<<"Added Story:"<<endl;
+        cout<<stories.back()->printOut();
+        cout<<"*****************"<<endl;
     }
     else
     {
         cout<<"ERROR: type +"<<type<<"+ not found"<<endl;
     }
 }
+vector<StoryGoal*> Director::getGoals(){
+    return storyGoals;}
+
+vector<Story*> Director::getStories(){
+    return stories;}
+
+StoryGoal* Director::getGoal(std::string name)
+{
+    for(int index=0;index<(int)storyGoals.size();index++)
+    {
+        if(storyGoals.at(index)->getName()==name)
+            return storyGoals.at(index);
+    }
+    return 0;
+}
+
+Story* Director::getStory(std::string name)
+{
+    for(int index=0;index<(int)stories.size();index++)
+    {
+        if(stories.at(index)->getName()==name)
+            return stories.at(index);
+    }
+    return 0;
+}
+
 
 string Director::vectorToString(vector<string> vec, int start, int end)
 {

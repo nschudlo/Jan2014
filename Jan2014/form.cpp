@@ -37,47 +37,7 @@ Form::~Form()
 
 void Form::on_buttonTest_released()
 {
-    /*********************************/
-    /*vector<Person*> a,b;
-    vector<string> conds;
-    conds.push_back("personIsAt a bank");
-    conds.push_back("personIsHolding a carrot");
-    conds.push_back("personIsAt b jail");
-    conds.push_back("isPolice b");
-
-    evaluator->evaluate(conds, &a, &b);
-
-    for(int index=0; index<(int)a.size();index++)
-        cout<<"a has: "<<a.at(index)->getName()<<endl;
-
-    for(int index=0; index<(int)b.size();index++)
-        cout<<"b has: "<<b.at(index)->getName()<<endl;
-    */
-    /**********************************/
-
-    //Story test=Story();
-    //cout<< test.evaluatePre()<<endl;
-
-    //director->loadGoals("./Stories/Goals.txt");
-    director->loadStories("./Stories/Stories.txt");
-
-    //cout<<interpreter.isGangMember("nick")<<endl;
-    /*
-    cout<<"----------------"<<endl;
-    cout<<"Parent "<<interpreter.relationshipParent("nick", "nikki")<<endl;
-    cout<<"Child "<<interpreter.relationshipChild("nick", "nikki")<<endl;
-    cout<<"Sibling "<<interpreter.relationshipSibling("nick", "nikki")<<endl;
-    cout<<"Married "<<interpreter.relationshipMarried("nick", "nikki")<<endl;
-    cout<<"Family "<<interpreter.relationshipFamily("nick", "nikki")<<endl;
-    cout<<"SO "<<interpreter.relationshipSO("nick", "nikki")<<endl;
-    cout<<"Strangers "<<interpreter.relationshipStrangers("nick", "nikki")<<endl;
-    cout<<"Friends "<<interpreter.relationshipFriends("nick", "nikki")<<endl;
-    cout<<"Enemies "<<interpreter.relationshipEnemies("nick", "nikki")<<endl;
-    cout<<"Teacher "<<interpreter.relationshipTeacher("nick", "nikki")<<endl;
-    cout<<"Student "<<interpreter.relationshipStudent("nick", "nikki")<<endl;
-    cout<<"Working "<<interpreter.relationshipWorking("nick", "nikki")<<endl;
-    cout<<"Community "<<interpreter.relationshipCommunity("nick", "nikki")<<endl;
-    */
+   //This is a test button
 }
 
 
@@ -668,4 +628,72 @@ void Form::on_storyRole_valueChanged(int arg1)
 
 
 
+}
+
+void Form::on_loadGoals_released()
+{
+    director->loadGoals("./Stories/Goals.txt");
+    on_refreshGoals_released();
+}
+
+void Form::on_refreshGoals_released()
+{
+    ui->listGoals->clear();
+    vector<StoryGoal*> goals = director->getGoals();
+    for(int x=0; x<(int)goals.size(); x++)
+    {
+        QString q = goals.at(x)->getName().c_str();
+
+        ui->listGoals->addItem(q);
+
+        if(goals.at(x)->isAuthorGoal())
+            ui->listGoals->itemAt(x,0)->setTextColor(Qt::red);
+    }
+
+    ui->listGoals->setCurrentRow(-1);
+    ui->numAttempts->setText(QString("0"));
+    ui->maxAttempts->setText(QString("0"));
+
+    ui->goalTextBrowser->clear();
+
+}
+
+void Form::on_loadStories_released()
+{
+    director->loadStories("./Stories/Stories.txt");
+    on_refreshStories_released();
+}
+
+void Form::on_refreshStories_released()
+{
+    ui->listStories->clear();
+    vector<Story*> stories = director->getStories();
+    for(int x=0; x<(int)stories.size(); x++)
+    {
+        QString q = stories.at(x)->getName().c_str();
+        ui->listStories->addItem(q);
+    }
+
+    ui->stortTextBrowser->clear();
+}
+
+void Form::on_listGoals_itemDoubleClicked(QListWidgetItem *item)
+{
+    StoryGoal* curr = director->getGoal(item->text().toStdString());
+
+    ui->numAttempts->setText(QString::number(curr->getNumOfAttempts()));
+    ui->maxAttempts->setText(QString::number(curr->getMaxAttempts()));
+
+    ui->goalTextBrowser->setText(QString(curr->printOut().c_str()));
+}
+
+
+
+void Form::on_listStories_itemDoubleClicked(QListWidgetItem *item)
+{
+    Story* curr = director->getStory(item->text().toStdString());
+
+    curr->evaluatePre();
+
+    ui->stortTextBrowser->setText(QString(curr->printOut().c_str()));
 }

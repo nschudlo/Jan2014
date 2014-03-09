@@ -58,6 +58,16 @@ private slots:
     void on_storyRank_valueChanged(int arg1);
     void on_citizenCheckBox_toggled(bool checked);
     void on_storyRole_valueChanged(int arg1);
+    void on_loadGoals_released();
+    void on_loadStories_released();
+
+    void on_listGoals_itemDoubleClicked(QListWidgetItem *item);
+
+    void on_refreshStories_released();
+
+    void on_refreshGoals_released();
+
+    void on_listStories_itemDoubleClicked(QListWidgetItem *item);
 
 private:
     Ui::Form *ui;

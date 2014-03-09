@@ -19,34 +19,48 @@
 #
 #	0=bad, 1=average, 2=good
 #
-# To give attributes to a person, list all items, relationships, and actions after them
-# Example:	Nick holding a banana in a relationship with Nikki
-#			<Person>Nick 0
-#			<Item>Banana
-#			<Relationship>Nikki 3 1
-#
+#	1=Shopper, 2=Shop Owner, 3=Bartender, 4=Police, 5=Mobster
+#	6=Banker, 7=Gang Member, 8=DockWorker
 
 #Define all items here. Included all actions that it can do and can happen to it here
-<Item>Knife
+<Item>knife
 <Action>cut do
 <Action>break get
-<Item>Apple
-<Action>cut get
-<Item>Carrot
-<Action>cut get
+<Item>information
+<Item>gun
+<Action>shoot do
+
+#Default Person actions
+<PAction>stab get
+<PAction>shoot get
+<PAction>eat do
 
 #Define People here. Included all items, actions, and relationships after the person
-<Person>Nick  0
+<Person>nick  0
 <StoryValues> 9 0 0 2
-<Action>eat do
-<Action>stab get
-<Item>Knife 
-<Item>Doughnut
-<Item>GlassWater
-<Relationship>Nikki 6 2
+<Item>gun
+<Relationship>paul 11 2
 <Location>Town Square 
 
-<Person>Nikki 1
-<StoryValues> 1 1 1 1
-<Item>Stethoscope
-<Relationship>Nick 3 1
+<Person>paul 0
+<StoryValues>9 0 0 0
+<StoryRole>4
+<Item>gun
+<Relationship>nick 11 2
+
+<Person>steve 0
+<StoryRole>7
+<Item>knife
+<item>gun
+<Relationship>jimmy 7 2
+<Location>Jimmys House
+
+<Person>jimmy 0
+<StoryRole>7
+<Item>knife
+<item>gun
+<Relationship>steve 7 2
+<Location>Jimmys House
+
+
+

@@ -1,5 +1,6 @@
 #include "storygoal.h"
 #include <iostream>
+#include <sstream>
 #include <boost/tokenizer.hpp>
 
 #define AUTHORGOAL 1
@@ -11,6 +12,9 @@ StoryGoal::StoryGoal()
 {
     name = "No Name Goal";
     typeOfGoal = STORYGOAL;
+    numOfAttempts = 0;
+    maxAttempts = 3;
+
     evaluator = Evaluator::Instance();
 }
 
@@ -45,11 +49,46 @@ bool StoryGoal::isStoryGoal(){
 void StoryGoal::addChanges(string _change){
     changes.push_back(_change);}
 
-void StoryGoal::printOut()
+int StoryGoal::getNumOfAttempts(){
+    return numOfAttempts;}
+
+void StoryGoal::setNumOfAttempts(int _num){
+    numOfAttempts=_num;}
+
+void StoryGoal::addAttempt(){
+    numOfAttempts++;}
+
+void StoryGoal::setMaxAttempts(int _max){
+    maxAttempts=_max;}
+
+int StoryGoal::getMaxAttempts(){
+    return maxAttempts;}
+
+string StoryGoal::printOut()
 {
-    cout<<"Goal: "<<name<<endl;
+    ostringstream printOut;
+
+    printOut<<"Goal: "<<name<<endl;
+    for(int index=0; index<(int)personConditions.size();index++)
+        printOut<<"    Person: "<<personConditions.at(index)<<endl;
+
+    printOut<<endl;
+
     for(int index=0; index<(int)changes.size();index++)
-        cout<<"\tChange: "<<changes.at(index)<<endl;
+        printOut<<"    Change: "<<changes.at(index)<<endl;
+
+    printOut<<endl;
+
+    for(int index=0; index<(int)a.size();index++)
+        printOut<<"a has: "<<a.at(index)->getName()<<endl;
+
+    for(int index=0; index<(int)b.size();index++)
+        printOut<<"b has: "<<b.at(index)->getName()<<endl;
+
+    for(int index=0; index<(int)c.size();index++)
+        printOut<<"c has: "<<c.at(index)->getName()<<endl;
+
+    return printOut.str();
 }
 
 void StoryGoal::addPerson(std::string person){
@@ -62,8 +101,14 @@ bool StoryGoal::evaluateChanges()
     int numTrue = evaluator->evaluate(changes,&a,&b,&c);
     if(numTrue==(int)changes.size())
     {
-        cout<<"All goal conditions met"<<endl;
+        cout<<"*****************"<<endl;
+        cout<<"All goal conditions met for this goal:"<<name<<endl;
+
+
+        cout<<"*****************"<<endl;
+
         //do something with a,b,c
+        //as in select who will be the chosen ones
         evaluation=true;
     }
 
@@ -86,15 +131,6 @@ void StoryGoal::evaluatePersonConditions()
 void StoryGoal::completeGoal()
 {
     evaluatePersonConditions();
-
-    for(int index=0; index<(int)a.size();index++)
-        cout<<"a has: "<<a.at(index)->getName()<<endl;
-
-    for(int index=0; index<(int)b.size();index++)
-        cout<<"b has: "<<b.at(index)->getName()<<endl;
-
-    for(int index=0; index<(int)c.size();index++)
-        cout<<"c has: "<<c.at(index)->getName()<<endl;
 }
 
 

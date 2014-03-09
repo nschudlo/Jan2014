@@ -134,36 +134,10 @@ Evaluator::Evaluator(){
  *  are modified.
  *
  */
-int Evaluator::evaluate(vector<string> _conditions, vector<Person*> *_a)
-{
-    conditions = _conditions;
-    vector<Person*> temp = controller->getPeopleVector();
-    a = _a;
 
-    for(int index=0; index<(int)temp.size(); index++)
-    {
-        a->push_back(temp.at(index));
-    }
-    return cycleConditions();
-
-}
-
-int Evaluator::evaluate(vector<string> _conditions, vector<Person*> *_a,vector<Person*> *_b)
-{
-    conditions = _conditions;
-    vector<Person*> temp = controller->getPeopleVector();
-    a = _a;
-    b = _b;
-
-    for(int index=0; index<(int)temp.size(); index++)
-    {
-        a->push_back(temp.at(index));
-        b->push_back(temp.at(index));
-    }
-    return cycleConditions();
-}
-
-int Evaluator::evaluate(vector<string> _conditions, vector<Person*> *_a,vector<Person*> *_b,vector<Person*> *_c)
+int Evaluator::evaluate(vector<string> _conditions,
+                        vector<Person*> *_a,vector<Person*> *_b,
+                        vector<Person*> *_c)//, vector<int> validConditions)
 {
     conditions = _conditions;
     vector<Person*> temp = controller->getPeopleVector();
@@ -179,52 +153,78 @@ int Evaluator::evaluate(vector<string> _conditions, vector<Person*> *_a,vector<P
     bCount = 0;
     cCount = 0;
 
-    //remA.clear();
-    //remB.clear();
-    //remC.clear();
-    //remTemp.clear();
+    //This variable is used to determine if the a b c vectors had values in them
+    //when the function was called. If so, do not modify the vectors
+    bool prefilledPeople = false;
 
-    for(int index=0; index<(int)temp.size(); index++)
+    //If a, b, c are passed in with values predetermined dont fill them
+    if(a->size()>0 || b->size()>0 || c->size()>0)
     {
-        countA.push_back(0);
-        countB.push_back(0);
-        countC.push_back(0);
-        countTemp.push_back(0);
-        a->push_back(temp.at(index));
-        b->push_back(temp.at(index));
-        c->push_back(temp.at(index));
+        prefilledPeople = true;
+        for(int index=0; index<(int)a->size(); index++)
+            countA.push_back(0);
+        for(int index=0; index<(int)b->size(); index++)
+            countB.push_back(0);
+        for(int index=0; index<(int)c->size(); index++)
+            countC.push_back(0);
+    }
+    else
+    {//If a b c are empty (new) fill them with all people
+        for(int index=0; index<(int)temp.size(); index++)
+        {
+            countA.push_back(0);
+            countB.push_back(0);
+            countC.push_back(0);
+            a->push_back(temp.at(index));
+            b->push_back(temp.at(index));
+            c->push_back(temp.at(index));
+        }
     }
 
-      int countCorrect =0;
+    //Cycle through each condition checking for validity
+    int countCorrect =0;
     for(int index=0; index<(int)conditions.size();index++)
     {
         string pre = conditions.at(index);
         //evaluatePre(pre);
-        if(evaluatePre(pre))
+        if(evaluatePre(pre))//This will only return true if no a b c variables are used
             countCorrect++;
     }
 
+    //Find the person with the most matching for each variable
     int maxA=0,maxB=0,maxC=0;
     for(int index=0;index<(int)a->size();index++)
-    {
         if(countA.at(index)>maxA)
+        {
             maxA=countA.at(index);
+        }
+
+    for(int index=0;index<(int)b->size();index++)
         if(countB.at(index)>maxB)
+        {
             maxB=countB.at(index);
+        }
+
+    for(int index=0;index<(int)c->size();index++)
         if(countC.at(index)>maxC)
+        {
             maxC=countC.at(index);
-    }
+        }
+
 
     //Once all conditions have been checked, eliminate the necessary people
     for(int index=a->size()-1; index>=0; index--)
-    {
         if(aCount!=countA.at(index) || aCount==0) //Meaning this person doesn't satisfy all of a's requirements
             vecRemove(a,index);                     //or there are no a requirements
+
+    for(int index=b->size()-1; index>=0; index--)
         if(bCount!=countB.at(index) || bCount==0)
             vecRemove(b,index);
+
+    for(int index=c->size()-1; index>=0; index--)
         if(cCount!=countC.at(index) || cCount==0)
             vecRemove(c,index);
-    }
+
 
     //If every condition is met this should = conditions.size()
     int totalCount = countCorrect + maxA + maxB + maxC;
@@ -233,7 +233,107 @@ int Evaluator::evaluate(vector<string> _conditions, vector<Person*> *_a,vector<P
     return totalCount;
 }
 
-int Evaluator::cycleConditions(){}
+int Evaluator::evaluateStory(vector<string> _conditions,
+                        vector<Person*> *_a,vector<Person*> *_b,
+                        vector<Person*> *_c)//, vector<int> validConditions)
+{
+    conditions = _conditions;
+    vector<Person*> temp = controller->getPeopleVector();
+    a = _a;
+    b = _b;
+    c = _c;
+
+    countA.clear();
+    countB.clear();
+    countC.clear();
+
+    aCount = 0;
+    bCount = 0;
+    cCount = 0;
+
+    //This variable is used to determine if the a b c vectors had values in them
+    //when the function was called. If so, do not modify the vectors
+    bool prefilledPeople = false;
+
+    //If a, b, c are passed in with values predetermined dont fill them
+    if(a->size()>0 || b->size()>0 || c->size()>0)
+    {
+        prefilledPeople = true;
+        for(int index=0; index<(int)a->size(); index++)
+            countA.push_back(0);
+        for(int index=0; index<(int)b->size(); index++)
+            countB.push_back(0);
+        for(int index=0; index<(int)c->size(); index++)
+            countC.push_back(0);
+    }
+    else
+    {//If a b c are empty (new) fill them with all people
+        for(int index=0; index<(int)temp.size(); index++)
+        {
+            countA.push_back(0);
+            countB.push_back(0);
+            countC.push_back(0);
+            a->push_back(temp.at(index));
+            b->push_back(temp.at(index));
+            c->push_back(temp.at(index));
+        }
+    }
+
+    //Cycle through each condition checking for validity
+    int countCorrect =0;
+    for(int index=0; index<(int)conditions.size();index++)
+    {
+        string pre = conditions.at(index);
+        //evaluatePre(pre);
+        if(evaluatePre(pre))//This will only return true if no a b c variables are used
+            countCorrect++;
+    }
+
+    Person *maxPerA,*maxPerB,*maxPerC;
+    //Find the person with the most matching for each variable
+    int maxA=0,maxB=0,maxC=0;
+    for(int index=0;index<(int)a->size();index++)
+        if(countA.at(index)>maxA)
+        {
+            maxPerA=a->at(index);
+            maxA=countA.at(index);
+        }
+
+    for(int index=0;index<(int)b->size();index++)
+        if(countB.at(index)>maxB)
+        {
+            maxPerB=b->at(index);
+            maxB=countB.at(index);
+        }
+
+    for(int index=0;index<(int)c->size();index++)
+        if(countC.at(index)>maxC)
+        {
+            maxPerC=c->at(index);
+            maxC=countC.at(index);
+        }
+
+
+    //Once all conditions have been checked, eliminate the necessary people
+    for(int index=a->size()-1; index>=0; index--)
+        if(aCount!=countA.at(index) || aCount==0) //Meaning this person doesn't satisfy all of a's requirements
+            vecRemove(a,index);                     //or there are no a requirements
+
+    for(int index=b->size()-1; index>=0; index--)
+        if(bCount!=countB.at(index) || bCount==0)
+            vecRemove(b,index);
+
+    for(int index=c->size()-1; index>=0; index--)
+        if(cCount!=countC.at(index) || cCount==0)
+            vecRemove(c,index);
+
+
+    //If every condition is met this should = conditions.size()
+    int totalCount = countCorrect + maxA + maxB + maxC;
+    //Otherwise is should be the number of conditions met
+
+    return totalCount;
+}
 
 bool Evaluator::evaluatePre(string pre)
 {
@@ -257,7 +357,7 @@ bool Evaluator::evaluatePre(string pre)
 
     //Pull out the type of check
     string type = *i++;
-    cout<<pre<<endl;
+    //cout<<pre<<endl;
 
 
     if(type =="personIsAt"){
@@ -271,68 +371,6 @@ bool Evaluator::evaluatePre(string pre)
         trim(location);
 
         macroMulti(personIsAt,personName,location)
-
-//        if(personName=="a")
-//            {
-//                aCount++;
-//                for(int index=0;index<(int)a->size();index++)
-//                    if(interpreter->personIsAt(a->at(index)->getName(),location)==evalBool)
-//                    {
-//                        countA.at(index)++;
-//                    }
-//            }
-//            else if(personName=="b")
-//            {
-//                bCount++;
-//                for(int index=0;index<(int)b->size();index++)
-//                    if(interpreter->personIsAt(b->at(index)->getName(),location)==evalBool)
-//                    {
-//                        countB.at(index)++;
-//                    }
-//            }
-//            else if(personName=="c")
-//            {
-//                cCount++;
-//                for(int index=0;index<(int)c->size();index++)
-//                    if(interpreter->personIsAt(c->at(index)->getName(),location)==evalBool)
-//                    {
-//                        countC.at(index)++;
-//                    }
-//            }
-//            else if(location=="a")
-//            {
-//                aCount++;
-//                for(int index=0;index<(int)a->size();index++)
-//                    if(interpreter->personIsAt(personName, a->at(index)->getName())==evalBool)
-//                    {
-//                        countA.at(index)++;
-//                    }
-//            }
-//            else if(location=="b")
-//            {
-//                bCount++;
-//                for(int index=0;index<(int)b->size();index++)
-//                    if(interpreter->personIsAt(personName, b->at(index)->getName())==evalBool)
-//                    {
-//                        countB.at(index)++;
-//                    }
-//            }
-//            else if(location=="c")
-//            {
-//                cCount++;
-//                for(int index=0;index<(int)c->size();index++)
-//                    if(interpreter->personIsAt(personName, c->at(index)->getName())==evalBool)
-//                    {
-//                        countC.at(index)++;
-//                    }
-//            }
-//            else
-//            {
-//                if(interpreter->personIsAt(personName,location)==evalBool)
-//                    return true;
-//            }
-//            return false;
-
     }
     else if(type =="personIsAtSameLocationAs"){
         string personName = *i++;
@@ -361,92 +399,24 @@ bool Evaluator::evaluatePre(string pre)
     else if(type =="personHealthGreaterThan"){
         string personName = *i++;
         string health = *i++;
-        int h = atoi(health.c_str());
 
         macroMulti(personHealthGreaterThan,personName,health);
     }
     else if(type =="personHealthLessThan"){
         string personName = *i++;
         string health = *i++;
-        int h = atoi(health.c_str());
 
         macroMulti(personHealthLessThan,personName,health);
     }
     else if(type =="personMoneyGreaterThan"){
         string personName = *i++;
         string money = *i++;
-        int h = atoi(money.c_str());
 
         macroMulti(personMoneyGreaterThan,personName,money);
-
-//        if(personName=="a")
-//        {
-//            for(int index=0;index<(int)a->size();index++)
-//                if(interpreter->personMoneyGreaterThan(a->at(index)->getName(),money)==evalBool)
-//                {
-//                    remA.at(index) = 1;
-//                    remTemp.at(index) = 1;
-//                }
-//        }
-//        else if(personName=="b")
-//        {
-//            for(int index=0;index<(int)b->size();index++)
-//                if(interpreter->personMoneyGreaterThan(b->at(index)->getName(),money)==evalBool)
-//                {
-//                    remB.at(index) = 1;
-//                    remTemp.at(index) = 1;
-//                }
-//        }
-//        else if(personName=="c")
-//        {
-//            for(int index=0;index<(int)c->size();index++)
-//                if(interpreter->personMoneyGreaterThan(c->at(index)->getName(),money)==evalBool)
-//                {
-//                    remC.at(index) = 1;
-//                    remTemp.at(index) = 1;
-//                }
-//        }
-//        else if(money=="a")
-//        {
-//            for(int index=0;index<(int)a->size();index++)
-//                if(interpreter->personMoneyGreaterThan(personName, a->at(index)->getName())==evalBool)
-//                {
-//                    remA.at(index) = 1;
-//                    remTemp.at(index) = 1;
-//                }
-//        }
-//        else if(money=="b")
-//        {
-//            for(int index=0;index<(int)b->size();index++)
-//                if(interpreter->personMoneyGreaterThan(personName, b->at(index)->getName())==evalBool)
-//                {
-//                    remB.at(index) = 1;
-//                    remTemp.at(index) = 1;
-//                }
-//        }
-//        else if(money=="c")
-//        {
-//            for(int index=0;index<(int)c->size();index++)
-//                if(interpreter->personMoneyGreaterThan(personName, c->at(index)->getName())==evalBool)
-//                {
-//                    remC.at(index) = 1;
-//                    remTemp.at(index) = 1;
-//                }
-//        }
-//        else
-//        {
-//            if(interpreter->personMoneyGreaterThan(personName,money)==evalBool)
-//                return false;
-//        }
-//        for(int index=0; index<(int)remTemp.size();index++)
-//            if(remTemp.at(index)==0)
-//                return true;
-//        return false;
     }
     else if(type =="personMoneyLessThan"){
         string personName = *i++;
         string money = *i++;
-        int h = atoi(money.c_str());
 
         macroMulti(personMoneyLessThan,personName,money);
     }
@@ -558,56 +528,48 @@ bool Evaluator::evaluatePre(string pre)
     else if(type =="policeRepGreaterThan"){
         string personName = *i++;
         string rep = *i++;
-        int r= atoi(rep.c_str());
 
         macroMulti(policeRepGreaterThan,personName,rep)
     }
     else if(type =="policeRepLessThan"){
         string personName = *i++;
         string rep = *i++;
-        int r= atoi(rep.c_str());
 
         macroMulti(policeRepLessThan,personName,rep)
     }
     else if(type =="mobRepGreaterThan"){
         string personName = *i++;
         string rep = *i++;
-        int r= atoi(rep.c_str());
 
         macroMulti(mobRepGreaterThan,personName,rep)
     }
     else if(type =="mobRepLessThan"){
         string personName = *i++;
         string rep = *i++;
-        int r= atoi(rep.c_str());
 
         macroMulti(mobRepLessThan,personName,rep)
     }
     else if(type =="policeWantedLessThan"){
         string personName = *i++;
         string wanted = *i++;
-        int w= atoi(wanted.c_str());
 
         macroMulti(policeWantedLessThan,personName,wanted)
     }
     else if(type =="policeWantedGreaterThan"){
         string personName = *i++;
         string wanted = *i++;
-        int w= atoi(wanted.c_str());
 
         macroMulti(policeWantedGreaterThan,personName,wanted)
     }
     else if(type =="mobWantedGreaterThan"){
         string personName = *i++;
         string wanted = *i++;
-        int w= atoi(wanted.c_str());
 
         macroMulti(mobWantedGreaterThan,personName,wanted)
     }
     else if(type =="mobWantedLessThan"){
         string personName = *i++;
         string wanted = *i++;
-        int w= atoi(wanted.c_str());
 
         macroMulti(mobWantedLessThan,personName,wanted)
     }
@@ -619,44 +581,42 @@ bool Evaluator::evaluatePre(string pre)
     else if(type =="isPolice"){
         string personName = *i++;
 
-        //        if(personName=="a")
-        //        {
-        //            for(int index=0;index<(int)a->size();index++)
-        //                if(interpreter->isPolice(a->at(index)->getName())==evalBool)
-        //                {
-        //                    remA.at(index) = 1;
-        //                    remTemp.at(index) = 1;
-        //                }
-        //        }
-        //        else if(personName=="b")
-        //        {
-        //            for(int index=0;index<(int)temp->size();index++)
-        //                if(interpreter->isPolice(temp->at(index)->getName())==evalBool)
-        //                {
-        //                    remB.at(index) = 1;
-        //                    remTemp.at(index) = 1;
-        //                }
-        //        }
-        //        else if(personName=="c")
-        //        {
-        //            for(int index=0;index<(int)temp->size();index++)
-        //                if(interpreter->isPolice(temp->at(index)->getName())==evalBool)
-        //                {
-        //                    remC.at(index) = 1;
-        //                    remTemp.at(index) = 1;
-        //                }
-        //        }
-        //        else{
-        //            if(interpreter->isPolice(personName)==evalBool)
-        //                return false;
-        //        }
-        //        for(int index=0; index<(int)remTemp.size();index++)
-        //            if(remTemp.at(index)==0)
-        //                return true;
-        //        return false;
+        //macroSingle(isPolice,personName);
 
 
-        macroSingle(isPolice,personName);
+        if(personName=="a")
+        {
+            aCount++;
+            for(int index=0;index<(int)a->size();index++)
+                if(interpreter->isPolice(a->at(index)->getName())==evalBool)
+                {
+                    countA.at(index)++;
+                }
+        }
+        else if(personName=="b")
+        {
+            bCount++;
+            for(int index=0;index<(int)b->size();index++)
+                if(interpreter->isPolice(b->at(index)->getName())==evalBool)
+                {
+                    countB.at(index)++;
+                }
+        }
+        else if(personName=="c")
+        {
+            cCount++;
+            for(int index=0;index<(int)c->size();index++)
+                if(interpreter->isPolice(c->at(index)->getName())==evalBool)
+                {
+                    countC.at(index)++;
+                }
+        }
+        else{
+            if(interpreter->isPolice(personName)==evalBool)
+                return true;
+        }
+        return false;
+
     }
     else if(type =="isVigilante"){
         string personName = *i++;

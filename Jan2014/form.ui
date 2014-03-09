@@ -22,6 +22,9 @@
      <height>711</height>
     </rect>
    </property>
+   <property name="currentIndex">
+    <number>1</number>
+   </property>
    <widget class="QWidget" name="tab">
     <attribute name="title">
      <string>World</string>
@@ -42,7 +45,7 @@
     <widget class="QPushButton" name="buttonUpdateLists">
      <property name="geometry">
       <rect>
-       <x>290</x>
+       <x>20</x>
        <y>10</y>
        <width>75</width>
        <height>23</height>
@@ -914,6 +917,200 @@
     <attribute name="title">
      <string>Tab 2</string>
     </attribute>
+    <widget class="QGroupBox" name="groupBox_2">
+     <property name="geometry">
+      <rect>
+       <x>20</x>
+       <y>10</y>
+       <width>601</width>
+       <height>251</height>
+      </rect>
+     </property>
+     <property name="title">
+      <string>Goals</string>
+     </property>
+     <widget class="QLabel" name="numAttempts">
+      <property name="geometry">
+       <rect>
+        <x>290</x>
+        <y>60</y>
+        <width>21</width>
+        <height>16</height>
+       </rect>
+      </property>
+      <property name="text">
+       <string>0</string>
+      </property>
+     </widget>
+     <widget class="QListWidget" name="listGoals">
+      <property name="geometry">
+       <rect>
+        <x>10</x>
+        <y>60</y>
+        <width>151</width>
+        <height>161</height>
+       </rect>
+      </property>
+     </widget>
+     <widget class="QLabel" name="maxAttempts">
+      <property name="geometry">
+       <rect>
+        <x>290</x>
+        <y>90</y>
+        <width>21</width>
+        <height>16</height>
+       </rect>
+      </property>
+      <property name="text">
+       <string>0</string>
+      </property>
+     </widget>
+     <widget class="QLabel" name="label_19">
+      <property name="geometry">
+       <rect>
+        <x>180</x>
+        <y>90</y>
+        <width>101</width>
+        <height>16</height>
+       </rect>
+      </property>
+      <property name="text">
+       <string>Max Attempts</string>
+      </property>
+     </widget>
+     <widget class="QTextBrowser" name="goalTextBrowser">
+      <property name="geometry">
+       <rect>
+        <x>310</x>
+        <y>20</y>
+        <width>281</width>
+        <height>221</height>
+       </rect>
+      </property>
+     </widget>
+     <widget class="QPushButton" name="refreshGoals">
+      <property name="geometry">
+       <rect>
+        <x>20</x>
+        <y>30</y>
+        <width>81</width>
+        <height>23</height>
+       </rect>
+      </property>
+      <property name="text">
+       <string>Refresh Goals</string>
+      </property>
+     </widget>
+     <widget class="QLabel" name="label_18">
+      <property name="geometry">
+       <rect>
+        <x>180</x>
+        <y>60</y>
+        <width>101</width>
+        <height>16</height>
+       </rect>
+      </property>
+      <property name="text">
+       <string>Number of Attempts</string>
+      </property>
+     </widget>
+     <zorder>numAttempts</zorder>
+     <zorder>listGoals</zorder>
+     <zorder>label_18</zorder>
+     <zorder>label_18</zorder>
+     <zorder>maxAttempts</zorder>
+     <zorder>label_19</zorder>
+     <zorder>goalTextBrowser</zorder>
+     <zorder>refreshGoals</zorder>
+    </widget>
+    <widget class="QGroupBox" name="groupBox_3">
+     <property name="geometry">
+      <rect>
+       <x>20</x>
+       <y>270</y>
+       <width>601</width>
+       <height>251</height>
+      </rect>
+     </property>
+     <property name="title">
+      <string>Stories</string>
+     </property>
+     <widget class="QListWidget" name="listStories">
+      <property name="geometry">
+       <rect>
+        <x>20</x>
+        <y>70</y>
+        <width>151</width>
+        <height>161</height>
+       </rect>
+      </property>
+     </widget>
+     <widget class="QPushButton" name="refreshStories">
+      <property name="geometry">
+       <rect>
+        <x>30</x>
+        <y>40</y>
+        <width>91</width>
+        <height>23</height>
+       </rect>
+      </property>
+      <property name="text">
+       <string>Refresh Stories</string>
+      </property>
+     </widget>
+     <widget class="QTextBrowser" name="stortTextBrowser">
+      <property name="geometry">
+       <rect>
+        <x>310</x>
+        <y>20</y>
+        <width>281</width>
+        <height>221</height>
+       </rect>
+      </property>
+     </widget>
+    </widget>
+    <widget class="QPushButton" name="loadGoals">
+     <property name="geometry">
+      <rect>
+       <x>40</x>
+       <y>640</y>
+       <width>75</width>
+       <height>23</height>
+      </rect>
+     </property>
+     <property name="text">
+      <string>Load Goals</string>
+     </property>
+    </widget>
+    <widget class="QPushButton" name="loadStories">
+     <property name="geometry">
+      <rect>
+       <x>130</x>
+       <y>640</y>
+       <width>75</width>
+       <height>23</height>
+      </rect>
+     </property>
+     <property name="text">
+      <string>Load Stories</string>
+     </property>
+    </widget>
+    <widget class="QLabel" name="label_20">
+     <property name="geometry">
+      <rect>
+       <x>60</x>
+       <y>600</y>
+       <width>131</width>
+       <height>31</height>
+      </rect>
+     </property>
+     <property name="text">
+      <string>These buttons reset the current stories and goals!</string>
+     </property>
+     <property name="wordWrap">
+      <bool>true</bool>
+     </property>
+    </widget>
    </widget>
   </widget>
  </widget>

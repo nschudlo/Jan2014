@@ -12,16 +12,20 @@ class Evaluator
 public:
     static Evaluator* Instance();
 
-    int evaluate(std::vector<std::string> _conditions, std::vector<Person*> *_a);
-    int evaluate(std::vector<std::string> _conditions, std::vector<Person*> *_a,  std::vector<Person*> *_b);
-    int evaluate(std::vector<std::string> _conditions, std::vector<Person*> *_a,std::vector<Person*> *_b,std::vector<Person*> *_c);
+    int evaluate(std::vector<std::string> _conditions,
+                 std::vector<Person*> *_a,
+                 std::vector<Person*> *_b,
+                 std::vector<Person*> *_c);
 
+    int evaluateStory(std::vector<std::string> _conditions,
+                 std::vector<Person*> *_a,
+                 std::vector<Person*> *_b,
+                 std::vector<Person*> *_c);
 private:
 
     Evaluator();
     static Evaluator* m_pInstance;
     bool evaluatePre(std::string pre);
-    int cycleConditions();
 
     WorldInterpreter *interpreter;
     Controller * controller;
@@ -29,8 +33,8 @@ private:
     std::vector<std::string> conditions;
 
     std::vector<Person*> *a,*b,*c, *temp;
-    std::vector<int> remA,remB,remC,remTemp;
-    std::vector<int> countA,countB,countC,countTemp;
+
+    std::vector<int> countA,countB,countC;//,countTemp;
     int aCount,bCount,cCount;
 
 

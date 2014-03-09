@@ -41,8 +41,6 @@ BulkLoader::BulkLoader(vector<WorldObject*> *_o,
 
     LocationLoader(locations, "locations.txt");
 
-    Person test = Person("Test  ", 1);
-
     loadfile(filename);
 
 }
@@ -63,6 +61,7 @@ void BulkLoader::loadfile(string filename)
         //types everytime
         for(int cycle=0; cycle<=CYCLE_MAX; cycle++)
         {
+            cout<<"Cycle "<<cycle<<endl;
             currentPerson = "";
             while(getline(file, line))
             {
@@ -221,40 +220,47 @@ void BulkLoader::testString(string line, int cycle, string &currentPerson, strin
                     }
                 }
             }
-            else
-                if(type.compare("Location")==0)
+            else if(type.compare("Location")==0)
+            {
+
+                Person* currPerson = getPerson(currentPerson);
+                string locName = vectorToString(info,0,(int)info.size());
+                //to_lower(locName);
+                Location* loc = getLocation(locName);
+                if(loc == 0)
                 {
-
-                    Person* currPerson = getPerson(currentPerson);
-                    string locName = vectorToString(info,0,(int)info.size());
-                    //to_lower(locName);
-                    Location* loc = getLocation(locName);
-                    if(loc == 0)
-                    {
-                        cout<<"ERROR: location "<<locName<<" not found"<<endl;
-                        break;
-                    }
-
-                    currPerson->setCurrLocation(loc);
+                    cout<<"ERROR: location "<<locName<<" not found"<<endl;
+                    break;
                 }
-                else
-                    if(type.compare("StoryValues")==0)
-                    {
-                        if(info.size()!=4)
-                        {
-                            cout<<"ERROR: <StoryValue> not followed by 4 values"<<endl;
-                            break;
-                        }
-                        else
-                        {
-                            Person* currPerson = getPerson(currentPerson);
-                            currPerson->setPoliceRep(atoi(info[0].c_str()));
-                            currPerson->setMobRep(atoi(info[1].c_str()));
-                            currPerson->setPoliceWanted(atoi(info[2].c_str()));
-                            currPerson->setMobWanted(atoi(info[3].c_str()));
-                        }
 
-                    }
+                currPerson->setCurrLocation(loc);
+            }
+            else if(type.compare("StoryValues")==0)
+            {
+                if(info.size()!=4)
+                {
+                    cout<<"ERROR: <StoryValue> not followed by 4 values"<<endl;
+                    break;
+                }
+
+                Person* currPerson = getPerson(currentPerson);
+                currPerson->setPoliceRep(atoi(info[0].c_str()));
+                currPerson->setMobRep(atoi(info[1].c_str()));
+                currPerson->setPoliceWanted(atoi(info[2].c_str()));
+                currPerson->setMobWanted(atoi(info[3].c_str()));
+            }
+            else if(type.compare("StoryRole")==0)
+            {
+                if(info.size()!=1)
+                {
+                    cout<<"ERROR: <StoryRole> not followed by 1 value"<<endl;
+                    break;
+                }
+
+                Person* currPerson = getPerson(currentPerson);
+                currPerson->setStoryRole(atoi(info[0].c_str()));
+            }
+
             break;
         }
     }

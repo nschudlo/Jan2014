@@ -23,6 +23,7 @@
 #include <QtWidgets/QSpacerItem>
 #include <QtWidgets/QSpinBox>
 #include <QtWidgets/QTabWidget>
+#include <QtWidgets/QTextBrowser>
 #include <QtWidgets/QVBoxLayout>
 #include <QtWidgets/QWidget>
 
@@ -114,6 +115,21 @@ public:
     QListWidget *listWorldObjects;
     QPushButton *buttonActionInfo;
     QWidget *tab_2;
+    QGroupBox *groupBox_2;
+    QLabel *numAttempts;
+    QListWidget *listGoals;
+    QLabel *maxAttempts;
+    QLabel *label_19;
+    QTextBrowser *goalTextBrowser;
+    QPushButton *refreshGoals;
+    QLabel *label_18;
+    QGroupBox *groupBox_3;
+    QListWidget *listStories;
+    QPushButton *refreshStories;
+    QTextBrowser *stortTextBrowser;
+    QPushButton *loadGoals;
+    QPushButton *loadStories;
+    QLabel *label_20;
 
     void setupUi(QWidget *Form)
     {
@@ -130,7 +146,7 @@ public:
         buttonTest->setGeometry(QRect(400, 10, 75, 23));
         buttonUpdateLists = new QPushButton(tab);
         buttonUpdateLists->setObjectName(QStringLiteral("buttonUpdateLists"));
-        buttonUpdateLists->setGeometry(QRect(290, 10, 75, 23));
+        buttonUpdateLists->setGeometry(QRect(20, 10, 75, 23));
         listLocations = new QListWidget(tab);
         listLocations->setObjectName(QStringLiteral("listLocations"));
         listLocations->setGeometry(QRect(330, 40, 151, 161));
@@ -413,10 +429,65 @@ public:
         mainTabWidget->addTab(tab, QString());
         tab_2 = new QWidget();
         tab_2->setObjectName(QStringLiteral("tab_2"));
+        groupBox_2 = new QGroupBox(tab_2);
+        groupBox_2->setObjectName(QStringLiteral("groupBox_2"));
+        groupBox_2->setGeometry(QRect(20, 10, 601, 251));
+        numAttempts = new QLabel(groupBox_2);
+        numAttempts->setObjectName(QStringLiteral("numAttempts"));
+        numAttempts->setGeometry(QRect(290, 60, 21, 16));
+        listGoals = new QListWidget(groupBox_2);
+        listGoals->setObjectName(QStringLiteral("listGoals"));
+        listGoals->setGeometry(QRect(10, 60, 151, 161));
+        maxAttempts = new QLabel(groupBox_2);
+        maxAttempts->setObjectName(QStringLiteral("maxAttempts"));
+        maxAttempts->setGeometry(QRect(290, 90, 21, 16));
+        label_19 = new QLabel(groupBox_2);
+        label_19->setObjectName(QStringLiteral("label_19"));
+        label_19->setGeometry(QRect(180, 90, 101, 16));
+        goalTextBrowser = new QTextBrowser(groupBox_2);
+        goalTextBrowser->setObjectName(QStringLiteral("goalTextBrowser"));
+        goalTextBrowser->setGeometry(QRect(310, 20, 281, 221));
+        refreshGoals = new QPushButton(groupBox_2);
+        refreshGoals->setObjectName(QStringLiteral("refreshGoals"));
+        refreshGoals->setGeometry(QRect(20, 30, 81, 23));
+        label_18 = new QLabel(groupBox_2);
+        label_18->setObjectName(QStringLiteral("label_18"));
+        label_18->setGeometry(QRect(180, 60, 101, 16));
+        numAttempts->raise();
+        listGoals->raise();
+        label_18->raise();
+        label_18->raise();
+        maxAttempts->raise();
+        label_19->raise();
+        goalTextBrowser->raise();
+        refreshGoals->raise();
+        groupBox_3 = new QGroupBox(tab_2);
+        groupBox_3->setObjectName(QStringLiteral("groupBox_3"));
+        groupBox_3->setGeometry(QRect(20, 270, 601, 251));
+        listStories = new QListWidget(groupBox_3);
+        listStories->setObjectName(QStringLiteral("listStories"));
+        listStories->setGeometry(QRect(20, 70, 151, 161));
+        refreshStories = new QPushButton(groupBox_3);
+        refreshStories->setObjectName(QStringLiteral("refreshStories"));
+        refreshStories->setGeometry(QRect(30, 40, 91, 23));
+        stortTextBrowser = new QTextBrowser(groupBox_3);
+        stortTextBrowser->setObjectName(QStringLiteral("stortTextBrowser"));
+        stortTextBrowser->setGeometry(QRect(310, 20, 281, 221));
+        loadGoals = new QPushButton(tab_2);
+        loadGoals->setObjectName(QStringLiteral("loadGoals"));
+        loadGoals->setGeometry(QRect(40, 640, 75, 23));
+        loadStories = new QPushButton(tab_2);
+        loadStories->setObjectName(QStringLiteral("loadStories"));
+        loadStories->setGeometry(QRect(130, 640, 75, 23));
+        label_20 = new QLabel(tab_2);
+        label_20->setObjectName(QStringLiteral("label_20"));
+        label_20->setGeometry(QRect(60, 600, 131, 31));
+        label_20->setWordWrap(true);
         mainTabWidget->addTab(tab_2, QString());
 
         retranslateUi(Form);
 
+        mainTabWidget->setCurrentIndex(1);
         infoTabWidget->setCurrentIndex(0);
 
 
@@ -473,6 +544,17 @@ public:
         buttonPersonInfo->setText(QApplication::translate("Form", "Person Info", 0));
         buttonActionInfo->setText(QApplication::translate("Form", "Action Info", 0));
         mainTabWidget->setTabText(mainTabWidget->indexOf(tab), QApplication::translate("Form", "World", 0));
+        groupBox_2->setTitle(QApplication::translate("Form", "Goals", 0));
+        numAttempts->setText(QApplication::translate("Form", "0", 0));
+        maxAttempts->setText(QApplication::translate("Form", "0", 0));
+        label_19->setText(QApplication::translate("Form", "Max Attempts", 0));
+        refreshGoals->setText(QApplication::translate("Form", "Refresh Goals", 0));
+        label_18->setText(QApplication::translate("Form", "Number of Attempts", 0));
+        groupBox_3->setTitle(QApplication::translate("Form", "Stories", 0));
+        refreshStories->setText(QApplication::translate("Form", "Refresh Stories", 0));
+        loadGoals->setText(QApplication::translate("Form", "Load Goals", 0));
+        loadStories->setText(QApplication::translate("Form", "Load Stories", 0));
+        label_20->setText(QApplication::translate("Form", "These buttons reset the current stories and goals!", 0));
         mainTabWidget->setTabText(mainTabWidget->indexOf(tab_2), QApplication::translate("Form", "Tab 2", 0));
     } // retranslateUi
 

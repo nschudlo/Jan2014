@@ -1,6 +1,7 @@
 <Goal>
 <Name>getInformation
-<Person>isMainCharacter a
+#<Person>true isMainCharacter a
+<Person>true personIsMale a
 <ValueEnd>true personIsHolding a information
 <EndGoal>
 
@@ -8,7 +9,8 @@
 
 #<Goal>
 #<Name>loseInformation
-#<ValueEnd>false personIsHolding nick information
+#<Person>true isMainCharacter a
+#<ValueEnd>false personIsHolding a information
 #<EndGoal>
 
 #<Goal>

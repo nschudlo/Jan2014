@@ -17,6 +17,12 @@ public:
     void loadGoals(std::string filename);
     void loadStories(std::string filename);
 
+    std::vector<StoryGoal*> getGoals();
+    std::vector<Story*> getStories();
+
+    StoryGoal* getGoal(std::string name);
+    Story* getStory(std::string name);
+
 private:
     Director(){}
     static Director* m_pInstance;
