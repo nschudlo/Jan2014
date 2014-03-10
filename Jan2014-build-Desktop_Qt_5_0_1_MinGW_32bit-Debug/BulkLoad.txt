@@ -40,7 +40,7 @@
 <StoryValues> 9 0 0 2
 <Item>gun
 <Relationship>paul 11 2
-<Location>Town Square 
+<Location>TownSquare 
 
 <Person>paul 0
 <StoryValues>9 0 0 0
@@ -53,14 +53,14 @@
 <Item>knife
 <item>gun
 <Relationship>jimmy 7 2
-<Location>Jimmys House
+<Location>JimmysHouse
 
 <Person>jimmy 0
 <StoryRole>7
 <Item>knife
 <item>gun
 <Relationship>steve 7 2
-<Location>Jimmys House
+<Location>JimmysHouse
 
 
 

@@ -27,6 +27,7 @@ WorldInterpreter::WorldInterpreter()
     actions = controller->getActionVector();
 }
 
+
 bool WorldInterpreter::personIsAt(std::string person, std::string location)
 {
     Person* per =controller->getPerson(person);

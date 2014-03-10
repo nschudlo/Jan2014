@@ -1,4 +1,6 @@
 #include "director.h"
+#include "condition.h"
+
 #include <iostream>
 #include <fstream>
 
@@ -199,11 +201,17 @@ void Director::evaluateStoryLine(string line)
     else if(type=="Description")
         currentStory->setDescription(vectorToString(info,0,(int)info.size()));
     else if(type=="MPrecondition")
+    {
         currentStory->addMPreCondition(vectorToString(info,0,(int)info.size()));
+    }
     else if(type=="Precondition")
+    {
         currentStory->addPreCondition(vectorToString(info,0,(int)info.size()));
+    }
     else if(type=="ValueEnd")
+    {
         currentStory->addChanges(vectorToString(info,0,(int)info.size()));
+    }
     else if(type=="EndStory")
     {
         stories.push_back(currentStory);

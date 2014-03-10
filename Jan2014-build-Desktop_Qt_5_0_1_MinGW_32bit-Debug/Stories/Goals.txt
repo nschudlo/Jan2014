@@ -1,6 +1,6 @@
 <Goal>
 <Name>getInformation
-#<Person>true isMainCharacter a
+<Person>true isMainCharacter a
 <Person>true personIsMale a
 <ValueEnd>true personIsHolding a information
 <EndGoal>

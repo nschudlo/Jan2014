@@ -1,30 +1,30 @@
-<Location>Town Square
+<Location>TownSquare
 	<GoTo><Both>Restaurant
-	<GoTo><Both>Ice Cream Bar
+	<GoTo><Both>IceCreamBar
 	<GoTo><Both>Bank
 	<GoTo><Both>Barber
-	<GoTo><Both>Main Street
-	<GoTo><Both>Oak Street
-<Location>Oak Street
-	<GoTo><Both>Nicks House
+	<GoTo><Both>MainStreet
+	<GoTo><Both>OakStreet
+<Location>OakStreet
+	<GoTo><Both>NicksHouse
 	<GoTo><Both>Park
-	<GoTo><Both>Pauls House
-<Location>Main Street
-	<GoTo><Both>Office Building
+	<GoTo><Both>PaulsHouse
+<Location>MainStreet
+	<GoTo><Both>OfficeBuilding
 	<GoTo><Both>Library
 	<GoTo><Both>Bank
 	<GoTo><Both>Jail
 <Location>Jail
 	<GoTo><Both>JailCell
 <Location>Dock Street
-	<GoTo><Both>Main Street
+	<GoTo><Both>MainStreet
 	<GoTo>Docks
 <Location>Docks
-	<GoTo><Both>Boat A
-	<GoTo><Both>Boat B
-	<GoTo><Both>Boat C
+	<GoTo><Both>BoatA
+	<GoTo><Both>BoatB
+	<GoTo><Both>BoatC
 	<GoTo>Canal Street
 <Location>Canal Street
-	<GoTo><Both>Steves House
-	<GoTo><Both>Jimmys House
-	<GoTo>Town Square
+	<GoTo><Both>StevesHouse
+	<GoTo><Both>JimmysHouse
+	<GoTo>TownSquare

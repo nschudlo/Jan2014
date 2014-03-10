@@ -14,5 +14,6 @@ INPUT(
 ./release/story.o
 ./release/storygoal.o
 ./release/evaluator.o
+./release/condition.o
 ./release/moc_form.o
 );

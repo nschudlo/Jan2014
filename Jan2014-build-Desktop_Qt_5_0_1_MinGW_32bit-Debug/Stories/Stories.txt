@@ -1,6 +1,6 @@
 #<Story>
 #<Name>buyIceCream
-#<Precondition>true personIsAt a ice cream bar
+#<Precondition>true personIsAt a icecreambar
 #<Precondition>false personMoneyLessThan a 100
 #<Description>[a] is at the ice cream bar. They have enough money for ice cream so they buy an ice cream.
 #<ValueEnd>personIsHolding a icecream
@@ -11,7 +11,7 @@
 #<Precondition>true isPolice a
 #<Precondition>false isPolice b
 #<Description>[a] arrests [b] and takes them to jail.
-#<ValueEnd>personIsAt b jailcell
+#<ValueEnd>true personIsAt b jailcell
 #<EndStory>
 
 <Story>
@@ -20,5 +20,7 @@
 <MPrecondition>true personIsMale a
 <Precondition>true personIsAt a bank
 <Precondition>false personIsHolding a gun
-<ValueEnd>personHealthLessThan a 100
+<Precondition>true isMainCharacter nick
+<Description>[a] the police officer is witness to a bank robbery, but does not have his gun!
+<ValueEnd>true personHealthLessThan a 100
 <EndStory>

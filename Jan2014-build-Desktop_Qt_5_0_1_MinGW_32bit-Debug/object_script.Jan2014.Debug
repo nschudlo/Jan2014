@@ -14,5 +14,6 @@ INPUT(
 ./debug/story.o
 ./debug/storygoal.o
 ./debug/evaluator.o
+./debug/condition.o
 ./debug/moc_form.o
 );

@@ -6,6 +6,7 @@
 #include "controller.h"
 #include "worldinterpreter.h"
 #include "evaluator.h"
+#include "condition.h"
 
 class Story
 {
@@ -23,16 +24,25 @@ public:
     void addPreCondition(std::string precondition);
     void addChanges(std::string change);
 
-    std::vector<Person*> getAPerson();
-    std::vector<Person*> getBPerson();
-    std::vector<Person*> getCPerson();
+    void divideConditions(int typeFlag);
+
+    std::vector<Person*> getAMand();
+    std::vector<Person*> getBMand();
+    std::vector<Person*> getCMand();
+
+    std::vector<Person*> getAOptional();
+    std::vector<Person*> getBOptional();
+    std::vector<Person*> getCOptional();
+
+    void evaluateMandatory();
+    int evaluateOptional();
 
 private:
     std::string name;
     std::string description;
-    std::vector<std::string> preStoryValues;
-    std::vector<std::string> preStoryValuesM;
-    std::vector<std::string> changes;
+    std::vector<Condition*> conds, aConds, bConds, cConds, setConds;
+    std::vector<Condition*> condsM, aCondsM, bCondsM, cCondsM, setCondsM;
+    std::vector<Condition*> changes;
 
     bool preEvaluation;
 
@@ -40,7 +50,9 @@ private:
     WorldInterpreter *interpreter;
     Evaluator *evaluator;
 
-    std::vector<Person*> a,b,c;
+    std::vector<Person*> aMand,bMand,cMand;
+    std::vector<Person*> aOpt,bOpt,cOpt;
+    //Person chosen_A, chosen_B, chosen_C;
     std::string chosenA,chosenB,chosenC;
 };
 
