@@ -12,6 +12,7 @@
 <MPrecondition>true isPolice a
 <MPrecondition>true isMainCharacter a
 <MPrecondition>true isMobster b
+<Precondition>true personIsAt b streetcorner
 <Trigger>true personIsAt a streetcorner
 <Description>[a] arrests [b] for selling drugs on the street corner and takes them to jail.
 <ValueEnd>true personIsAt b jailcell

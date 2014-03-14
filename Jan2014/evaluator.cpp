@@ -571,6 +571,9 @@ bool Evaluator::checkConditionSet(Condition *condition)
     else if(type =="isDockWorker"){
         macroSinglesSet(isDockWorker,val1);
     }
+    else if(type =="isEmpty"){
+        macroSinglesSet(isEmpty,val1);
+    }
     else
     {
         cout<<"ERROR: Function +"<<type<<"+ not found!"<<endl;
@@ -1128,6 +1131,11 @@ bool Evaluator::evaluatePre(string pre)
         string personName = *i++;
 
         macroSingle(isDockWorker,personName);
+    }
+    else if(type =="isEmpty"){
+        string locationName = *i++;
+
+        macroSingle(isEmpty,locationName);
     }
     else
     {

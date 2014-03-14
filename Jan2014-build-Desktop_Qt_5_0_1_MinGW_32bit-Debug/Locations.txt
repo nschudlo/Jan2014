@@ -20,6 +20,7 @@
 	<GoTo><Both>MainStreet
 	<GoTo>DockStreet
 <Location>DockStreet
+	<GoTo><Both>mobheadquarters
 	<GoTo>Docks
 	<GoTo>Canal Street
 <Location>Docks

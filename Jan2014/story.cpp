@@ -21,6 +21,7 @@ Story::Story()
     name = "InterrogateGangMember";
     description = "No description";
     failedOptConditions=0;
+    used=false;
 
     // preStoryValues.push_back("isMainCharacter nick");
 
@@ -153,6 +154,7 @@ void Story::evaluateMandatory()
 
 int Story::evaluateOptional()
 {
+    //evaluator returns number of fulfilled conditions
     aCount = evaluator->checkOptional(&aConds, &aMand, &aOpt);
     bCount = evaluator->checkOptional(&bConds, &bMand, &bOpt);
     cCount = evaluator->checkOptional(&cConds, &cMand, &cOpt);
@@ -166,7 +168,7 @@ int Story::evaluateOptional()
 
     //Returns the number of conditions that will need goals
     //created in order for every condition to be met
-    failedOptConditions = conds.size()-aCount+bCount+cCount+setCount;
+    failedOptConditions = conds.size()-(aCount+bCount+cCount+setCount);
     return failedOptConditions;
 }
 
@@ -245,40 +247,40 @@ void Story::chooseVariablePeople()
     }
     if((int)bOpt.size()>0)
     {
-        chosenB = bOpt.at(rand()%(int)aOpt.size())->getName();
+        chosenB = bOpt.at(rand()%(int)bOpt.size())->getName();
     }
     if((int)cOpt.size()>0)
     {
-        chosenC = cOpt.at(rand()%(int)aOpt.size())->getName();
+        chosenC = cOpt.at(rand()%(int)cOpt.size())->getName();
     }
 
 
     //Attempt to add the goal to the director goal queue
     //The director is responsible for not double adding the goal
 
-    //Loop through all of a conditions to find any the chosenA doesnt have
+    //This is the reevaluators job-->//Loop through all of a conditions to find any the chosenA doesnt have
     for(int index=0;index<(int)aConds.size();index++)
     {
         //Set Variable person to chosenA for all a conditions
         aConds.at(index)->setVariablePerson(chosenA);
-        if(!aConds.at(index)->hasPerson(chosenA))
-            director->addStoryGoal(aConds.at(index));
+        //if(!aConds.at(index)->hasPerson(chosenA))
+        //    director->addStoryGoal(aConds.at(index));
     }
 
     for(int index=0; index<(int)bConds.size();index++)
     {
         //Set Variable person to chosenB for all b conditions
         bConds.at(index)->setVariablePerson(chosenB);
-        if(!bConds.at(index)->hasPerson(chosenB))
-            director->addStoryGoal(bConds.at(index));
+       // if(!bConds.at(index)->hasPerson(chosenB))
+       //     director->addStoryGoal(bConds.at(index));
     }
 
     for(int index=0; index<(int)cConds.size();index++)
     {
         //Set Variable person to chosenC for all c conditions
         cConds.at(index)->setVariablePerson(chosenC);
-        if(!cConds.at(index)->hasPerson(chosenC))
-            director->addStoryGoal(cConds.at(index));
+       // if(!cConds.at(index)->hasPerson(chosenC))
+       //     director->addStoryGoal(cConds.at(index));
     }
 
     for(int index=0; index<(int)triggers.size();index++)
@@ -291,6 +293,16 @@ void Story::chooseVariablePeople()
             triggers.at(index)->setVariablePerson(chosenC);
     }
 
+    for(int index=0; index<(int)changes.size();index++)
+    {
+        if(changes.at(index)->isA())
+            changes.at(index)->setVariablePerson(chosenA);
+        else if(changes.at(index)->isB())
+            changes.at(index)->setVariablePerson(chosenB);
+        else if(changes.at(index)->isC())
+            changes.at(index)->setVariablePerson(chosenC);
+    }
+
 }
 
 void Story::checkStoryGoals()
@@ -301,7 +313,7 @@ void Story::checkStoryGoals()
     {
         //If the condition comes back unfulfilled, add it to the
         //goals queue
-        if(evaluator->checkConditionSet(conds.at(index)))
+        if(!evaluator->checkConditionSet(conds.at(index)))
         {
             director->addStoryGoal(conds.at(index));
             failedOptConditions++;

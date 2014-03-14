@@ -19,21 +19,25 @@ public:
     void loadGoals(std::string filename);
     void loadStories(std::string filename);
 
-    std::vector<Condition*> getGoals();
+    std::vector<Condition*> getGoalQueue();
     std::vector<Story*> getStories();
+    std::vector<Story*> getStoryQueue();
+    std::vector<Story*> getWorkingStories();
 
-    StoryGoal* getGoal(std::string name);
+    // StoryGoal* getGoal(std::string name);
     Story* getStory(std::string name);
 
     void addStoryGoal(Condition * condition);
+    void addToStoryQueue(Story* story);
 
     bool compareConditions(Condition* condition1, Condition* condition2);
     bool compareConditionsSet(Condition* condition1, Condition* condition2);
     void findStory(Condition* condition);
 
 private:
-    Director(){}
+    Director();
     static Director* m_pInstance;
+    Evaluator* evaluator;
 
     void evaluateGoalLine(std::string line);
     void evaluateStoryLine(std::string line);
@@ -45,11 +49,13 @@ private:
     std::vector<Story*> possibleStories;
     std::vector<Story*> workingStories; //stories with all pre
 
-   // std::vector<StoryGoal*> storyGoals;
+    // std::vector<StoryGoal*> storyGoals;
     std::vector<Story*> stories;
 
     std::vector<Story*> storyQueue; //List of currently active
     std::vector<Condition*> goalQueue;
+
+    bool changeMade;
 
 };
 

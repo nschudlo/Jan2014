@@ -7,6 +7,7 @@
 
 #include <vector>
 #include <iostream>
+#include <time.h>
 
 #include "person.h"
 
@@ -28,6 +29,8 @@ Form::Form(QWidget *parent) :
     current = new Person();
     currentLocation = new Location();
     //updateLists();
+
+    srand(time(NULL));
 }
 
 Form::~Form()
@@ -632,8 +635,8 @@ void Form::on_storyRole_valueChanged(int arg1)
 
 void Form::on_loadGoals_released()
 {
-    director->loadGoals("./Stories/Goals.txt");
-    on_refreshGoals_released();
+    //director->loadGoals("./Stories/Goals.txt");
+    //on_refreshGoals_released();
 }
 
 void Form::on_refreshGoals_released()
@@ -679,12 +682,12 @@ void Form::on_refreshStories_released()
 
 void Form::on_listGoals_itemDoubleClicked(QListWidgetItem *item)
 {
-    StoryGoal* curr = director->getGoal(item->text().toStdString());
+    //StoryGoal* curr = director->getGoal(item->text().toStdString());
 
-    ui->numAttempts->setText(QString::number(curr->getNumOfAttempts()));
-    ui->maxAttempts->setText(QString::number(curr->getMaxAttempts()));
+    //ui->numAttempts->setText(QString::number(curr->getNumOfAttempts()));
+    //ui->maxAttempts->setText(QString::number(curr->getMaxAttempts()));
 
-    ui->goalTextBrowser->setText(QString(curr->printOut().c_str()));
+    //ui->goalTextBrowser->setText(QString(curr->printOut().c_str()));
 }
 
 
@@ -697,13 +700,16 @@ void Form::on_listStories_itemDoubleClicked(QListWidgetItem *item)
     {
         curr->evaluateOptional();
         curr->chooseVariablePeople();
+        curr->reEvaluate();
+        director->addToStoryQueue(curr);
     }
     ui->stortTextBrowser->setText(QString(curr->printOut().c_str()));
+    on_runDirectorLoop_released();
 }
 
 void Form::on_updateCurrentGoalsButton_released()
 {
-    vector<Condition*> currGoals = director->getGoals();
+    vector<Condition*> currGoals = director->getGoalQueue();
 
     ui->currentGoalsList->clear();
 
@@ -713,4 +719,30 @@ void Form::on_updateCurrentGoalsButton_released()
         ui->currentGoalsList->addItem(QString(curr.c_str()));
     }
 
+}
+
+void Form::on_updateCurrentStoriesButton_released()
+{
+    vector<Story*> currStories = director->getStoryQueue();
+    ui->currentStoriesList->clear();
+    for(int index=0; index<(int)currStories.size();index++)
+    {
+        string curr = currStories.at(index)->getName();
+        ui->currentStoriesList->addItem(QString(curr.c_str()));
+    }
+
+    vector<Story*> currWStories = director->getWorkingStories();
+    ui->currentWorkingStoriesList->clear();
+    for(int index=0; index<(int)currWStories.size();index++)
+    {
+        string curr = currWStories.at(index)->getName();
+        ui->currentWorkingStoriesList->addItem(QString(curr.c_str()));
+    }
+}
+
+void Form::on_runDirectorLoop_released()
+{
+    director->runStoryLoop();
+    on_updateCurrentStoriesButton_released();
+    on_updateCurrentGoalsButton_released();
 }

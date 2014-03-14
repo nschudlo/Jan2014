@@ -71,6 +71,10 @@ private slots:
 
     void on_updateCurrentGoalsButton_released();
 
+    void on_updateCurrentStoriesButton_released();
+
+    void on_runDirectorLoop_released();
+
 private:
     Ui::Form *ui;
     Controller *controller;

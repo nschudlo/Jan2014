@@ -41,6 +41,7 @@
 <Item>gun
 <Relationship>paul 11 2
 <Location>TownSquare 
+<MainCharacter>true
 
 <Person>paul 0
 <StoryValues>9 0 0 0

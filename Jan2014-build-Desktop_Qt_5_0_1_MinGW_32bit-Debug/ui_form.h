@@ -134,6 +134,13 @@ public:
     QGroupBox *groupBox_4;
     QListWidget *currentGoalsList;
     QPushButton *updateCurrentGoalsButton;
+    QGroupBox *groupBox_5;
+    QListWidget *currentStoriesList;
+    QPushButton *updateCurrentStoriesButton;
+    QListWidget *currentWorkingStoriesList;
+    QLabel *label_21;
+    QLabel *label_22;
+    QPushButton *runDirectorLoop;
 
     void setupUi(QWidget *Form)
     {
@@ -498,11 +505,32 @@ public:
         updateCurrentGoalsButton = new QPushButton(groupBox_4);
         updateCurrentGoalsButton->setObjectName(QStringLiteral("updateCurrentGoalsButton"));
         updateCurrentGoalsButton->setGeometry(QRect(440, 30, 75, 23));
+        groupBox_5 = new QGroupBox(tab_3);
+        groupBox_5->setObjectName(QStringLiteral("groupBox_5"));
+        groupBox_5->setGeometry(QRect(30, 300, 581, 241));
+        currentStoriesList = new QListWidget(groupBox_5);
+        currentStoriesList->setObjectName(QStringLiteral("currentStoriesList"));
+        currentStoriesList->setGeometry(QRect(20, 40, 151, 161));
+        updateCurrentStoriesButton = new QPushButton(groupBox_5);
+        updateCurrentStoriesButton->setObjectName(QStringLiteral("updateCurrentStoriesButton"));
+        updateCurrentStoriesButton->setGeometry(QRect(50, 210, 75, 23));
+        currentWorkingStoriesList = new QListWidget(groupBox_5);
+        currentWorkingStoriesList->setObjectName(QStringLiteral("currentWorkingStoriesList"));
+        currentWorkingStoriesList->setGeometry(QRect(210, 40, 151, 161));
+        label_21 = new QLabel(groupBox_5);
+        label_21->setObjectName(QStringLiteral("label_21"));
+        label_21->setGeometry(QRect(60, 20, 71, 16));
+        label_22 = new QLabel(groupBox_5);
+        label_22->setObjectName(QStringLiteral("label_22"));
+        label_22->setGeometry(QRect(240, 20, 81, 16));
+        runDirectorLoop = new QPushButton(tab_3);
+        runDirectorLoop->setObjectName(QStringLiteral("runDirectorLoop"));
+        runDirectorLoop->setGeometry(QRect(40, 580, 101, 23));
         mainTabWidget->addTab(tab_3, QString());
 
         retranslateUi(Form);
 
-        mainTabWidget->setCurrentIndex(2);
+        mainTabWidget->setCurrentIndex(1);
         infoTabWidget->setCurrentIndex(0);
 
 
@@ -571,8 +599,13 @@ public:
         loadStories->setText(QApplication::translate("Form", "Load Stories", 0));
         label_20->setText(QApplication::translate("Form", "These buttons reset the current stories and goals!", 0));
         mainTabWidget->setTabText(mainTabWidget->indexOf(tab_2), QApplication::translate("Form", "Stories and Goals", 0));
-        groupBox_4->setTitle(QApplication::translate("Form", "Current Goals", 0));
+        groupBox_4->setTitle(QApplication::translate("Form", "Current Goals Queue", 0));
         updateCurrentGoalsButton->setText(QApplication::translate("Form", "Update", 0));
+        groupBox_5->setTitle(QApplication::translate("Form", "Current Stories Queue", 0));
+        updateCurrentStoriesButton->setText(QApplication::translate("Form", "Update", 0));
+        label_21->setText(QApplication::translate("Form", "Story Queue", 0));
+        label_22->setText(QApplication::translate("Form", "Working Queue", 0));
+        runDirectorLoop->setText(QApplication::translate("Form", "Run Director Loop", 0));
         mainTabWidget->setTabText(mainTabWidget->indexOf(tab_3), QApplication::translate("Form", "Director", 0));
     } // retranslateUi
 

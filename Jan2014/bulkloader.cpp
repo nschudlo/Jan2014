@@ -260,6 +260,12 @@ void BulkLoader::testString(string line, int cycle, string &currentPerson, strin
                 Person* currPerson = getPerson(currentPerson);
                 currPerson->setStoryRole(atoi(info[0].c_str()));
             }
+            else if(type.compare("MainCharacter")==0)
+            {
+                Person* currPerson = getPerson(currentPerson);
+                currPerson->setIsMainChar(true);
+                currPerson->recheckStoryRank();
+            }
 
             break;
         }
