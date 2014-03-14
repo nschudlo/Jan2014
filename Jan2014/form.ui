@@ -23,7 +23,7 @@
     </rect>
    </property>
    <property name="currentIndex">
-    <number>1</number>
+    <number>2</number>
    </property>
    <widget class="QWidget" name="tab">
     <attribute name="title">
@@ -915,7 +915,7 @@
    </widget>
    <widget class="QWidget" name="tab_2">
     <attribute name="title">
-     <string>Tab 2</string>
+     <string>Stories and Goals</string>
     </attribute>
     <widget class="QGroupBox" name="groupBox_2">
      <property name="geometry">
@@ -1017,7 +1017,6 @@
      <zorder>numAttempts</zorder>
      <zorder>listGoals</zorder>
      <zorder>label_18</zorder>
-     <zorder>label_18</zorder>
      <zorder>maxAttempts</zorder>
      <zorder>label_19</zorder>
      <zorder>goalTextBrowser</zorder>
@@ -1110,6 +1109,47 @@
      <property name="wordWrap">
       <bool>true</bool>
      </property>
+    </widget>
+   </widget>
+   <widget class="QWidget" name="tab_3">
+    <attribute name="title">
+     <string>Director</string>
+    </attribute>
+    <widget class="QGroupBox" name="groupBox_4">
+     <property name="geometry">
+      <rect>
+       <x>30</x>
+       <y>30</y>
+       <width>581</width>
+       <height>241</height>
+      </rect>
+     </property>
+     <property name="title">
+      <string>Current Goals</string>
+     </property>
+     <widget class="QListWidget" name="currentGoalsList">
+      <property name="geometry">
+       <rect>
+        <x>20</x>
+        <y>30</y>
+        <width>391</width>
+        <height>191</height>
+       </rect>
+      </property>
+     </widget>
+     <widget class="QPushButton" name="updateCurrentGoalsButton">
+      <property name="geometry">
+       <rect>
+        <x>440</x>
+        <y>30</y>
+        <width>75</width>
+        <height>23</height>
+       </rect>
+      </property>
+      <property name="text">
+       <string>Update</string>
+      </property>
+     </widget>
     </widget>
    </widget>
   </widget>

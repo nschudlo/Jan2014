@@ -47,6 +47,7 @@
 <StoryRole>4
 <Item>gun
 <Relationship>nick 11 2
+<Location>bank
 
 <Person>steve 0
 <StoryRole>7
@@ -61,6 +62,12 @@
 <item>gun
 <Relationship>steve 7 2
 <Location>JimmysHouse
+
+<Person>carlo 0
+<StoryRole>5
+<Item>drugs
+<Item>knife
+<Location>streetcorner
 
 
 

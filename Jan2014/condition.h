@@ -18,6 +18,8 @@ public:
     bool isB();
     bool isC();
 
+    int getVariablePosition();
+
     std::string getType();
     std::string getVal1();
     std::string getVal2();

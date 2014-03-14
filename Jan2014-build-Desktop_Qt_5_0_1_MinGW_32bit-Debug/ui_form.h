@@ -130,6 +130,10 @@ public:
     QPushButton *loadGoals;
     QPushButton *loadStories;
     QLabel *label_20;
+    QWidget *tab_3;
+    QGroupBox *groupBox_4;
+    QListWidget *currentGoalsList;
+    QPushButton *updateCurrentGoalsButton;
 
     void setupUi(QWidget *Form)
     {
@@ -456,7 +460,6 @@ public:
         numAttempts->raise();
         listGoals->raise();
         label_18->raise();
-        label_18->raise();
         maxAttempts->raise();
         label_19->raise();
         goalTextBrowser->raise();
@@ -484,10 +487,22 @@ public:
         label_20->setGeometry(QRect(60, 600, 131, 31));
         label_20->setWordWrap(true);
         mainTabWidget->addTab(tab_2, QString());
+        tab_3 = new QWidget();
+        tab_3->setObjectName(QStringLiteral("tab_3"));
+        groupBox_4 = new QGroupBox(tab_3);
+        groupBox_4->setObjectName(QStringLiteral("groupBox_4"));
+        groupBox_4->setGeometry(QRect(30, 30, 581, 241));
+        currentGoalsList = new QListWidget(groupBox_4);
+        currentGoalsList->setObjectName(QStringLiteral("currentGoalsList"));
+        currentGoalsList->setGeometry(QRect(20, 30, 391, 191));
+        updateCurrentGoalsButton = new QPushButton(groupBox_4);
+        updateCurrentGoalsButton->setObjectName(QStringLiteral("updateCurrentGoalsButton"));
+        updateCurrentGoalsButton->setGeometry(QRect(440, 30, 75, 23));
+        mainTabWidget->addTab(tab_3, QString());
 
         retranslateUi(Form);
 
-        mainTabWidget->setCurrentIndex(1);
+        mainTabWidget->setCurrentIndex(2);
         infoTabWidget->setCurrentIndex(0);
 
 
@@ -555,7 +570,10 @@ public:
         loadGoals->setText(QApplication::translate("Form", "Load Goals", 0));
         loadStories->setText(QApplication::translate("Form", "Load Stories", 0));
         label_20->setText(QApplication::translate("Form", "These buttons reset the current stories and goals!", 0));
-        mainTabWidget->setTabText(mainTabWidget->indexOf(tab_2), QApplication::translate("Form", "Tab 2", 0));
+        mainTabWidget->setTabText(mainTabWidget->indexOf(tab_2), QApplication::translate("Form", "Stories and Goals", 0));
+        groupBox_4->setTitle(QApplication::translate("Form", "Current Goals", 0));
+        updateCurrentGoalsButton->setText(QApplication::translate("Form", "Update", 0));
+        mainTabWidget->setTabText(mainTabWidget->indexOf(tab_3), QApplication::translate("Form", "Director", 0));
     } // retranslateUi
 
 };

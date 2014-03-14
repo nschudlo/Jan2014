@@ -48,6 +48,16 @@ bool Condition::hasPerson(string name){
     return false;
 }
 
+int Condition::getVariablePosition()
+{
+    if(originalVal1=="a"||originalVal1=="b"||originalVal1=="c")
+        return 1;
+    else if(originalVal2=="a"||originalVal2=="b"||originalVal2=="c")
+        return 2;
+    else
+        return 0;
+}
+
 void Condition::setVariablePerson(string name){
     if(originalVal1=="a"||originalVal1=="b"||originalVal1=="c")
         val1 = name;

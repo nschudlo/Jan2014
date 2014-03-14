@@ -63,6 +63,8 @@ public:
     bool isBanker(std::string person);
     bool isDockWorker(std::string person);
 
+    bool isEmpty(std::string location);
+
 
 private:
     WorldInterpreter();

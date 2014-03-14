@@ -37,7 +37,7 @@ Form::~Form()
 
 void Form::on_buttonTest_released()
 {
-   //This is a test button
+    //This is a test button
 }
 
 
@@ -638,7 +638,7 @@ void Form::on_loadGoals_released()
 
 void Form::on_refreshGoals_released()
 {
-    ui->listGoals->clear();
+    /* ui->listGoals->clear();
     vector<StoryGoal*> goals = director->getGoals();
     for(int x=0; x<(int)goals.size(); x++)
     {
@@ -655,7 +655,7 @@ void Form::on_refreshGoals_released()
     ui->maxAttempts->setText(QString("0"));
 
     ui->goalTextBrowser->clear();
-
+*/
 }
 
 void Form::on_loadStories_released()
@@ -693,7 +693,24 @@ void Form::on_listStories_itemDoubleClicked(QListWidgetItem *item)
 {
     Story* curr = director->getStory(item->text().toStdString());
 
-    curr->evaluatePre();
-
+    if(curr->evaluatePre())
+    {
+        curr->evaluateOptional();
+        curr->chooseVariablePeople();
+    }
     ui->stortTextBrowser->setText(QString(curr->printOut().c_str()));
+}
+
+void Form::on_updateCurrentGoalsButton_released()
+{
+    vector<Condition*> currGoals = director->getGoals();
+
+    ui->currentGoalsList->clear();
+
+    for(int index=0; index<(int)currGoals.size();index++)
+    {
+        string curr = currGoals.at(index)->printOut();
+        ui->currentGoalsList->addItem(QString(curr.c_str()));
+    }
+
 }

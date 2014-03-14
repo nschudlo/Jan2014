@@ -16,9 +16,11 @@ Story::Story()
     controller = Controller::Instance();
     interpreter = WorldInterpreter::Instance();
     evaluator = Evaluator::Instance();
+    director = Director::Instance();
 
     name = "InterrogateGangMember";
     description = "No description";
+    failedOptConditions=0;
 
     // preStoryValues.push_back("isMainCharacter nick");
 
@@ -42,84 +44,11 @@ string Story::getDescription(){
 void Story::setDescription(string _description){
     description = _description;}
 
-void Story::addPreCondition(string precondition){
-    Condition* tempCond = new Condition(precondition);
-    conds.push_back(tempCond);
+void Story::setUsed(bool _used){
+    used = _used;}
 
-    /*
-    if(tempCond->isA())
-        aConds.push_back(tempCond);
-    else if(tempCond->isB())
-        bConds.push_back(tempCond);
-    else if(tempCond->isC())
-        cConds.push_back(tempCond);
-    else
-        setConds.push_back(tempCond);
-        */
-}
-
-void Story::addMPreCondition(string precondition)
-{
-    Condition* tempCond = new Condition(precondition);
-    condsM.push_back(tempCond);
-
-    /* if(tempCond->isA())
-        aCondsM.push_back(tempCond);
-    if(tempCond->isB())
-        bCondsM.push_back(tempCond);
-    if(tempCond->isC())
-        cCondsM.push_back(tempCond);
-    else
-        setCondsM.pushBack(tempCond);
-        */
-}
-
-void Story::divideConditions(int typeFlag)
-{
-    //Clear all current lists and re-divide the conditions. This is done in the case
-    //that any condition has been changed from a variable condition to a set condition
-    //Ex-if paul was chosen to represent a and missing conditions of paul being a were
-    //sent to the goal queue, that condition would no longer be in the aConds list but
-    //rather the setConds list for evaluation.
-
-    aCondsM.clear();
-    bCondsM.clear();
-    cCondsM.clear();
-    setCondsM.clear();
-    aConds.clear();
-    bConds.clear();
-    cConds.clear();
-    setConds.clear();
-
-    // if(typeFlag==0)//Mandatory
-    // {
-    for(int index=0; index<(int)condsM.size();index++)
-    {
-        if(condsM.at(index)->isA())
-            aCondsM.push_back(condsM.at(index));
-        else if(condsM.at(index)->isB())
-            bCondsM.push_back(condsM.at(index));
-        else if(condsM.at(index)->isC())
-            cCondsM.push_back(condsM.at(index));
-        else
-            setCondsM.push_back(condsM.at(index));
-    }
-    // }
-    // else//Optional
-    // {
-    for(int index=0; index<(int)conds.size();index++)
-    {
-        if(conds.at(index)->isA())
-            aConds.push_back(conds.at(index));
-        else if(conds.at(index)->isB())
-            bConds.push_back(conds.at(index));
-        else if(conds.at(index)->isC())
-            cConds.push_back(conds.at(index));
-        else
-            setConds.push_back(conds.at(index));
-    }
-    //  }
-}
+bool Story::beenUsed(){
+    return used;}
 
 void Story::addChanges(string change){
     changes.push_back(new Condition(change));}
@@ -142,38 +71,125 @@ std::vector<Person*> Story::getBOptional(){
 std::vector<Person*> Story::getCOptional(){
     return cOpt;}
 
+vector<Condition*> Story::getChanges(){
+    return changes;}
+
+void Story::addPreCondition(string precondition){
+    Condition* tempCond = new Condition(precondition);
+    conds.push_back(tempCond);
+    failedOptConditions++;
+}
+
+void Story::addMPreCondition(string precondition)
+{
+    Condition* tempCond = new Condition(precondition);
+    condsM.push_back(tempCond);
+}
+
+void Story::addTrigger(string trigger)
+{
+    Condition* tempCond = new Condition(trigger);
+    triggers.push_back(tempCond);
+}
+
+void Story::divideConditions()
+{
+    //Clear all current lists and re-divide the conditions. This is done in the case
+    //that any condition has been changed from a variable condition to a set condition
+    //Ex-if paul was chosen to represent a and missing conditions of paul being a were
+    //sent to the goal queue, that condition would no longer be in the aConds list but
+    //rather the setConds list for evaluation.
+
+    aCondsM.clear();
+    bCondsM.clear();
+    cCondsM.clear();
+    setCondsM.clear();
+    aConds.clear();
+    bConds.clear();
+    cConds.clear();
+    setConds.clear();
+
+    for(int index=0; index<(int)condsM.size();index++)
+    {
+        if(condsM.at(index)->isA())
+            aCondsM.push_back(condsM.at(index));
+        else if(condsM.at(index)->isB())
+            bCondsM.push_back(condsM.at(index));
+        else if(condsM.at(index)->isC())
+            cCondsM.push_back(condsM.at(index));
+        else
+            setCondsM.push_back(condsM.at(index));
+    }
+
+    for(int index=0; index<(int)conds.size();index++)
+    {
+        if(conds.at(index)->isA())
+            aConds.push_back(conds.at(index));
+        else if(conds.at(index)->isB())
+            bConds.push_back(conds.at(index));
+        else if(conds.at(index)->isC())
+            cConds.push_back(conds.at(index));
+        else
+            setConds.push_back(conds.at(index));
+    }
+}
+
+
+
+
 void Story::evaluateMandatory()
 {
     evaluator->checkMandatory(&aCondsM,&aMand);
     evaluator->checkMandatory(&bCondsM,&bMand);
     evaluator->checkMandatory(&cCondsM,&cMand);
 
-    //Need to evaluate the setCondsM;
+    //Go through each mandatory set condition and evaluate fulfillment
+    //If fullfilled add to setCountM
+    setCountM=0;
+    for(int index=0; index<(int)setCondsM.size();index++)
+        if(evaluator->checkConditionSet(setCondsM.at(index)))
+            setCountM++;
 }
 
 int Story::evaluateOptional()
 {
-    int count=0;
-    count += evaluator->checkOptional(&aConds, &aMand, &aOpt);
-    count += evaluator->checkOptional(&bConds, &bMand, &bOpt);
-    count += evaluator->checkOptional(&cConds, &cMand, &cOpt);
+    aCount = evaluator->checkOptional(&aConds, &aMand, &aOpt);
+    bCount = evaluator->checkOptional(&bConds, &bMand, &bOpt);
+    cCount = evaluator->checkOptional(&cConds, &cMand, &cOpt);
 
-    //Need to evaluate the setConds
+    //Go through each optional set condition and evaluate fulfillment.
+    //If fullfilled add to setCount
+    setCount=0;
     for(int index=0; index<(int)setConds.size();index++)
         if(evaluator->checkConditionSet(setConds.at(index)))
-            count++;
+            setCount++;
 
-    return count;
+    //Returns the number of conditions that will need goals
+    //created in order for every condition to be met
+    failedOptConditions = conds.size()-aCount+bCount+cCount+setCount;
+    return failedOptConditions;
 }
 
+/*
+ *  Divides the conditions into variable groupings and evaluates the mandatory
+ *  conditions. The Person objects which fulfill the a, b, and c mandatory
+ *  conditions are put into the respective vectors. This function will return
+ *  false if any of the required conditions can not be fulfilled. Otherwise return
+ *  true, indicating the story fulfills all mandatory conditions.
+ */
 bool Story::evaluatePre()
 {
-    divideConditions(1);
+    //Seperate the conds and condsM into a, b, c, and set vectors
+    divideConditions();
 
+    //Clear the vectors of People who fit the
+    //mandatory a, b, and c conditions
     aMand.clear();
     bMand.clear();
     cMand.clear();
 
+    //Clear the vectors of People who fit the
+    //optional a, b, and c conditions
     aOpt.clear();
     bOpt.clear();
     cOpt.clear();
@@ -184,13 +200,45 @@ bool Story::evaluatePre()
     //chosenB.clear();
     //chosenC.clear();
 
-
+    //Evaluate the mandatory conditions
     evaluateMandatory();
-    int trueOptConditions = evaluateOptional();
+
+    //Check if mandatory requirements are met with current people
+    //If this returns true then this story is possible to achieve
+    //with goals, if not already possible
+    if(aCondsM.size()>0)
+        if(aMand.size()==0)
+            return false;
+
+    if(bCondsM.size()>0)
+        if(bMand.size()==0)
+            return false;
+
+    if(cCondsM.size()>0)
+        if(cMand.size()==0)
+            return false;
+
+    if(setCondsM.size()>0)
+        if(setCountM==0)
+            return false;
+
+    return true;
+
+}
+
+void Story::chooseVariablePeople()
+{
+    //Evaluate the optional conditions. Returns the number of
+    //conditions the variables do not fulfill
+    //failedOptConditions = evaluateOptional();
 
 
-
-
+    //If there are any people in the optional people vectors then
+    //they at least passed the mandatory screening. A random is chosen
+    //from the list as the representative of that variable. The random
+    //process could be improved by selecting based on which conditions
+    //failed. Also, need to make sure the a, b, and c people are not the
+    //same
     if(((int)aOpt.size())>0)
     {
         chosenA = aOpt.at(rand()%(int)aOpt.size())->getName();
@@ -204,50 +252,193 @@ bool Story::evaluatePre()
         chosenC = cOpt.at(rand()%(int)aOpt.size())->getName();
     }
 
-    //If this is true, every precondition is met
-    if(trueOptConditions == (int)aConds.size()+(int)bConds.size()+(int)cConds.size()+(int)setConds.size())
+
+    //Attempt to add the goal to the director goal queue
+    //The director is responsible for not double adding the goal
+
+    //Loop through all of a conditions to find any the chosenA doesnt have
+    for(int index=0;index<(int)aConds.size();index++)
     {
-        preEvaluation=true;
-        //returning true tells the director everything is good
-        return true;
+        //Set Variable person to chosenA for all a conditions
+        aConds.at(index)->setVariablePerson(chosenA);
+        if(!aConds.at(index)->hasPerson(chosenA))
+            director->addStoryGoal(aConds.at(index));
     }
-    else
+
+    for(int index=0; index<(int)bConds.size();index++)
     {
-        preEvaluation=false;
+        //Set Variable person to chosenB for all b conditions
+        bConds.at(index)->setVariablePerson(chosenB);
+        if(!bConds.at(index)->hasPerson(chosenB))
+            director->addStoryGoal(bConds.at(index));
+    }
 
-        //Attempt to add the goal to the director goal queue
-        //The director is responsible for not double adding the goal
+    for(int index=0; index<(int)cConds.size();index++)
+    {
+        //Set Variable person to chosenC for all c conditions
+        cConds.at(index)->setVariablePerson(chosenC);
+        if(!cConds.at(index)->hasPerson(chosenC))
+            director->addStoryGoal(cConds.at(index));
+    }
 
-        //Loop through all of a conditions to find any the chosenA doesnt have
-        for(int index=0;index<(int)aConds.size();index++)
+    for(int index=0; index<(int)triggers.size();index++)
+    {
+        if(triggers.at(index)->isA())
+            triggers.at(index)->setVariablePerson(chosenA);
+        else if(triggers.at(index)->isB())
+            triggers.at(index)->setVariablePerson(chosenB);
+        else if(triggers.at(index)->isC())
+            triggers.at(index)->setVariablePerson(chosenC);
+    }
+
+}
+
+void Story::checkStoryGoals()
+{
+    failedOptConditions=0;
+    //Loop through all optional conditions
+    for(int index=0; index<(int)conds.size();index++)
+    {
+        //If the condition comes back unfulfilled, add it to the
+        //goals queue
+        if(evaluator->checkConditionSet(conds.at(index)))
         {
-            //Set Variable person to chosenA for all a conditions
-            aConds.at(index)->setVariablePerson(chosenA);
-            if(!aConds.at(index)->hasPerson(chosenA))
-                //Add to director
-                true;
+            director->addStoryGoal(conds.at(index));
+            failedOptConditions++;
         }
+    }
+}
 
-        for(int index=0; index<(int)bConds.size();index++)
-        {
-            //Set Variable person to chosenB for all b conditions
-            bConds.at(index)->setVariablePerson(chosenB);
-            if(!bConds.at(index)->hasPerson(chosenB))
-                //Add to director
-                true;
-        }
+bool Story::reEvaluate()
+{
+    //Redivide the conditions
+    //divideConditions();
 
-        for(int index=0; index<(int)cConds.size();index++)
-        {
-            //Set Variable person to chosenC for all c conditions
-            cConds.at(index)->setVariablePerson(chosenC);
-            if(!cConds.at(index)->hasPerson(chosenC))
-                //Add to director
-                true;
-        }
+    //Evaluate all the preconditions. Modified failedOptConditions
+    //with new count of number of unfulfilled conditions
+    //evaluateOptional()
+    checkStoryGoals();
 
+    //If this is true, every precondition is met
+    preEvaluation = failedOptConditions==0;
+    //if(failedOptConditions == 0)//(int)aConds.size()+(int)bConds.size()+(int)cConds.size()+(int)setConds.size())
+    //    preEvaluation=true;
+    //else
+    //    preEvaluation=false;
+    return preEvaluation;
+}
+
+/*
+ *  Checks if any of the triggers is true
+ */
+bool Story::checkTriggers()
+{
+    for(int index=0; index<(int)triggers.size();index++)
+    {
+        if(evaluator->checkConditionSet(triggers.at(index)))
+            return true;
     }
     return false;
+}
+
+/*
+ *  Function takes a goal condition and sets the variable people from
+ *  that goal. It then checks if the mand functions would work. If not
+ *  the variables are reset and this story cannot be used.
+ */
+bool Story::setGoal(Condition *goalCondition)
+{
+    //determine which variable is to be set
+    int pos = goalCondition->getVariablePosition();
+
+    //If no variables then return true
+    if(pos==0)
+        return true;
+
+
+    //search the changes for the matching one
+    for(int index=0;index<(int)changes.size();index++)
+    {
+        if(compareConditions(goalCondition,changes.at(index)))
+        {
+            if(changes.at(index)->isA())
+            {
+                if(pos==1)
+                    this->chosenA=goalCondition->getVal1();
+                else
+                    this->chosenA=goalCondition->getVal2();
+
+            }
+            else if(changes.at(index)->isB())
+            {
+                if(pos==1)
+                    this->chosenB=goalCondition->getVal1();
+                else
+                    this->chosenB=goalCondition->getVal2();
+            }
+            else if(changes.at(index)->isC())
+            {
+                if(pos==1)
+                    this->chosenC=goalCondition->getVal1();
+                else
+                    this->chosenC=goalCondition->getVal2();
+            }
+        }
+    }
+
+    //After the chosen variable is selected, check if mandatory
+    //conditions can be met with this new variable. If not, reset
+    //and resturn false
+    if(!evaluatePre())
+    {
+        chosenA.clear();
+        chosenB.clear();
+        chosenC.clear();
+        return false;
+    }
+    return true;
+
+}
+
+/*
+ *  Compare two conditions for the same goal. Goals are considered the same
+ *  if all their values are the same, except for a substitution in the variable
+ *  location.
+ */
+bool Story::compareConditions(Condition *condition1, Condition *condition2)
+{
+    if(condition1->getType() != condition2->getType())
+        return false;
+    if(condition1->getEvaluationBool() != condition2->getEvaluationBool())
+        return false;
+
+    int variablePosition1 = condition1->getVariablePosition();
+    int variablePosition2 = condition2->getVariablePosition();
+
+    if(variablePosition1!=variablePosition2)
+        return false;
+
+    //If they both share val1 as their variable position, dont compare val1
+    if(variablePosition1==1)
+        if(condition1->getVal2()!=condition2->getVal2())
+            return false;
+
+    //If they both share val2 as their variable position, dont compare val2
+    if(variablePosition1==2)
+        if(condition1->getVal1()!=condition2->getVal1())
+            return false;
+
+    //If they both don't have a variable, compare both variables
+    if(variablePosition1==0)
+    {
+        if(condition1->getVal1()!=condition2->getVal1())
+            return false;
+        if(condition1->getVal2()!=condition2->getVal2())
+            return false;
+    }
+
+    //If they are the same condition, except a possible variable, return true
+    return true;
 }
 
 string Story::printOut()
@@ -261,6 +452,9 @@ string Story::printOut()
 
     for(int index=0; index<(int)conds.size();index++)
         printOut<<"    Preconditions: "<<conds.at(index)->printOut()<<endl;
+
+    for(int index=0; index<(int)triggers.size();index++)
+        printOut<<"    Triggers: "<<triggers.at(index)->printOut()<<endl;
 
     printOut<<endl;
 
@@ -321,6 +515,7 @@ string Story::printOut()
     }
     else
     {
+        printOut<<"Number of unfulfilled conditions: "<<failedOptConditions<<endl;
         printOut<<description;
     }
     printOut<<endl;

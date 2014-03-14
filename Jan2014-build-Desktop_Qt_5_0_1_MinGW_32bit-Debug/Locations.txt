@@ -16,14 +16,16 @@
 	<GoTo><Both>Jail
 <Location>Jail
 	<GoTo><Both>JailCell
-<Location>Dock Street
+<Location>StreetCorner
 	<GoTo><Both>MainStreet
+	<GoTo>DockStreet
+<Location>DockStreet
 	<GoTo>Docks
+	<GoTo>Canal Street
 <Location>Docks
 	<GoTo><Both>BoatA
 	<GoTo><Both>BoatB
 	<GoTo><Both>BoatC
-	<GoTo>Canal Street
 <Location>Canal Street
 	<GoTo><Both>StevesHouse
 	<GoTo><Both>JimmysHouse

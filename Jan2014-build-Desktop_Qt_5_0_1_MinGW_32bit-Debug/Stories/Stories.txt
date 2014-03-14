@@ -1,26 +1,49 @@
-#<Story>
-#<Name>buyIceCream
-#<Precondition>true personIsAt a icecreambar
-#<Precondition>false personMoneyLessThan a 100
-#<Description>[a] is at the ice cream bar. They have enough money for ice cream so they buy an ice cream.
-#<ValueEnd>personIsHolding a icecream
-#<EndStory>
-
-#<Story>
-#<Name>arrestPerson
-#<Precondition>true isPolice a
-#<Precondition>false isPolice b
-#<Description>[a] arrests [b] and takes them to jail.
-#<ValueEnd>true personIsAt b jailcell
-#<EndStory>
+<Story>
+<Name>crashDrugBust
+<MPrecondition>true isMainCharacter a
+<MPrecondition>true personIsMale a
+<Precondition>true personIsHolding a information
+<Trigger>true personIsHolding a information
+<Description> [a] has acquired the needed information! Now he knows where the drug shipment will be. 
+<EndStory>
 
 <Story>
-<Name>unarmedBankRobbery
+<Name>ArrestDrugDealer
 <MPrecondition>true isPolice a
-<MPrecondition>true personIsMale a
-<Precondition>true personIsAt a bank
-<Precondition>false personIsHolding a gun
-<Precondition>true isMainCharacter nick
-<Description>[a] the police officer is witness to a bank robbery, but does not have his gun!
-<ValueEnd>true personHealthLessThan a 100
+<MPrecondition>true isMainCharacter a
+<MPrecondition>true isMobster b
+<Trigger>true personIsAt a streetcorner
+<Description>[a] arrests [b] for selling drugs on the street corner and takes them to jail.
+<ValueEnd>true personIsAt b jailcell
 <EndStory>
+
+<Story>
+<Name>FailedBankRobbery
+<MPrecondition>true isPolice a
+<MPrecondition>true isMainCharacter a
+<MPrecondition>true isMobster b
+<Precondition>true personIsHolding a gun
+<Trigger>true personIsAt a bank
+<Description>[a] the police officer is witness to a bank robbery, but the criminal, [b],  doesn't know they took a cop hostage!
+<ValueEnd>true personIsAt b jailcell
+<EndStory>
+
+<Story>
+<Name>GetInfoInterrogation
+<MPrecondition>true isMobster a
+<MPrecondition>true isPolice b
+<Precondition>true personIsAt a jailcell
+<Trigger>true personIsAt b jail
+<Description> [a] is a mobster and is in jail. [b] needs information from [a] and will get to interrogate him for that info.
+<ValueEnd>true personIsHolding b information
+<EndStory>
+
+<Story>
+<Name>GetInfoMobHeadquarters
+<Precondition>true isEmpty mobheadquarters
+<Trigger>true personIsAt a mobheadquarters
+<Description>[a] is at the mob bar headquarters and it is empty at the moment. [a] is going to break in to look for information.
+<ValueEnd>true personIsHolding a information
+<EndStory>
+
+

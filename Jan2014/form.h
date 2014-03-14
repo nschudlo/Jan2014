@@ -69,6 +69,8 @@ private slots:
 
     void on_listStories_itemDoubleClicked(QListWidgetItem *item);
 
+    void on_updateCurrentGoalsButton_released();
+
 private:
     Ui::Form *ui;
     Controller *controller;

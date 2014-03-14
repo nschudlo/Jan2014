@@ -7,6 +7,8 @@
 #include "storygoal.h"
 #include "story.h"
 
+class Story;
+
 class Director
 {
 public:
@@ -17,11 +19,17 @@ public:
     void loadGoals(std::string filename);
     void loadStories(std::string filename);
 
-    std::vector<StoryGoal*> getGoals();
+    std::vector<Condition*> getGoals();
     std::vector<Story*> getStories();
 
     StoryGoal* getGoal(std::string name);
     Story* getStory(std::string name);
+
+    void addStoryGoal(Condition * condition);
+
+    bool compareConditions(Condition* condition1, Condition* condition2);
+    bool compareConditionsSet(Condition* condition1, Condition* condition2);
+    void findStory(Condition* condition);
 
 private:
     Director(){}
@@ -31,11 +39,17 @@ private:
     void evaluateStoryLine(std::string line);
     std::string vectorToString(std::vector<std::string> vec,int start, int end);
 
-    StoryGoal *currentGoal;
+    //StoryGoal *currentGoal;
     Story *currentStory;
 
-    std::vector<StoryGoal*> storyGoals;
+    std::vector<Story*> possibleStories;
+    std::vector<Story*> workingStories; //stories with all pre
+
+   // std::vector<StoryGoal*> storyGoals;
     std::vector<Story*> stories;
+
+    std::vector<Story*> storyQueue; //List of currently active
+    std::vector<Condition*> goalQueue;
 
 };
 

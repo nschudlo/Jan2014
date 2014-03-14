@@ -560,3 +560,12 @@ bool WorldInterpreter::isDockWorker(std::string person)
         return false;
     return per->getStoryRole()==DockWorker;
 }
+
+bool WorldInterpreter::isEmpty(string location)
+{
+    Location * loc = controller->getLocation(location);
+    if(loc==0)
+        return false;
+
+    return loc->getCurrentPeople().size()==0;
+}
