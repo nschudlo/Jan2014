@@ -31,71 +31,41 @@ Director* Director::Instance()
 Director::Director()
 {
     evaluator = Evaluator::Instance();
+    currentStory = NULL;
+    activeStory = NULL;
 }
 
 void Director::runStoryLoop()
 {
-    /*
-    for(all current goals (X))
-    {
-        if((X) is author goal)
-        {
-            if((X) is true)
-                trigger authorial event
-            else
-                if(no other goals before authorial)
-                {
-                    find all stories with result = authorial goal
-                    pick one (Y)
-                    for(all of (Y)'s pre that are false (YPRE))
-                    {
-                        create goals to make (YPRE) true
-                    }
-                }
-        }
-        else if((X) is not author goal) //making it a story goal
-        {
-            if((X)'s pre are all true)
-                trigger story event
-            else
-            {
-                for(all of (X)'s pre that are false (XPRE))
-                {
-                    if((XPRE) has goal already)
-                        add 1 to it
-                    else
-                        add (XPRE) to the goals
-                }
-
-            }
-        }
-    }
-    */
 
     changeMade=true;
+
 
     while(changeMade)
     {
         changeMade=false;
         //Set current story to null to start fresh. This value will be set
         //if any stories have their triggers active.
-        currentStory = NULL;
 
-        workingStories.clear();
+        //activeStory = NULL; <--THIS NEEDS TO HAPPEN SOMEWHERE
+        triggerStories.clear();
         //for all stories in the story queue check if their triggers are active
         for(int sIndex=0; sIndex<(int)storyQueue.size();sIndex++)
         {
             Story* currStory = storyQueue.at(sIndex);
             if(currStory->reEvaluate())//checks optional story conditions and adds goals
             {
-                workingStories.push_back(currStory);//adds any stories with all conditions fulfilled
+                triggerStories.push_back(currStory);//adds any stories with all conditions fulfilled
                 if(currStory->checkTriggers())
                 {
                     //Only run one story at a time
-                    if(currentStory==NULL)
+                    if(activeStory==NULL)
                     {
-                        currentStory = currStory;
-                        vecRemove(storyQueue,sIndex--);
+                        activeStory = currStory;
+                        //Removed this line because when stories became the current story they were
+                        //no longer seen as persuing the goal and therefore another story was selected
+                        //to persue the goal. Not sure if removing will break something...
+                        //vecRemove(storyQueue,sIndex--);
                     }
                 }
             }
@@ -160,7 +130,7 @@ void Director::runStoryLoop()
                         goalMatch->evaluateOptional();
                         goalMatch->chooseVariablePeople();
                         if(goalMatch->reEvaluate())
-                            workingStories.push_back(goalMatch);
+                            triggerStories.push_back(goalMatch);
                         addToStoryQueue(goalMatch);
                         test=false;
                     }
@@ -196,6 +166,28 @@ void Director::addToStoryQueue(Story* story)
     storyQueue.push_back(story);
     story->setUsed(true);
     changeMade=true;
+}
+
+void Director::completeActiveStory()
+{
+    if(activeStory != NULL)
+    {
+        //Clear the story from the trigger list
+        for(int index=0; index<(int)triggerStories.size();index++)
+        {
+            if(triggerStories.at(index)->getName() == activeStory->getName())
+                vecRemove(triggerStories,index);
+
+
+        }
+        //Clear the story from the active list
+        for(int index=0; index<(int)storyQueue.size();index++)
+        {
+            if(storyQueue.at(index)->getName() == activeStory->getName())
+                vecRemove(storyQueue,index);
+        }
+        activeStory=NULL;
+    }
 }
 
 
@@ -454,8 +446,11 @@ vector<Story*> Director::getStories(){
 vector<Story*> Director::getStoryQueue(){
     return storyQueue;}
 
-vector<Story*> Director::getWorkingStories(){
-    return workingStories;}
+vector<Story*> Director::getTriggerStories(){
+    return triggerStories;}
+
+Story* Director::getCurrentActiveStory(){
+    return activeStory;}
 /*
 StoryGoal* Director::getGoal(std::string name)
 {

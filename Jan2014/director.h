@@ -22,7 +22,8 @@ public:
     std::vector<Condition*> getGoalQueue();
     std::vector<Story*> getStories();
     std::vector<Story*> getStoryQueue();
-    std::vector<Story*> getWorkingStories();
+    std::vector<Story*> getTriggerStories();
+    Story* getCurrentActiveStory();
 
     // StoryGoal* getGoal(std::string name);
     Story* getStory(std::string name);
@@ -34,6 +35,8 @@ public:
     bool compareConditionsSet(Condition* condition1, Condition* condition2);
     void findStory(Condition* condition);
 
+    void completeActiveStory();
+
 private:
     Director();
     static Director* m_pInstance;
@@ -44,15 +47,16 @@ private:
     std::string vectorToString(std::vector<std::string> vec,int start, int end);
 
     //StoryGoal *currentGoal;
-    Story *currentStory;
+    Story *currentStory, *activeStory;
 
-    std::vector<Story*> possibleStories;
-    std::vector<Story*> workingStories; //stories with all pre
+    std::vector<Story*> possibleStories; //all stories
+    std::vector<Story*> triggerStories; //stories with all pre
+    std::vector<Story*> storyQueue; //List of currently active
 
     // std::vector<StoryGoal*> storyGoals;
     std::vector<Story*> stories;
 
-    std::vector<Story*> storyQueue; //List of currently active
+
     std::vector<Condition*> goalQueue;
 
     bool changeMade;

@@ -723,6 +723,8 @@ void Form::on_updateCurrentGoalsButton_released()
 
 void Form::on_updateCurrentStoriesButton_released()
 {
+    ui->currentStoryInfo->clear();
+
     vector<Story*> currStories = director->getStoryQueue();
     ui->currentStoriesList->clear();
     for(int index=0; index<(int)currStories.size();index++)
@@ -731,12 +733,12 @@ void Form::on_updateCurrentStoriesButton_released()
         ui->currentStoriesList->addItem(QString(curr.c_str()));
     }
 
-    vector<Story*> currWStories = director->getWorkingStories();
-    ui->currentWorkingStoriesList->clear();
-    for(int index=0; index<(int)currWStories.size();index++)
+    vector<Story*> currTrigStories = director->getTriggerStories();
+    ui->currentTriggerStoriesList->clear();
+    for(int index=0; index<(int)currTrigStories.size();index++)
     {
-        string curr = currWStories.at(index)->getName();
-        ui->currentWorkingStoriesList->addItem(QString(curr.c_str()));
+        string curr = currTrigStories.at(index)->getName();
+        ui->currentTriggerStoriesList->addItem(QString(curr.c_str()));
     }
 }
 
@@ -745,4 +747,52 @@ void Form::on_runDirectorLoop_released()
     director->runStoryLoop();
     on_updateCurrentStoriesButton_released();
     on_updateCurrentGoalsButton_released();
+
+    ui->currentActiveStory->clear();
+
+    //Get the active story from the director
+    Story* currActiveStory = director->getCurrentActiveStory();
+    if(currActiveStory != NULL)
+        ui->currentActiveStory->addItem(QString(currActiveStory->getName().c_str()));
 }
+
+void Form::on_currentTriggerStoriesList_itemDoubleClicked(QListWidgetItem *item)
+{
+    ui->currentStoriesList->setCurrentRow(-1);
+    ui->currentActiveStory->setCurrentRow(-1);
+
+    ui->currentStoryInfo->clear();
+    Story* currStory = director->getStory(item->text().toStdString());
+
+    ui->currentStoryInfo->addItem(QString(currStory->printOut().c_str()));
+}
+
+void Form::on_currentStoriesList_itemDoubleClicked(QListWidgetItem *item)
+{
+    ui->currentTriggerStoriesList->setCurrentRow(-1);
+    ui->currentActiveStory->setCurrentRow(-1);
+
+    ui->currentStoryInfo->clear();
+    Story* currStory = director->getStory(item->text().toStdString());
+
+    ui->currentStoryInfo->addItem(QString(currStory->printOut().c_str()));
+}
+
+void Form::on_currentActiveStory_itemDoubleClicked(QListWidgetItem *item)
+{
+    ui->currentTriggerStoriesList->setCurrentRow(-1);
+    ui->currentStoriesList->setCurrentRow(-1);
+
+    ui->currentStoryInfo->clear();
+    Story* currStory = director->getStory(item->text().toStdString());
+
+    ui->currentStoryInfo->addItem(QString(currStory->printOut().c_str()));
+}
+
+void Form::on_completeStory_released()
+{
+    director->completeActiveStory();
+    on_runDirectorLoop_released();
+}
+
+

@@ -137,10 +137,16 @@ public:
     QGroupBox *groupBox_5;
     QListWidget *currentStoriesList;
     QPushButton *updateCurrentStoriesButton;
-    QListWidget *currentWorkingStoriesList;
+    QListWidget *currentTriggerStoriesList;
     QLabel *label_21;
     QLabel *label_22;
+    QListWidget *currentActiveStory;
+    QLabel *label_24;
+    QTextBrowser *textBrowser;
+    QPushButton *completeStory;
     QPushButton *runDirectorLoop;
+    QListWidget *currentStoryInfo;
+    QLabel *label_23;
 
     void setupUi(QWidget *Form)
     {
@@ -498,39 +504,59 @@ public:
         tab_3->setObjectName(QStringLiteral("tab_3"));
         groupBox_4 = new QGroupBox(tab_3);
         groupBox_4->setObjectName(QStringLiteral("groupBox_4"));
-        groupBox_4->setGeometry(QRect(30, 30, 581, 241));
+        groupBox_4->setGeometry(QRect(30, 30, 581, 171));
         currentGoalsList = new QListWidget(groupBox_4);
         currentGoalsList->setObjectName(QStringLiteral("currentGoalsList"));
-        currentGoalsList->setGeometry(QRect(20, 30, 391, 191));
+        currentGoalsList->setGeometry(QRect(20, 30, 391, 121));
         updateCurrentGoalsButton = new QPushButton(groupBox_4);
         updateCurrentGoalsButton->setObjectName(QStringLiteral("updateCurrentGoalsButton"));
         updateCurrentGoalsButton->setGeometry(QRect(440, 30, 75, 23));
         groupBox_5 = new QGroupBox(tab_3);
         groupBox_5->setObjectName(QStringLiteral("groupBox_5"));
-        groupBox_5->setGeometry(QRect(30, 300, 581, 241));
+        groupBox_5->setGeometry(QRect(30, 220, 581, 241));
         currentStoriesList = new QListWidget(groupBox_5);
         currentStoriesList->setObjectName(QStringLiteral("currentStoriesList"));
         currentStoriesList->setGeometry(QRect(20, 40, 151, 161));
         updateCurrentStoriesButton = new QPushButton(groupBox_5);
         updateCurrentStoriesButton->setObjectName(QStringLiteral("updateCurrentStoriesButton"));
         updateCurrentStoriesButton->setGeometry(QRect(50, 210, 75, 23));
-        currentWorkingStoriesList = new QListWidget(groupBox_5);
-        currentWorkingStoriesList->setObjectName(QStringLiteral("currentWorkingStoriesList"));
-        currentWorkingStoriesList->setGeometry(QRect(210, 40, 151, 161));
+        currentTriggerStoriesList = new QListWidget(groupBox_5);
+        currentTriggerStoriesList->setObjectName(QStringLiteral("currentTriggerStoriesList"));
+        currentTriggerStoriesList->setGeometry(QRect(210, 40, 151, 161));
         label_21 = new QLabel(groupBox_5);
         label_21->setObjectName(QStringLiteral("label_21"));
         label_21->setGeometry(QRect(60, 20, 71, 16));
         label_22 = new QLabel(groupBox_5);
         label_22->setObjectName(QStringLiteral("label_22"));
-        label_22->setGeometry(QRect(240, 20, 81, 16));
+        label_22->setGeometry(QRect(250, 20, 81, 16));
+        currentActiveStory = new QListWidget(groupBox_5);
+        currentActiveStory->setObjectName(QStringLiteral("currentActiveStory"));
+        currentActiveStory->setGeometry(QRect(390, 40, 151, 31));
+        label_24 = new QLabel(groupBox_5);
+        label_24->setObjectName(QStringLiteral("label_24"));
+        label_24->setGeometry(QRect(410, 20, 111, 16));
+        textBrowser = new QTextBrowser(groupBox_5);
+        textBrowser->setObjectName(QStringLiteral("textBrowser"));
+        textBrowser->setEnabled(false);
+        textBrowser->setGeometry(QRect(390, 80, 151, 101));
+        completeStory = new QPushButton(groupBox_5);
+        completeStory->setObjectName(QStringLiteral("completeStory"));
+        completeStory->setGeometry(QRect(420, 190, 91, 23));
         runDirectorLoop = new QPushButton(tab_3);
         runDirectorLoop->setObjectName(QStringLiteral("runDirectorLoop"));
-        runDirectorLoop->setGeometry(QRect(40, 580, 101, 23));
+        runDirectorLoop->setGeometry(QRect(530, 510, 101, 23));
+        currentStoryInfo = new QListWidget(tab_3);
+        currentStoryInfo->setObjectName(QStringLiteral("currentStoryInfo"));
+        currentStoryInfo->setGeometry(QRect(50, 490, 431, 171));
+        currentStoryInfo->setVerticalScrollMode(QAbstractItemView::ScrollPerPixel);
+        label_23 = new QLabel(tab_3);
+        label_23->setObjectName(QStringLiteral("label_23"));
+        label_23->setGeometry(QRect(70, 470, 111, 16));
         mainTabWidget->addTab(tab_3, QString());
 
         retranslateUi(Form);
 
-        mainTabWidget->setCurrentIndex(1);
+        mainTabWidget->setCurrentIndex(2);
         infoTabWidget->setCurrentIndex(0);
 
 
@@ -601,11 +627,19 @@ public:
         mainTabWidget->setTabText(mainTabWidget->indexOf(tab_2), QApplication::translate("Form", "Stories and Goals", 0));
         groupBox_4->setTitle(QApplication::translate("Form", "Current Goals Queue", 0));
         updateCurrentGoalsButton->setText(QApplication::translate("Form", "Update", 0));
-        groupBox_5->setTitle(QApplication::translate("Form", "Current Stories Queue", 0));
+        groupBox_5->setTitle(QApplication::translate("Form", "Current Stories Lists", 0));
         updateCurrentStoriesButton->setText(QApplication::translate("Form", "Update", 0));
         label_21->setText(QApplication::translate("Form", "Story Queue", 0));
-        label_22->setText(QApplication::translate("Form", "Working Queue", 0));
+        label_22->setText(QApplication::translate("Form", "Trigger List", 0));
+        label_24->setText(QApplication::translate("Form", "Current Active Story", 0));
+        textBrowser->setHtml(QApplication::translate("Form", "<!DOCTYPE HTML PUBLIC \"-//W3C//DTD HTML 4.0//EN\" \"http://www.w3.org/TR/REC-html40/strict.dtd\">\n"
+"<html><head><meta name=\"qrichtext\" content=\"1\" /><style type=\"text/css\">\n"
+"p, li { white-space: pre-wrap; }\n"
+"</style></head><body style=\" font-family:'MS Shell Dlg 2'; font-size:8.25pt; font-weight:400; font-style:normal;\">\n"
+"<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\"><span style=\" font-size:8pt;\">If a story is currently active then go to the world tab and act out the plot fragment. Once all changes have been made click &quot;Complete Story&quot; button.</span></p></body></html>", 0));
+        completeStory->setText(QApplication::translate("Form", "Complete Story", 0));
         runDirectorLoop->setText(QApplication::translate("Form", "Run Director Loop", 0));
+        label_23->setText(QApplication::translate("Form", "Selected Story Info", 0));
         mainTabWidget->setTabText(mainTabWidget->indexOf(tab_3), QApplication::translate("Form", "Director", 0));
     } // retranslateUi
 

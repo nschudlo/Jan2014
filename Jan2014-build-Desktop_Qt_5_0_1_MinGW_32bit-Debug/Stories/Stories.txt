@@ -42,7 +42,7 @@
 <Story>
 <Name>GetInfoMobHeadquarters
 <Precondition>true isEmpty mobheadquarters
-<Trigger>true personIsAt a mobheadquarters
+<Trigger>true personIsAt a mobheadquartersyard
 <Description>[a] is at the mob bar headquarters and it is empty at the moment. [a] is going to break in to look for information.
 <ValueEnd>true personIsHolding a information
 <EndStory>

@@ -75,6 +75,14 @@ private slots:
 
     void on_runDirectorLoop_released();
 
+    void on_currentTriggerStoriesList_itemDoubleClicked(QListWidgetItem *item);
+
+    void on_currentStoriesList_itemDoubleClicked(QListWidgetItem *item);
+
+    void on_completeStory_released();
+
+    void on_currentActiveStory_itemDoubleClicked(QListWidgetItem *item);
+
 private:
     Ui::Form *ui;
     Controller *controller;

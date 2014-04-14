@@ -244,14 +244,27 @@ void Story::chooseVariablePeople()
     if(((int)aOpt.size())>0)
     {
         chosenA = aOpt.at(rand()%(int)aOpt.size())->getName();
+    }else if(((int)aMand.size())>0) //This covers cases where no optional conditions exist
+    {
+        chosenA = aMand.at(rand()%(int)aMand.size())->getName();
     }
+
+
     if((int)bOpt.size()>0)
     {
         chosenB = bOpt.at(rand()%(int)bOpt.size())->getName();
+    }else if(((int)bMand.size())>0) //This covers cases where no optional conditions exist
+    {
+        chosenB = bMand.at(rand()%(int)bMand.size())->getName();
     }
+
+
     if((int)cOpt.size()>0)
     {
         chosenC = cOpt.at(rand()%(int)cOpt.size())->getName();
+    }else if(((int)cMand.size())>0) //This covers cases where no optional conditions exist
+    {
+        chosenC = cMand.at(rand()%(int)cMand.size())->getName();
     }
 
 
