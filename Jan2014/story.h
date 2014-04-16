@@ -17,6 +17,7 @@ public:
     Story();
 
     std::string printOut();
+    std::string printDescription();
     bool evaluatePre();
     std::string getName();
     void setName(std::string _name);
@@ -27,6 +28,9 @@ public:
     void addPreCondition(std::string precondition);
     void addChanges(std::string change);
     void addTrigger(std::string trigger);
+
+    void setPriority(int _priority);
+    int getPriority();
 
     void divideConditions();
 
@@ -80,6 +84,7 @@ private:
     std::string chosenA,chosenB,chosenC;
 
     bool used;
+    int priority;
 
 };
 

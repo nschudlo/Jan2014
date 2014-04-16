@@ -13,8 +13,8 @@
 	<GoTo><Both>OfficeBuilding
 	<GoTo><Both>Library
 	<GoTo><Both>Bank
-	<GoTo><Both>Jail
-<Location>Jail
+	<GoTo><Both>PoliceStation
+<Location>PoliceStation
 	<GoTo><Both>JailCell
 <Location>StreetCorner
 	<GoTo><Both>MainStreet
@@ -30,6 +30,7 @@
 <Location>Canal Street
 	<GoTo><Both>StevesHouse
 	<GoTo><Both>JimmysHouse
+	<GoTo><Both>AbandondedHouse
 	<GoTo>TownSquare
 <Location>mobheadquartersyard
 	<GoTo><Both>mobheadquarters

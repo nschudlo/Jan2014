@@ -147,6 +147,8 @@ public:
     QPushButton *runDirectorLoop;
     QListWidget *currentStoryInfo;
     QLabel *label_23;
+    QWidget *tab_4;
+    QListWidget *outputText;
 
     void setupUi(QWidget *Form)
     {
@@ -553,10 +555,16 @@ public:
         label_23->setObjectName(QStringLiteral("label_23"));
         label_23->setGeometry(QRect(70, 470, 111, 16));
         mainTabWidget->addTab(tab_3, QString());
+        tab_4 = new QWidget();
+        tab_4->setObjectName(QStringLiteral("tab_4"));
+        outputText = new QListWidget(tab_4);
+        outputText->setObjectName(QStringLiteral("outputText"));
+        outputText->setGeometry(QRect(50, 50, 571, 311));
+        mainTabWidget->addTab(tab_4, QString());
 
         retranslateUi(Form);
 
-        mainTabWidget->setCurrentIndex(2);
+        mainTabWidget->setCurrentIndex(0);
         infoTabWidget->setCurrentIndex(0);
 
 
@@ -641,6 +649,7 @@ public:
         runDirectorLoop->setText(QApplication::translate("Form", "Run Director Loop", 0));
         label_23->setText(QApplication::translate("Form", "Selected Story Info", 0));
         mainTabWidget->setTabText(mainTabWidget->indexOf(tab_3), QApplication::translate("Form", "Director", 0));
+        mainTabWidget->setTabText(mainTabWidget->indexOf(tab_4), QApplication::translate("Form", "Output", 0));
     } // retranslateUi
 
 };

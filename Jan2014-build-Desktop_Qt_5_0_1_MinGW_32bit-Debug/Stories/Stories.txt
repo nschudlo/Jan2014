@@ -1,25 +1,63 @@
 <Story>
 <Name>crashDrugBust
+<Priority>2
 <MPrecondition>true isMainCharacter a
 <MPrecondition>true personIsMale a
 <Precondition>true personIsHolding a information
-<Trigger>true personIsHolding a information
+<Precondition>true personIsHolding a powerweapon
+<Trigger>true personIsAt a docks
 <Description> [a] has acquired the needed information! Now he knows where the drug shipment will be. 
 <EndStory>
 
+#Ways to get Information
+
 <Story>
-<Name>ArrestDrugDealer
-<MPrecondition>true isPolice a
-<MPrecondition>true isMainCharacter a
-<MPrecondition>true isMobster b
-<Precondition>true personIsAt b streetcorner
-<Trigger>true personIsAt a streetcorner
-<Description>[a] arrests [b] for selling drugs on the street corner and takes them to jail.
-<ValueEnd>true personIsAt b jailcell
+<Name>GetInfoMobHeadquarters
+<Priority>1
+<Precondition>true isEmpty mobheadquarters
+<Trigger>true personIsAt a mobheadquartersyard
+<Description>[a] is at the mob bar headquarters and it is empty at the moment. [a] is going to break in to look for information.
+<ValueEnd>true personIsHolding a information
+<ValueEnd>true personIsHolding a powerweapon
 <EndStory>
 
 <Story>
+<Name>GetInfoInterrogation
+<Priority>1
+<MPrecondition>true isMobster a
+<MPrecondition>true isPolice b
+<MPrecondition>true isMainCharacter b
+<Precondition>true personIsAt a jailcell
+<Trigger>true personIsAt b policestation
+<Description> [a] is a mobster and is being held at the Police Station. [b] needs information from [a] and will get to interrogate him for that info.
+<ValueEnd>true personIsHolding b information
+<EndStory>
+
+<Story>
+<Name>AnonTipper
+<Priority>0
+<MPrecondition>true isPolice a
+<MPrecondition>true isMainCharacter a
+<Trigger>true personIsAt a policestation
+<Description>[a] gets an anonymous call, supplying needed information.
+<ValueEnd>true personIsHolding a information
+<EndStory>
+
+<Story>
+<Name>WantsToSnitch
+<Priority>0
+<MPrecondition>true isMainCharacter a
+<MPrecondition>true isMobster b
+<Trigger>true personIsAt a policestation
+<Description>[a] goes to the police station to find that [b] wants to provide information.
+<ValueEnd>true personIsHolding a information
+<EndStory>
+
+#Ways to get someone in policestation
+
+<Story>
 <Name>FailedBankRobbery
+<Priority>1
 <MPrecondition>true isPolice a
 <MPrecondition>true isMainCharacter a
 <MPrecondition>true isMobster b
@@ -30,21 +68,65 @@
 <EndStory>
 
 <Story>
-<Name>GetInfoInterrogation
-<MPrecondition>true isMobster a
-<MPrecondition>true isPolice b
-<Precondition>true personIsAt a jailcell
-<Trigger>true personIsAt b jail
-<Description> [a] is a mobster and is in jail. [b] needs information from [a] and will get to interrogate him for that info.
-<ValueEnd>true personIsHolding b information
+<Name>ArrestDrugDealer
+<Priority>1
+<MPrecondition>true isPolice a
+<MPrecondition>true isMainCharacter a
+<MPrecondition>true isMobster b
+<Precondition>true personIsAt b streetcorner
+<Trigger>true personIsAt a streetcorner
+<Description>[a] catches [b] selling drugs on the street corner. [a] chases [b] to arrest him and take him to the Police Station.
+<ValueEnd>true personIsAt b jailcell
 <EndStory>
 
 <Story>
-<Name>GetInfoMobHeadquarters
-<Precondition>true isEmpty mobheadquarters
-<Trigger>true personIsAt a mobheadquartersyard
-<Description>[a] is at the mob bar headquarters and it is empty at the moment. [a] is going to break in to look for information.
-<ValueEnd>true personIsHolding a information
+<Name>MobsterArrested
+<Priority>0
+<MPrecondition>true isMainCharacter a
+<MPrecondition>true isPolice b
+<MPrecondition>false isMainCharacter b
+<MPrecondition>true isMobster c
+<Trigger>true personIsAt a policestation
+<Description>[a] arrives to the police station to find [b] has arrested [c].
+<ValueEnd>true personIsAt c jailcell
 <EndStory>
+
+#Ways to get power weapon
+<Story>
+<Name>ConfiscateFromWarehouse
+<Priority>1
+<MPrecondition>true isMainCharacter a
+<MPrecondition>true personIsAt b mainstreet
+<MPrecondition>true isMobster b
+<Trigger>true personIsAt a mainstreet
+<Trigger>true personIsAt a dockstreet
+<Description>[a] is patrolling the streets and catches [b] driving erratically. A car chase begins, ending at the warehouse. A footchase begins to catch the fleeing mobster!
+<ValueEnd>true personIsHolding a powerweapon
+<ValueEnd>true personIsAt b jailcell
+<EndStory>
+
+<Story>
+<Name>BurningDrugHouse
+<Priority>0
+<MPrecondition>true isMainCharacter a
+<Precondition>true personIsAt a abandondedhouse
+<Trigger>true personIsAt a abandondedhouse
+<Description>A burned down house has been found to have been a drug manufacturing facility. The scene must be investigated.
+<ValueEnd>true personIsHolding a powerweapon
+<EndStory>
+
+<Story>
+<Name>GetToAbandondedHouse
+<Priority>0
+<MPrecondition>true isMainCharacter a
+<Trigger>true personIsAt a policestation
+<Description>A call has come in that a house has caught fire and burned down. [a] must go to the Abandoned House.
+<ValueEnd>true personIsAt a abandondedhouse
+<EndStory>
+
+
+
+
+
 
 

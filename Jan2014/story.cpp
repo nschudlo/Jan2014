@@ -22,6 +22,7 @@ Story::Story()
     description = "No description";
     failedOptConditions=0;
     used=false;
+    priority = 1;
 
     // preStoryValues.push_back("isMainCharacter nick");
 
@@ -74,6 +75,13 @@ std::vector<Person*> Story::getCOptional(){
 
 vector<Condition*> Story::getChanges(){
     return changes;}
+
+void Story::setPriority(int _priority){
+    priority = _priority;}
+
+int Story::getPriority(){
+    return priority;}
+
 
 void Story::addPreCondition(string precondition){
     Condition* tempCond = new Condition(precondition);
@@ -472,6 +480,8 @@ string Story::printOut()
 
     printOut<<"Story: "<<name<<endl;
 
+    printOut<<"Priority: "<<priority<<endl;
+
     for(int index=0; index<(int)condsM.size();index++)
         printOut<<"    MPreconditions: "<<condsM.at(index)->printOut()<<endl;
 
@@ -544,6 +554,19 @@ string Story::printOut()
         printOut<<description;
     }
     printOut<<endl;
+    return printOut.str();
+}
+
+string Story::printDescription()
+{
+    ostringstream printOut;
+    string tempDesc=description;
+
+    replace_all(tempDesc,"[a]",chosenA);
+    replace_all(tempDesc,"[b]",chosenB);
+    replace_all(tempDesc,"[c]",chosenC);
+
+    printOut<<tempDesc;
     return printOut.str();
 }
 

@@ -23,7 +23,7 @@
     </rect>
    </property>
    <property name="currentIndex">
-    <number>2</number>
+    <number>0</number>
    </property>
    <widget class="QWidget" name="tab">
     <attribute name="title">
@@ -1316,6 +1316,21 @@ p, li { white-space: pre-wrap; }
      </property>
      <property name="text">
       <string>Selected Story Info</string>
+     </property>
+    </widget>
+   </widget>
+   <widget class="QWidget" name="tab_4">
+    <attribute name="title">
+     <string>Output</string>
+    </attribute>
+    <widget class="QListWidget" name="outputText">
+     <property name="geometry">
+      <rect>
+       <x>50</x>
+       <y>50</y>
+       <width>571</width>
+       <height>311</height>
+      </rect>
      </property>
     </widget>
    </widget>

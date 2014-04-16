@@ -83,6 +83,20 @@ private slots:
 
     void on_currentActiveStory_itemDoubleClicked(QListWidgetItem *item);
 
+    void on_personMoneyInput_editingFinished();
+
+    void on_personHealthInput_editingFinished();
+
+    void on_personMoodInput_editingFinished();
+
+    void on_personRelTypeInput_editingFinished();
+
+    void on_personRelStrengthInput_editingFinished();
+
+    void on_storyRole_editingFinished();
+
+    void on_citizenCheckBox_released();
+
 private:
     Ui::Form *ui;
     Controller *controller;
@@ -100,6 +114,8 @@ private:
 
     void refreshLocationTab();
     void refreshPersonTab();
+
+    void addOutputText(std::string textToAdd, int colour);
 };
 
 #endif // FORM_H

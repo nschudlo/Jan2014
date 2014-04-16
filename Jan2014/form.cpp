@@ -8,6 +8,7 @@
 #include <vector>
 #include <iostream>
 #include <time.h>
+#include <boost/lexical_cast.hpp>
 
 #include "person.h"
 
@@ -41,6 +42,8 @@ Form::~Form()
 void Form::on_buttonTest_released()
 {
     //This is a test button
+    int random = rand()%4;
+    addOutputText("Test Output", random);
 }
 
 
@@ -140,7 +143,8 @@ void Form::on_buttonAddItem_released()
                 current->holdItem(object);
                 on_buttonPersonInfo_released();
             }
-
+            string output = current->getName() + " now has the " + newItem.toStdString() + ".";
+            addOutputText(output,0);
         }
     }
 }
@@ -152,6 +156,9 @@ void Form::on_buttonRemoveItem_released()
         QString removeItem = ui->listPersonItems->currentItem()->text();
         current->dropItem(removeItem.toStdString());
         on_buttonPersonInfo_released();
+
+        string output = current->getName() + " no longer has the " + removeItem.toStdString() + ".";
+        addOutputText(output,0);
     }
 }
 
@@ -260,15 +267,32 @@ void Form::on_personHealthInput_valueChanged(int arg1)
     current->setHealth(arg1);
 }
 
+void Form::on_personHealthInput_editingFinished()
+{
+    string output = current->getName() + "'s health is now " + boost::lexical_cast<string>(current->getHealth()) + ".";
+    addOutputText(output,0);
+}
+
 void Form::on_personMoneyInput_valueChanged(int arg1)
 {
     current->setMoney(arg1);
 }
 
+void Form::on_personMoneyInput_editingFinished()
+{
+    string output = current->getName() + " now has " + boost::lexical_cast<string>(current->getMoney()) + " dollars.";
+    addOutputText(output,0);
+}
 
 void Form::on_personMoodInput_valueChanged(int arg1)
 {
     current->setMood(arg1);
+}
+
+void Form::on_personMoodInput_editingFinished()
+{
+    string output = current->getName() + " now has a mood of " + boost::lexical_cast<string>(current->getMood()) + ".";
+    addOutputText(output,0);
 }
 
 
@@ -301,6 +325,21 @@ void Form::on_personRelTypeInput_valueChanged(int arg1)
 
     rel->setState(arg1, rel->getStrength());
     ui->personRelPrintout->setText(rel->relationshipToString().c_str());
+
+
+}
+
+void Form::on_personRelTypeInput_editingFinished()
+{
+    QString currRel = ui->listPersonRelationship->currentItem()->text();
+    Relationship* rel = current->getRelationship(currRel.toStdString());
+    string output = rel->relationshipToString();
+    addOutputText(output,0);
+}
+
+void Form::on_personRelStrengthInput_editingFinished()
+{
+    on_personRelTypeInput_editingFinished();
 }
 
 void Form::on_personRelStrengthInput_valueChanged(int arg1)
@@ -355,6 +394,11 @@ void Form::on_buttonAddRelationship_released()
         }
     }
     refreshPersonTab();
+
+    string person2 = ui->listPeople->currentItem()->text().toStdString();
+    Relationship* rel = current->getRelationship(person2);
+    string output = rel->relationshipToString();
+    addOutputText(output,0);
 }
 
 void Form::on_buttonRemoveRelationship_released()
@@ -380,6 +424,8 @@ void Form::on_listPersonLocations_itemDoubleClicked(QListWidgetItem *item)
     }
     refreshLocationTab();
 
+    string output= current->getName() + " is now at the location " + newLoc->getName()+".";
+    addOutputText(output,0);
 }
 
 void Form::on_listWorldObjects_itemDoubleClicked()
@@ -584,6 +630,7 @@ void Form::on_storyRank_valueChanged(int arg1)
 
 void Form::on_citizenCheckBox_toggled(bool checked)
 {
+
     if(checked)//Not main char
     {
         current->setIsMainChar(false);
@@ -594,7 +641,15 @@ void Form::on_citizenCheckBox_toggled(bool checked)
     }
 
     refreshPersonTab();
+}
 
+void Form::on_citizenCheckBox_released()
+{
+    string output = current->getName() + " is ";
+    if(!current->isMainChar())
+        output = output + " not ";
+    output = output + " the main character.";
+    addOutputText(output,0);
 }
 
 void Form::on_storyRole_valueChanged(int arg1)
@@ -628,9 +683,13 @@ void Form::on_storyRole_valueChanged(int arg1)
         }
         ui->roleLabel->setText(role);
     }
+}
 
-
-
+void Form::on_storyRole_editingFinished()
+{
+    QString role = ui->roleLabel->text();
+    string output = current->getName() + " is a " + role.toStdString();
+    addOutputText(output,0);
 }
 
 void Form::on_loadGoals_released()
@@ -696,6 +755,9 @@ void Form::on_listStories_itemDoubleClicked(QListWidgetItem *item)
 {
     Story* curr = director->getStory(item->text().toStdString());
 
+    string output = "Story Fragment '" + curr->getName() + "' added as a goal story.";
+    addOutputText(output, 1);
+
     if(curr->evaluatePre())
     {
         curr->evaluateOptional();
@@ -753,7 +815,13 @@ void Form::on_runDirectorLoop_released()
     //Get the active story from the director
     Story* currActiveStory = director->getCurrentActiveStory();
     if(currActiveStory != NULL)
+    {
         ui->currentActiveStory->addItem(QString(currActiveStory->getName().c_str()));
+        string output= "Currently playing the story '" + currActiveStory->getName() + "'.";
+        addOutputText(output,1);
+        output = currActiveStory->printDescription();
+        addOutputText(output,2);
+    }
 }
 
 void Form::on_currentTriggerStoriesList_itemDoubleClicked(QListWidgetItem *item)
@@ -791,8 +859,44 @@ void Form::on_currentActiveStory_itemDoubleClicked(QListWidgetItem *item)
 
 void Form::on_completeStory_released()
 {
-    director->completeActiveStory();
-    on_runDirectorLoop_released();
+    Story* currActiveStory = director->getCurrentActiveStory();
+    if(currActiveStory!=NULL)
+    {
+        string output= "Completing the story '" + currActiveStory->getName() + "'.";
+        addOutputText(output,1);
+
+        director->completeActiveStory();
+        on_runDirectorLoop_released();
+    }
+
+
 }
+
+void Form::addOutputText(string textToAdd, int colour)
+{
+
+    QListWidgetItem* pItem =new QListWidgetItem(textToAdd.c_str());
+
+    switch (colour)
+    {
+    case 0://Black
+        pItem->setForeground(Qt::black);
+        break;
+    case 1://Blue
+        pItem->setForeground(Qt::darkBlue);
+        break;
+    case 2://Green
+        pItem->setForeground(Qt::darkGreen);
+        break;
+    case 3://Red
+        pItem->setForeground(Qt::red);
+        break;
+    }
+
+    ui->outputText->addItem(pItem);
+    ui->outputText->scrollToBottom();
+}
+
+
 
 

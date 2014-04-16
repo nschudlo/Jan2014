@@ -118,6 +118,28 @@ void Director::runStoryLoop()
             bool test=true;
             if(possibleStories.size()>0)
             {
+
+                int highestP = 0;
+                std::vector<Story*> newList;
+                //Slim the selection down to those with highest priority
+                for(int pIndex=0; pIndex<(int)possibleStories.size();pIndex++)
+                {
+                    int currPriority = possibleStories.at(pIndex)->getPriority();
+                    if( currPriority == highestP)
+                    {
+                        //add it to the new list
+                        newList.push_back(possibleStories.at(pIndex));
+                    }
+                    else if(currPriority > highestP)
+                    {
+                        //clear new list and add this one
+                        newList.clear();
+                        newList.push_back(possibleStories.at(pIndex));
+                        highestP = currPriority;
+                    }
+                }
+                possibleStories = newList;
+
                 while(test)
                 {
                     //This is where we pick the story from the possible list
@@ -431,6 +453,10 @@ void Director::evaluateStoryLine(string line)
         cout<<"Added Story:"<<endl;
         cout<<stories.back()->printOut();
         cout<<"*****************"<<endl;
+    }
+    else if(type=="Priority")
+    {
+        currentStory->setPriority(atoi(info.at(0).c_str()));
     }
     else
     {
