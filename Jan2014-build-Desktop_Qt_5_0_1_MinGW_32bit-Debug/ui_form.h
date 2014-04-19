@@ -564,7 +564,7 @@ public:
 
         retranslateUi(Form);
 
-        mainTabWidget->setCurrentIndex(0);
+        mainTabWidget->setCurrentIndex(1);
         infoTabWidget->setCurrentIndex(0);
 
 

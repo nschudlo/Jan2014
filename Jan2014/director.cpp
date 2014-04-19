@@ -80,6 +80,7 @@ void Director::runStoryLoop()
             Condition* currGoal = goalQueue.at(gIndex);
             bool matched = false;
 
+            //Check if this condition is fulfilled
             if(!evaluator->checkConditionSet(currGoal))
             {
                 //Check the story queue for a story with this goal as the result
@@ -104,7 +105,6 @@ void Director::runStoryLoop()
             else
                 vecRemove(goalQueue,gIndex--);
         }
-
         //For each unmet goal find a story to reach it. The reason this wasn't
         //done as soon as a goal was deemed unmatched is because there is a
         //possibilty now to compare the stories being matched to the goals
@@ -112,8 +112,21 @@ void Director::runStoryLoop()
         for(int ugIndex=0; ugIndex<(int)unmetGoals.size();ugIndex++)
         {
             possibleStories.clear();
-            //Adds matches to the possibleStories vector
+
+            //Adds matches to the possibleStories vector. Only matches with
+            //change condition, doesn't do any other checks.
             findStory(unmetGoals.at(ugIndex));
+
+            //Go through every story and see if it would work with mandatory variables.
+            //If not, eliminate it
+            for(int psIndex=0; psIndex<(int)possibleStories.size(); psIndex++)
+            {
+                Story* currStory = possibleStories.at(psIndex);
+                if(!currStory->setGoal(unmetGoals.at(ugIndex)))
+                    vecRemove(possibleStories,psIndex);
+                currStory->resetVariables();
+            }
+
 
             bool test=true;
             if(possibleStories.size()>0)
@@ -142,18 +155,35 @@ void Director::runStoryLoop()
 
                 while(test)
                 {
-                    //This is where we pick the story from the possible list
-                    int randStory = rand() % possibleStories.size();
-                    Story* goalMatch = possibleStories.at(randStory);
-                    if(!goalMatch->setGoal(unmetGoals.at(ugIndex)))
-                        vecRemove(unmetGoals,randStory);
+                    //It's possible to eliminate every story through this loop so this next check is necessary
+                    //If every story is eliminated then this goal is skipped and hopefully solved the next
+                    //time the the director's loop runs
+                    if(possibleStories.size()>0)
+                    {
+                        //This is where we pick the story from the possible list
+                        int randStory = rand() % possibleStories.size();
+                        Story* goalMatch = possibleStories.at(randStory);
+                        if(!goalMatch->setGoal(unmetGoals.at(ugIndex)))
+                        {
+                            //vecRemove(unmetGoals,randStory);
+                            vecRemove(possibleStories,randStory);
+
+                            //This is to check if removing this story created an empty list
+                            if(possibleStories.size()==0)
+                                changeMade=true;
+                        }
+                        else
+                        {
+                            goalMatch->evaluateOptional();
+                            goalMatch->chooseVariablePeople();
+                            if(goalMatch->reEvaluate())
+                                triggerStories.push_back(goalMatch);
+                            addToStoryQueue(goalMatch);
+                            test=false;
+                        }
+                    }
                     else
                     {
-                        goalMatch->evaluateOptional();
-                        goalMatch->chooseVariablePeople();
-                        if(goalMatch->reEvaluate())
-                            triggerStories.push_back(goalMatch);
-                        addToStoryQueue(goalMatch);
                         test=false;
                     }
                 }
@@ -214,8 +244,8 @@ void Director::completeActiveStory()
 
 
 /*
- *  Find a story which has an end value of the given condition
- */
+         *  Find a story which has an end value of the given condition
+         */
 void Director::findStory(Condition *condition)
 {
     //cycle through every story - could be improved with categories
@@ -244,10 +274,10 @@ void Director::findStory(Condition *condition)
 }
 
 /*
- *  Compare two conditions for the same goal. Goals are considered the same
- *  if all their values are the same, except for a substitution in the variable
- *  location.
- */
+         *  Compare two conditions for the same goal. Goals are considered the same
+         *  if all their values are the same, except for a substitution in the variable
+         *  location.
+         */
 bool Director::compareConditions(Condition *condition1, Condition *condition2)
 {
     if(condition1->getType() != condition2->getType())
@@ -307,78 +337,78 @@ bool Director::compareConditionsSet(Condition *condition1, Condition *condition2
 
 }
 /*
-void Director::loadGoals(string filename)
-{
-    cout<<"*****************"<<endl;
-    cout<<"Clearing all current goals..."<<endl;
-
-    storyGoals.clear();
-
-    string line;
-    ifstream file(filename.c_str());
-
-    //Open the file
-    if(file.is_open())
-    {
-        while(getline(file, line))
+        void Director::loadGoals(string filename)
         {
-            evaluateGoalLine(line);
+            cout<<"*****************"<<endl;
+            cout<<"Clearing all current goals..."<<endl;
+
+            storyGoals.clear();
+
+            string line;
+            ifstream file(filename.c_str());
+
+            //Open the file
+            if(file.is_open())
+            {
+                while(getline(file, line))
+                {
+                    evaluateGoalLine(line);
+                }
+                file.clear();
+                file.seekg(0,ios::beg);
+
+                file.close();
+            }
+            else cout<<"Unable to open file "<<filename<<endl;
+
         }
-        file.clear();
-        file.seekg(0,ios::beg);
 
-        file.close();
-    }
-    else cout<<"Unable to open file "<<filename<<endl;
+        void Director::evaluateGoalLine(string line)
+        {
 
-}
+            //Skip comment lines and blank lines
+            if(line[0] == '#' || line.empty())
+                return;
 
-void Director::evaluateGoalLine(string line)
-{
+            //tokenize the line
+            boost::tokenizer<> tok(line);
+            boost::tokenizer<>::iterator tokenIterator=tok.begin();
 
-    //Skip comment lines and blank lines
-    if(line[0] == '#' || line.empty())
-        return;
+            //Pull out the <type> from the line
+            string type = *tokenIterator++;
 
-    //tokenize the line
-    boost::tokenizer<> tok(line);
-    boost::tokenizer<>::iterator tokenIterator=tok.begin();
+            //Assign the remaining tokens to the info string vector
+            vector<string> info;
+            info.assign(tokenIterator, tok.end());
 
-    //Pull out the <type> from the line
-    string type = *tokenIterator++;
+            if(type=="Goal")
+            {
+                currentGoal = new StoryGoal();
+                currentGoal->setType(AUTHORGOAL);
+            }
+            else if(type=="Name")
+                currentGoal->setName(vectorToString(info,0,(int)info.size()));
+            else if(type=="Person")
+                currentGoal->addPerson(vectorToString(info,0,(int)info.size()));
+            else if(type=="ValueEnd")
+                currentGoal->addChanges(vectorToString(info,0,(int)info.size()));
+            else if(type=="EndGoal")
+            {
+                currentGoal->completeGoal();
+                storyGoals.push_back(currentGoal);
+                cout<<"*****************"<<endl;
+                cout<<"Added Goal:"<<endl;
+                cout<<storyGoals.back()->printOut()<<endl;
+                cout<<"*****************"<<endl;
 
-    //Assign the remaining tokens to the info string vector
-    vector<string> info;
-    info.assign(tokenIterator, tok.end());
+            }
+            else
+            {
+                cout<<"ERROR: type +"<<type<<"+ not found"<<endl;
+            }
 
-    if(type=="Goal")
-    {
-        currentGoal = new StoryGoal();
-        currentGoal->setType(AUTHORGOAL);
-    }
-    else if(type=="Name")
-        currentGoal->setName(vectorToString(info,0,(int)info.size()));
-    else if(type=="Person")
-        currentGoal->addPerson(vectorToString(info,0,(int)info.size()));
-    else if(type=="ValueEnd")
-        currentGoal->addChanges(vectorToString(info,0,(int)info.size()));
-    else if(type=="EndGoal")
-    {
-        currentGoal->completeGoal();
-        storyGoals.push_back(currentGoal);
-        cout<<"*****************"<<endl;
-        cout<<"Added Goal:"<<endl;
-        cout<<storyGoals.back()->printOut()<<endl;
-        cout<<"*****************"<<endl;
-
-    }
-    else
-    {
-        cout<<"ERROR: type +"<<type<<"+ not found"<<endl;
-    }
-
-}
-*/
+        }
+        */
 void Director::loadStories(string filename)
 {
     cout<<"*****************"<<endl;
@@ -478,17 +508,17 @@ vector<Story*> Director::getTriggerStories(){
 Story* Director::getCurrentActiveStory(){
     return activeStory;}
 /*
-StoryGoal* Director::getGoal(std::string name)
-{
-    for(int index=0;index<(int)storyGoals.size();index++)
-    {
-        if(storyGoals.at(index)->getName()==name)
-            return storyGoals.at(index);
-    }
-    return 0;
+        StoryGoal* Director::getGoal(std::string name)
+        {
+            for(int index=0;index<(int)storyGoals.size();index++)
+            {
+                if(storyGoals.at(index)->getName()==name)
+                    return storyGoals.at(index);
+            }
+            return 0;
 
-}
-*/
+        }
+        */
 Story* Director::getStory(std::string name)
 {
     for(int index=0;index<(int)stories.size();index++)

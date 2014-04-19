@@ -31,7 +31,7 @@ Form::Form(QWidget *parent) :
     currentLocation = new Location();
     //updateLists();
 
-    srand(time(NULL));
+    srand(1000);//time(NULL));
 }
 
 Form::~Form()

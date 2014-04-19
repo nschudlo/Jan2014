@@ -58,6 +58,7 @@ public:
 
     bool beenUsed();
     void setUsed(bool _used);
+    void resetVariables();
 
 private:
     std::string name;

@@ -29,6 +29,8 @@
 <Item>information
 <Item>gun
 <Action>shoot do
+<Item>powerweapon
+<Action>shoot do
 
 #Default Person actions
 <PAction>stab get

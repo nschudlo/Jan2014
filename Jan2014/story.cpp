@@ -433,6 +433,13 @@ bool Story::setGoal(Condition *goalCondition)
 
 }
 
+void Story::resetVariables()
+{
+    chosenA.clear();
+    chosenB.clear();
+    chosenC.clear();
+}
+
 /*
  *  Compare two conditions for the same goal. Goals are considered the same
  *  if all their values are the same, except for a substitution in the variable
