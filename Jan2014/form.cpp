@@ -31,7 +31,11 @@ Form::Form(QWidget *parent) :
     currentLocation = new Location();
     //updateLists();
 
-    srand(1000);//time(NULL));
+   // srand(1000);//time(NULL));
+    cout.precision(15);
+    double r = time(NULL);
+    srand(r);
+    cout<< r << endl;
 }
 
 Form::~Form()
@@ -801,6 +805,12 @@ void Form::on_updateCurrentStoriesButton_released()
     {
         string curr = currTrigStories.at(index)->getName();
         ui->currentTriggerStoriesList->addItem(QString(curr.c_str()));
+
+        if(!currTrigStories.at(index)->motivationBeenPrinted())
+        {
+            addOutputText(currTrigStories.at(index)->printMotivation(),3);
+            currTrigStories.at(index)->setMotivationPrinted(true);
+        }
     }
 }
 

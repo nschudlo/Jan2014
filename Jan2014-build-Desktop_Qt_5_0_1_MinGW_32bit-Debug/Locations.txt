@@ -21,16 +21,17 @@
 	<GoTo>DockStreet
 <Location>DockStreet
 	<GoTo><Both>mobheadquartersyard
-	<GoTo>Docks
-	<GoTo>Canal Street
+	<GoTo><Both>Docks
+	<GoTo><Both>Canal Street
 <Location>Docks
+	<GoTo><Both>warehouse
 	<GoTo><Both>BoatA
 	<GoTo><Both>BoatB
 	<GoTo><Both>BoatC
 <Location>Canal Street
 	<GoTo><Both>StevesHouse
 	<GoTo><Both>JimmysHouse
-	<GoTo><Both>AbandondedHouse
+	<GoTo><Both>abandonedHouse
 	<GoTo>TownSquare
 <Location>mobheadquartersyard
 	<GoTo><Both>mobheadquarters

@@ -1,12 +1,13 @@
 <Story>
-<Name>crashDrugBust
+<Name>crashDrugShipment
 <Priority>2
 <MPrecondition>true isMainCharacter a
 <MPrecondition>true personIsMale a
 <Precondition>true personIsHolding a information
 <Precondition>true personIsHolding a powerweapon
 <Trigger>true personIsAt a docks
-<Description> [a] has acquired the needed information! Now he knows where the drug shipment will be. 
+<Motivation> The information has been discovered! Gear up and get to the docks!
+<Description> [a] has arrived at the docks and is ready to intercept the drug shipment!
 <EndStory>
 
 #Ways to get Information
@@ -16,6 +17,7 @@
 <Priority>1
 <Precondition>true isEmpty mobheadquarters
 <Trigger>true personIsAt a mobheadquartersyard
+<Motivation>Maybe there will be information at the mob headquarters. Better wait until it's empty.
 <Description>[a] is at the mob bar headquarters and it is empty at the moment. [a] is going to break in to look for information.
 <ValueEnd>true personIsHolding a information
 <ValueEnd>true personIsHolding a powerweapon
@@ -29,6 +31,7 @@
 <MPrecondition>true isMainCharacter b
 <Precondition>true personIsAt a jailcell
 <Trigger>true personIsAt b policestation
+<Motivation> [a] is at the police station in custody. You should get there to interrogate for information.
 <Description> [a] is a mobster and is being held at the Police Station. [b] needs information from [a] and will get to interrogate him for that info.
 <ValueEnd>true personIsHolding b information
 <EndStory>
@@ -39,6 +42,7 @@
 <MPrecondition>true isPolice a
 <MPrecondition>true isMainCharacter a
 <Trigger>true personIsAt a policestation
+<Motivation>You get a call that there is good news at the police station. Get there right away!
 <Description>[a] gets an anonymous call, supplying needed information.
 <ValueEnd>true personIsHolding a information
 <EndStory>
@@ -49,6 +53,7 @@
 <MPrecondition>true isMainCharacter a
 <MPrecondition>true isMobster b
 <Trigger>true personIsAt a policestation
+<Motivation>You get a call that there is good news at the police station. Get there right away!
 <Description>[a] goes to the police station to find that [b] wants to provide information.
 <ValueEnd>true personIsHolding a information
 <EndStory>
@@ -63,6 +68,7 @@
 <MPrecondition>true isMobster b
 <Precondition>true personIsHolding a gun
 <Trigger>true personIsAt a bank
+<Motivation>You need to do some banking. Better head over to the bank.
 <Description>[a] the police officer is witness to a bank robbery, but the criminal, [b],  doesn't know they took a cop hostage!
 <ValueEnd>true personIsAt b jailcell
 <EndStory>
@@ -75,6 +81,7 @@
 <MPrecondition>true isMobster b
 <Precondition>true personIsAt b streetcorner
 <Trigger>true personIsAt a streetcorner
+<Motivation>You get a tip that some criminals are at the street corner. Maybe go check it out.
 <Description>[a] catches [b] selling drugs on the street corner. [a] chases [b] to arrest him and take him to the Police Station.
 <ValueEnd>true personIsAt b jailcell
 <EndStory>
@@ -87,6 +94,7 @@
 <MPrecondition>false isMainCharacter b
 <MPrecondition>true isMobster c
 <Trigger>true personIsAt a policestation
+<Motivation>You get a call that there is good news at the police station. Get there right away!
 <Description>[a] arrives to the police station to find [b] has arrested [c].
 <ValueEnd>true personIsAt c jailcell
 <EndStory>
@@ -96,21 +104,24 @@
 <Name>ConfiscateFromWarehouse
 <Priority>1
 <MPrecondition>true isMainCharacter a
-<MPrecondition>true personIsAt b mainstreet
+<MPrecondition>true personIsAt b streetcorner
 <MPrecondition>true isMobster b
 <Trigger>true personIsAt a mainstreet
 <Trigger>true personIsAt a dockstreet
+<Motivation>You get a call that someone is driving erratically. Better check out mainstreet and dockstreet. 
 <Description>[a] is patrolling the streets and catches [b] driving erratically. A car chase begins, ending at the warehouse. A footchase begins to catch the fleeing mobster!
 <ValueEnd>true personIsHolding a powerweapon
 <ValueEnd>true personIsAt b jailcell
+<ValueEnd>true personIsAt a warehouse
 <EndStory>
 
 <Story>
 <Name>BurningDrugHouse
 <Priority>0
 <MPrecondition>true isMainCharacter a
-<Precondition>true personIsAt a abandondedhouse
-<Trigger>true personIsAt a abandondedhouse
+<Precondition>true personIsAt a abandonedhouse
+<Trigger>true personIsAt a abandonedhouse
+<Motivation>An abandoned house caught fire. Inspect the house.
 <Description>A burned down house has been found to have been a drug manufacturing facility. The scene must be investigated.
 <ValueEnd>true personIsHolding a powerweapon
 <EndStory>
@@ -120,10 +131,21 @@
 <Priority>0
 <MPrecondition>true isMainCharacter a
 <Trigger>true personIsAt a policestation
-<Description>A call has come in that a house has caught fire and burned down. [a] must go to the Abandoned House.
-<ValueEnd>true personIsAt a abandondedhouse
+<Motivation>You get a call that there is a case at the station. Get to the station to get a briefing. 
+<Description>[a] arrives at the station and is told to head over to a house fire.
+<ValueEnd>true personIsAt a abandonedhouse
 <EndStory>
 
+
+<Story>
+<Name>NewShipment
+<Priority>0
+<MPrecondition>true isMainCharacter a
+<Trigger>true personIsAt a policestation
+<Motivation>A shipment has come into the station. Head over there to recieve some new gear.
+<Description>The police station just received a new order of weapons. [a] has received a new powerweapon.
+<ValueEnd>true personIsHolding a powerweapon
+<EndStory>
 
 
 

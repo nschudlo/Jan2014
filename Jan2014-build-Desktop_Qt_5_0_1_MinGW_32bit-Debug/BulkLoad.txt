@@ -8,10 +8,10 @@
 #				6) <StoryValues>
 #
 # The formatting of each type should be as follows:
-# <Action>
+# <Action> name Type(do if this action can be performed, get if this action happens to this person/item)
 # <Item> NameOfPersonHolding(NULL for World)    NameOfObject
 # <Person> Name    Gender(0 male, 1 female)
-# <Relationship> NameOfMain    NameOfPartner    Type    Strength
+# <Relationship> NameOfPartner    Type    Strength
 # <StoryValues> PoliceRep MobRep PoliceWantedLevel MobWantedLevel
 #
 #	Parent=0, Child=1, Sibling=2, Married=3, Family=4, SO=5, Strangers=6,

@@ -18,11 +18,16 @@ public:
 
     std::string printOut();
     std::string printDescription();
+    std::string printMotivation();
     bool evaluatePre();
     std::string getName();
     void setName(std::string _name);
     std::string getDescription();
     void setDescription(std::string _description);
+    std::string getMotivator();
+    void setMotivator(std::string _motivator);
+    bool motivationBeenPrinted();
+    void setMotivationPrinted(bool _been);
 
     void addMPreCondition(std::string precondition);
     void addPreCondition(std::string precondition);
@@ -63,6 +68,8 @@ public:
 private:
     std::string name;
     std::string description;
+    std::string motivator;
+
     std::vector<Condition*> conds, aConds, bConds, cConds, setConds;
     std::vector<Condition*> condsM, aCondsM, bCondsM, cCondsM, setCondsM;
     std::vector<Condition*> changes;
@@ -86,6 +93,8 @@ private:
 
     bool used;
     int priority;
+
+    bool motivationPrinted;
 
 };
 

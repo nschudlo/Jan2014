@@ -34,7 +34,6 @@ class Ui_Form
 public:
     QTabWidget *mainTabWidget;
     QWidget *tab;
-    QPushButton *buttonTest;
     QPushButton *buttonUpdateLists;
     QListWidget *listLocations;
     QPushButton *buttonLocationInfo;
@@ -115,21 +114,14 @@ public:
     QListWidget *listWorldObjects;
     QPushButton *buttonActionInfo;
     QWidget *tab_2;
-    QGroupBox *groupBox_2;
-    QLabel *numAttempts;
-    QListWidget *listGoals;
-    QLabel *maxAttempts;
-    QLabel *label_19;
-    QTextBrowser *goalTextBrowser;
-    QPushButton *refreshGoals;
-    QLabel *label_18;
     QGroupBox *groupBox_3;
     QListWidget *listStories;
     QPushButton *refreshStories;
     QTextBrowser *stortTextBrowser;
-    QPushButton *loadGoals;
     QPushButton *loadStories;
-    QLabel *label_20;
+    QLabel *label_25;
+    QLabel *label_26;
+    QTextBrowser *textBrowser_2;
     QWidget *tab_3;
     QGroupBox *groupBox_4;
     QListWidget *currentGoalsList;
@@ -160,9 +152,6 @@ public:
         mainTabWidget->setGeometry(QRect(0, 0, 671, 711));
         tab = new QWidget();
         tab->setObjectName(QStringLiteral("tab"));
-        buttonTest = new QPushButton(tab);
-        buttonTest->setObjectName(QStringLiteral("buttonTest"));
-        buttonTest->setGeometry(QRect(400, 10, 75, 23));
         buttonUpdateLists = new QPushButton(tab);
         buttonUpdateLists->setObjectName(QStringLiteral("buttonUpdateLists"));
         buttonUpdateLists->setGeometry(QRect(20, 10, 75, 23));
@@ -267,7 +256,7 @@ public:
         buttonRemoveRelationship->setGeometry(QRect(390, 170, 75, 23));
         groupBox = new QGroupBox(tabPerson);
         groupBox->setObjectName(QStringLiteral("groupBox"));
-        groupBox->setGeometry(QRect(10, 210, 391, 141));
+        groupBox->setGeometry(QRect(10, 240, 391, 141));
         layoutWidget = new QWidget(groupBox);
         layoutWidget->setObjectName(QStringLiteral("layoutWidget"));
         layoutWidget->setGeometry(QRect(20, 20, 141, 116));
@@ -368,15 +357,15 @@ public:
         citizenCheckBox->setObjectName(QStringLiteral("citizenCheckBox"));
         citizenCheckBox->setGeometry(QRect(200, 60, 70, 17));
         citizenCheckBox->setChecked(true);
-        label_17 = new QLabel(groupBox);
+        label_17 = new QLabel(tabPerson);
         label_17->setObjectName(QStringLiteral("label_17"));
-        label_17->setGeometry(QRect(200, 90, 61, 16));
-        roleLabel = new QLabel(groupBox);
+        label_17->setGeometry(QRect(20, 200, 61, 16));
+        roleLabel = new QLabel(tabPerson);
         roleLabel->setObjectName(QStringLiteral("roleLabel"));
-        roleLabel->setGeometry(QRect(310, 90, 71, 16));
-        storyRole = new QSpinBox(groupBox);
+        roleLabel->setGeometry(QRect(130, 200, 71, 16));
+        storyRole = new QSpinBox(tabPerson);
         storyRole->setObjectName(QStringLiteral("storyRole"));
-        storyRole->setGeometry(QRect(260, 90, 42, 22));
+        storyRole->setGeometry(QRect(80, 200, 42, 22));
         storyRole->setMaximum(8);
         infoTabWidget->addTab(tabPerson, QString());
         tabItem = new QWidget();
@@ -448,59 +437,31 @@ public:
         mainTabWidget->addTab(tab, QString());
         tab_2 = new QWidget();
         tab_2->setObjectName(QStringLiteral("tab_2"));
-        groupBox_2 = new QGroupBox(tab_2);
-        groupBox_2->setObjectName(QStringLiteral("groupBox_2"));
-        groupBox_2->setGeometry(QRect(20, 10, 601, 251));
-        numAttempts = new QLabel(groupBox_2);
-        numAttempts->setObjectName(QStringLiteral("numAttempts"));
-        numAttempts->setGeometry(QRect(290, 60, 21, 16));
-        listGoals = new QListWidget(groupBox_2);
-        listGoals->setObjectName(QStringLiteral("listGoals"));
-        listGoals->setGeometry(QRect(10, 60, 151, 161));
-        maxAttempts = new QLabel(groupBox_2);
-        maxAttempts->setObjectName(QStringLiteral("maxAttempts"));
-        maxAttempts->setGeometry(QRect(290, 90, 21, 16));
-        label_19 = new QLabel(groupBox_2);
-        label_19->setObjectName(QStringLiteral("label_19"));
-        label_19->setGeometry(QRect(180, 90, 101, 16));
-        goalTextBrowser = new QTextBrowser(groupBox_2);
-        goalTextBrowser->setObjectName(QStringLiteral("goalTextBrowser"));
-        goalTextBrowser->setGeometry(QRect(310, 20, 281, 221));
-        refreshGoals = new QPushButton(groupBox_2);
-        refreshGoals->setObjectName(QStringLiteral("refreshGoals"));
-        refreshGoals->setGeometry(QRect(20, 30, 81, 23));
-        label_18 = new QLabel(groupBox_2);
-        label_18->setObjectName(QStringLiteral("label_18"));
-        label_18->setGeometry(QRect(180, 60, 101, 16));
-        numAttempts->raise();
-        listGoals->raise();
-        label_18->raise();
-        maxAttempts->raise();
-        label_19->raise();
-        goalTextBrowser->raise();
-        refreshGoals->raise();
         groupBox_3 = new QGroupBox(tab_2);
         groupBox_3->setObjectName(QStringLiteral("groupBox_3"));
-        groupBox_3->setGeometry(QRect(20, 270, 601, 251));
+        groupBox_3->setGeometry(QRect(20, 30, 601, 251));
         listStories = new QListWidget(groupBox_3);
         listStories->setObjectName(QStringLiteral("listStories"));
         listStories->setGeometry(QRect(20, 70, 151, 161));
         refreshStories = new QPushButton(groupBox_3);
         refreshStories->setObjectName(QStringLiteral("refreshStories"));
-        refreshStories->setGeometry(QRect(30, 40, 91, 23));
+        refreshStories->setGeometry(QRect(120, 20, 101, 23));
         stortTextBrowser = new QTextBrowser(groupBox_3);
         stortTextBrowser->setObjectName(QStringLiteral("stortTextBrowser"));
-        stortTextBrowser->setGeometry(QRect(310, 20, 281, 221));
-        loadGoals = new QPushButton(tab_2);
-        loadGoals->setObjectName(QStringLiteral("loadGoals"));
-        loadGoals->setGeometry(QRect(40, 640, 75, 23));
-        loadStories = new QPushButton(tab_2);
+        stortTextBrowser->setGeometry(QRect(310, 40, 281, 201));
+        loadStories = new QPushButton(groupBox_3);
         loadStories->setObjectName(QStringLiteral("loadStories"));
-        loadStories->setGeometry(QRect(130, 640, 75, 23));
-        label_20 = new QLabel(tab_2);
-        label_20->setObjectName(QStringLiteral("label_20"));
-        label_20->setGeometry(QRect(60, 600, 131, 31));
-        label_20->setWordWrap(true);
+        loadStories->setGeometry(QRect(20, 20, 91, 23));
+        label_25 = new QLabel(groupBox_3);
+        label_25->setObjectName(QStringLiteral("label_25"));
+        label_25->setGeometry(QRect(320, 20, 111, 16));
+        label_26 = new QLabel(groupBox_3);
+        label_26->setObjectName(QStringLiteral("label_26"));
+        label_26->setGeometry(QRect(40, 50, 121, 16));
+        textBrowser_2 = new QTextBrowser(tab_2);
+        textBrowser_2->setObjectName(QStringLiteral("textBrowser_2"));
+        textBrowser_2->setEnabled(false);
+        textBrowser_2->setGeometry(QRect(40, 310, 271, 81));
         mainTabWidget->addTab(tab_2, QString());
         tab_3 = new QWidget();
         tab_3->setObjectName(QStringLiteral("tab_3"));
@@ -564,7 +525,7 @@ public:
 
         retranslateUi(Form);
 
-        mainTabWidget->setCurrentIndex(1);
+        mainTabWidget->setCurrentIndex(0);
         infoTabWidget->setCurrentIndex(0);
 
 
@@ -574,7 +535,6 @@ public:
     void retranslateUi(QWidget *Form)
     {
         Form->setWindowTitle(QApplication::translate("Form", "Form", 0));
-        buttonTest->setText(QApplication::translate("Form", "Test", 0));
         buttonUpdateLists->setText(QApplication::translate("Form", "Update Lists", 0));
         buttonLocationInfo->setText(QApplication::translate("Form", "Location Info", 0));
         buttonItemInfo->setText(QApplication::translate("Form", "Item Info", 0));
@@ -621,33 +581,32 @@ public:
         buttonPersonInfo->setText(QApplication::translate("Form", "Person Info", 0));
         buttonActionInfo->setText(QApplication::translate("Form", "Action Info", 0));
         mainTabWidget->setTabText(mainTabWidget->indexOf(tab), QApplication::translate("Form", "World", 0));
-        groupBox_2->setTitle(QApplication::translate("Form", "Goals", 0));
-        numAttempts->setText(QApplication::translate("Form", "0", 0));
-        maxAttempts->setText(QApplication::translate("Form", "0", 0));
-        label_19->setText(QApplication::translate("Form", "Max Attempts", 0));
-        refreshGoals->setText(QApplication::translate("Form", "Refresh Goals", 0));
-        label_18->setText(QApplication::translate("Form", "Number of Attempts", 0));
-        groupBox_3->setTitle(QApplication::translate("Form", "Stories", 0));
-        refreshStories->setText(QApplication::translate("Form", "Refresh Stories", 0));
-        loadGoals->setText(QApplication::translate("Form", "Load Goals", 0));
-        loadStories->setText(QApplication::translate("Form", "Load Stories", 0));
-        label_20->setText(QApplication::translate("Form", "These buttons reset the current stories and goals!", 0));
-        mainTabWidget->setTabText(mainTabWidget->indexOf(tab_2), QApplication::translate("Form", "Stories and Goals", 0));
-        groupBox_4->setTitle(QApplication::translate("Form", "Current Goals Queue", 0));
+        groupBox_3->setTitle(QApplication::translate("Form", "Plot Fragments", 0));
+        refreshStories->setText(QApplication::translate("Form", "Refresh Fragments", 0));
+        loadStories->setText(QApplication::translate("Form", "Load Fragments", 0));
+        label_25->setText(QApplication::translate("Form", "Selected Plot Info", 0));
+        label_26->setText(QApplication::translate("Form", "Loaded Plot Fragments", 0));
+        textBrowser_2->setHtml(QApplication::translate("Form", "<!DOCTYPE HTML PUBLIC \"-//W3C//DTD HTML 4.0//EN\" \"http://www.w3.org/TR/REC-html40/strict.dtd\">\n"
+"<html><head><meta name=\"qrichtext\" content=\"1\" /><style type=\"text/css\">\n"
+"p, li { white-space: pre-wrap; }\n"
+"</style></head><body style=\" font-family:'MS Shell Dlg 2'; font-size:8.25pt; font-weight:400; font-style:normal;\">\n"
+"<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\"><span style=\" font-size:8pt;\">This tab is used to load all plot fragments from file using the &quot;Load Fragments&quot; button. They will be displayed in the left list. From there, double clicking a fragments will add it as an Author level plot fragment. The right list will display the plot fragment information.</span></p></body></html>", 0));
+        mainTabWidget->setTabText(mainTabWidget->indexOf(tab_2), QApplication::translate("Form", "Plot Fragments", 0));
+        groupBox_4->setTitle(QApplication::translate("Form", "Current Goals List", 0));
         updateCurrentGoalsButton->setText(QApplication::translate("Form", "Update", 0));
-        groupBox_5->setTitle(QApplication::translate("Form", "Current Stories Lists", 0));
+        groupBox_5->setTitle(QApplication::translate("Form", "Current Plot Lists", 0));
         updateCurrentStoriesButton->setText(QApplication::translate("Form", "Update", 0));
-        label_21->setText(QApplication::translate("Form", "Story Queue", 0));
-        label_22->setText(QApplication::translate("Form", "Trigger List", 0));
-        label_24->setText(QApplication::translate("Form", "Current Active Story", 0));
+        label_21->setText(QApplication::translate("Form", "Active Plot List", 0));
+        label_22->setText(QApplication::translate("Form", "Trigger Plot List", 0));
+        label_24->setText(QApplication::translate("Form", "Current Active Plot", 0));
         textBrowser->setHtml(QApplication::translate("Form", "<!DOCTYPE HTML PUBLIC \"-//W3C//DTD HTML 4.0//EN\" \"http://www.w3.org/TR/REC-html40/strict.dtd\">\n"
 "<html><head><meta name=\"qrichtext\" content=\"1\" /><style type=\"text/css\">\n"
 "p, li { white-space: pre-wrap; }\n"
 "</style></head><body style=\" font-family:'MS Shell Dlg 2'; font-size:8.25pt; font-weight:400; font-style:normal;\">\n"
-"<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\"><span style=\" font-size:8pt;\">If a story is currently active then go to the world tab and act out the plot fragment. Once all changes have been made click &quot;Complete Story&quot; button.</span></p></body></html>", 0));
-        completeStory->setText(QApplication::translate("Form", "Complete Story", 0));
+"<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\"><span style=\" font-size:8pt;\">If a plot is currently active then go to the world tab and act out the plot fragment. Once all changes have been made click &quot;Complete Plot&quot; button.</span></p></body></html>", 0));
+        completeStory->setText(QApplication::translate("Form", "Complete Plot", 0));
         runDirectorLoop->setText(QApplication::translate("Form", "Run Director Loop", 0));
-        label_23->setText(QApplication::translate("Form", "Selected Story Info", 0));
+        label_23->setText(QApplication::translate("Form", "Selected Plot Info", 0));
         mainTabWidget->setTabText(mainTabWidget->indexOf(tab_3), QApplication::translate("Form", "Director", 0));
         mainTabWidget->setTabText(mainTabWidget->indexOf(tab_4), QApplication::translate("Form", "Output", 0));
     } // retranslateUi

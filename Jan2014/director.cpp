@@ -459,6 +459,8 @@ void Director::evaluateStoryLine(string line)
         currentStory->setName(vectorToString(info,0,(int)info.size()));
     else if(type=="Description")
         currentStory->setDescription(vectorToString(info,0,(int)info.size()));
+    else if(type=="Motivation")
+        currentStory->setMotivator(vectorToString(info,0,(int)info.size()));
     else if(type=="MPrecondition")
     {
         currentStory->addMPreCondition(vectorToString(info,0,(int)info.size()));

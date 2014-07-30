@@ -20,9 +20,12 @@ Story::Story()
 
     name = "InterrogateGangMember";
     description = "No description";
+    motivator = "No motivator";
     failedOptConditions=0;
     used=false;
     priority = 1;
+
+    motivationPrinted = false;
 
     // preStoryValues.push_back("isMainCharacter nick");
 
@@ -45,6 +48,18 @@ string Story::getDescription(){
 
 void Story::setDescription(string _description){
     description = _description;}
+
+string Story::getMotivator(){
+    return motivator;}
+
+void Story::setMotivator(string _motivator){
+    motivator = _motivator;}
+
+bool Story::motivationBeenPrinted(){
+    return motivationPrinted;}
+
+void Story::setMotivationPrinted(bool _been){
+    motivationPrinted=_been;}
 
 void Story::setUsed(bool _used){
     used = _used;}
@@ -554,6 +569,16 @@ string Story::printOut()
         replace_all(tempDesc,"[c]",chosenC);
 
         printOut<<tempDesc<<endl;
+
+        //Replace all [variables] in the motivation
+        string tempMot=motivator;
+
+        replace_all(tempMot,"[a]",chosenA);
+        replace_all(tempMot,"[b]",chosenB);
+        replace_all(tempMot,"[c]",chosenC);
+
+        printOut<<tempMot<<endl;
+
     }
     else
     {
@@ -577,4 +602,17 @@ string Story::printDescription()
     return printOut.str();
 }
 
+string Story::printMotivation()
+{
+    ostringstream printOut;
+    string tempMot=motivator;
+
+    replace_all(tempMot,"[a]",chosenA);
+    replace_all(tempMot,"[b]",chosenB);
+    replace_all(tempMot,"[c]",chosenC);
+
+    printOut<<tempMot;
+    return printOut.str();
+
+}
 
